@@ -1,0 +1,86 @@
+---
+// src/components/Hero.astro
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  tags?: string[];
+}
+
+const {
+  headline = "Mae Mendoza",
+  subheadline = "Content Design & Subject Matter Expertise",
+  tags = ["LEARNING × DESIGN × EDITORIAL",],
+} = Astro.props;
+---
+
+<header
+  class="relative min-h-screen flex items-end justify-start overflow-hidden"
+>
+  <!-- Background image with slow zoom -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-zoom"
+    style="background-image: url('src/assets/images/hero.jpg');"
+    role="img"
+    aria-label="Books on wooden shelves in warm lighting"
+  >
+  </div>
+
+  <!-- Dark overlay for text legibility -->
+  <div class="absolute inset-0 bg-black/50"></div>
+
+<!-- Content -->
+<div class="relative z-10 p-8 md:p-16 lg:p-24 max-w-3xl">
+  <!-- Headline -->
+  <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white mb-4">
+    {headline}
+  </h1>
+  
+  <!-- Subheadline -->
+  <p class="text-lg md:text-xl text-neutral-200 max-w-xl mb-6 whitespace-nowrap">
+    {subheadline}
+  </p>
+  
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-3" role="list" aria-label="Specializations">
+    {tags.map(tag => (
+      <span class="text-sm tracking-widest text-neutral-300 font-medium" role="listitem">
+        [ {tag} ]
+      </span>
+    ))}
+  </div>
+</div>
+
+    <!-- Headline -->
+    <h1
+      class="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tight text-white mb-4"
+    >
+      {headline}
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-lg md:text-xl text-neutral-200 max-w-xl">
+      {subheadline}
+    </p>
+  </div>
+</header>
+
+<style>
+  @keyframes slowZoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.08);
+    }
+  }
+
+  .hero-zoom {
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-zoom {
+      animation: none;
+    }
+  }
+</style>

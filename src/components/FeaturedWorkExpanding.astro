@@ -1,0 +1,487 @@
+---
+// src/components/FeaturedWorkExpanding.astro
+
+interface ProblemItem {
+  title: string;
+  description: string;
+}
+
+interface WorkSection {
+  id: string;
+  title: string;
+  thumbnail: string;
+  thumbnailAlt: string;
+  hook: string;
+  intro: string;
+  featuredImage: string;
+  featuredImageAlt: string;
+  featuredProjectTitle: string;
+  featuredProjectDescription: string;
+  featuredProjectLink?: string;
+  problems: ProblemItem[];
+}
+
+interface Props {
+  sections?: WorkSection[];
+}
+
+const { sections = [
+  {
+    id: "content-design",
+    title: "Content Design",
+    thumbnail: "src/assets/images/cd.png",
+    thumbnailAlt: "Person's hands typing on a notebook computer",
+    hook: "Good content is designed to speak to specific humans.",
+    intro: "You need someone who understands that a style guide isn't a strategy, and that plugging the right key words into a template doesn't create a connection. Your content should do more than just check off basic requirements boxes. That's where I come in. Your audience deserves more than content that hits all the beats but isn't aligned to their needs.",
+    featuredImage: "src/assets/images/content-aphugeo.png",
+    featuredImageAlt: "AP Human Geography",
+    featuredProjectTitle: "Featured Project: AP Human Geography",
+    featuredProjectDescription: "Rigor doesn't have to leave behind students who need help with executive functioning. Supporting learners with test-taking strategies, study methods, and attention to their social-emotional needs allows students with constraints to succeed in studying AP courses.<br /><br />I developed this course as a prototype to show what's possible in accommodating a wider range of learners. The scope goes beyond content coverage and practice exam questions to include a focus on building executive functioning and exam success skills.",
+    featuredProjectLink: "https://drive.google.com/drive/folders/1dsayinQN09Xl4-pVtVv1U5DQh7p1t7Jn?usp=drive_link",
+    problems: [
+      {
+        title: "I manage end-to-end development from strategy to delivery.",
+        description: "That means needs analysis, requirements synthesis, content development, QA and revision, and client iteration through final approval."
+      },
+      {
+        title: "I analyze and fill content gaps to address new requirements.",
+        description: "That means auditing existing content, identifying what's missing or outdated, and developing new material to meet current standards."
+      },
+      {
+        title: "I tailor language to make it sing for a specific audience.",
+        description: "This means adjusting reading level, localizing content, structuring for ELL accessibility, and aligning tone and voice to the audience."
+      }
+    ]
+  },
+  {
+    id: "instructional-design",
+    title: "Instructional Design",
+    thumbnail: "src/assets/images/id.png",
+    thumbnailAlt: "Person's hand tracing a paper flowchart for app design on a bulletin board",
+    hook: "Good structure makes the constraints invisible.",
+    intro: "You need a course that works for learners, not just one that satisfies a requirements checklist. Your learners deserve more than content dumped into units with no clear path forward. That's where I come in. Good structure guides learners from understanding to mastery, making visible the connections between what they know and what they can do.",
+    featuredImage: "",
+    featuredImageAlt: "",
+    featuredProjectTitle: "Featured Project: Edmentum Ethnic Studies",
+    featuredProjectDescription: "Building a nationally viable Ethnic Studies course requires synthesizing frameworks, state requirements, and development guidelines into a structure that works seamlessly.<br /><br />I led scope and sequence development for Edmentum's new national Ethnic Studies course. I researched existing course offerings, interpreted requirements across multiple states into a flexible framework, and integrated SEL and learning design principles into the structure and content.",
+    featuredProjectLink: "https://www.edmentum.com/articles/implementing-research-based-learning-design-edmentum-courseware/",
+    problems: [
+      {
+        title: "I translate complex requirements into a coherent plan.",
+        description: "That means competitive analysis, audience research, and examining standards across multiple states to define what the course needs to do."
+      },
+      {
+        title: "I build scopes and sequence from the ground up.",
+        description: "That means designing unit and lesson structure, determining content coverage, and making pacing decisions that work for real learners."
+      },
+      {
+        title: "I design scaffolding that builds toward mastery.",
+        description: "That means aligning lesson objectives to unit goals, unit goals to course objectives, and anticipating learner needs as complexity increases."
+      }
+    ]
+  },
+  {
+    id: "editorial-qa",
+    title: "Editorial & QA",
+    thumbnail: "src/assets/images/editorial.png",
+    thumbnailAlt: "Webster's Dictionary, Thesaurus, and Spelling Guide, and Practical English",
+    hook: "Good user experiences require editing beyond spell check.",
+    intro: "You need more than just a proofread for misplaced commas and misused homophones. Your content should reach learners where they are, whether that means adjusting reading level, restructuring for ELL/MLL accessibility, or catching cultural assumptions that don't translate. Technically correct content that doesn't land with its audience isn't doing its job. That's where I come in.",
+    featuredImage: "",
+    featuredImageAlt: "",
+    featuredProjectTitle: "Featured Project: Language Level Adaptation",
+    featuredProjectDescription: "Adapting technical content for different audiences requires more than vocabulary swaps. It means rethinking analogies, sentence structure, and assumed knowledge for each reading level.<br /><br />Poor adaptation risks alienating your audience. Too simplified feels condescending, while too academic feels inaccessible. Imprecise word choice can introduce inaccuracies or vague statements that obscure meaning. I draw upon more than 10 years of experience adjusting language to simplify without losing content depth or voice.",
+    problems: [
+      {
+        title: "I adapt content for language level and accessibility.",
+        description: "That means adjusting reading level, restructuring syntax for ELL learners, and ensuring content is accessible without being oversimplified."
+      },
+      {
+        title: "I review for cultural sensitivity and localization.",
+        description: "That means identifying U.S.-centric assumptions, adapting content for international markets, and balancing accessibility with regional appropriateness."
+      },
+      {
+        title: "I conduct quality audits that catch systemic issues.",
+        description: "That means course-level reviews that identify patterns of inconsistency, alignment gaps, and recurring errors rather than just one-off fixes."
+      }
+    ]
+  },
+  {
+    id: "sme",
+    title: "Subject Matter Expertise",
+    thumbnail: "src/assets/images/sme.png",
+    thumbnailAlt: "Open notebook in front of a notebook computer on a desk with flowers in a vase",
+    hook: "Good quality requires an expert eye for accuracy.",
+    intro: "You need content that holds up when someone who knows the subject looks closely. Generalist editors catch grammar errors and missed style guide rules. Subject matter experts catch the granular details and nuanced connotations that impact meaning. The difference matters when your content is your brand. That's where I come in.",
+    featuredImage: "src/assets/images/sme-pd.png",
+    featuredImageAlt: "Presentation title screen that reads: Working Smarter With Claude",
+    featuredProjectTitle: "Featured Project: Working Smarter with Claude",
+    featuredProjectDescription: "Integrating AI tools into workflows requires understanding the constraints. Usage limits and model behavior can have major impacts on how teams incorporate generative AI models into their processes.<br /><br />I designed this professional development deck to help introduce colleagues to some best practices for using Claude AI. It focuses on teaching users with varying degrees of AI familiarity strategies for getting better results while using fewer tokens.",
+    problems: [
+      {
+        title: "I catch errors that generalist reviewers miss.",
+        description: "That means identifying factual inaccuracies, misattributed quotes, and hallucinated details that sound plausible but don't hold up to verification."
+      },
+      {
+        title: "I review standards alignment and map curriculum.",
+        description: "That means reviewing K-12 ELA and Social Studies content for standards alignment, writing alignment justifications for external reviewers, and mapping existing curriculum to standards frameworks."
+      },
+      {
+        title: "I develop bespoke samples for proposals and bids.",
+        description: "That means creating original content aligned to proposal specifications that demonstrates capability and fit for B2B opportunities."
+      },
+      {
+        title: "I design professional development and training.",
+        description: "That means analyzing needs and creating workshops, presentations, and slide decks that build practical skills for real workflows."
+      }
+    ]
+  }
+]} = Astro.props;
+---
+
+<section class="bg-neutral-50 py-16 md:py-24" aria-labelledby="featured-work-heading">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <h2 id="featured-work-heading" class="font-display text-3xl md:text-4xl font-bold uppercase tracking-tight text-neutral-900 mb-12">
+      What I Do
+    </h2>
+    
+    <!-- Thumbnail Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" role="list">
+      {sections.map((section, index) => (
+        <button
+          type="button"
+          class="group text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm"
+          data-section-trigger={section.id}
+          aria-expanded="false"
+          aria-controls={`panel-${section.id}`}
+        >
+          <article class="space-y-3">
+            <div class="aspect-[4/3] overflow-hidden bg-neutral-200">
+              <img 
+                src={section.thumbnail} 
+                alt={section.thumbnailAlt}
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0 transition-all duration-500"
+                loading={index < 2 ? "eager" : "lazy"}
+              />
+            </div>
+            <h3 class="text-neutral-900 font-medium text-base md:text-lg group-hover:text-neutral-600 transition-colors">
+              {section.title}
+            </h3>
+          </article>
+        </button>
+      ))}
+    </div>
+
+    <!-- Expandable Panels -->
+    {sections.map((section) => (
+      <div
+        id={`panel-${section.id}`}
+        class="hidden mt-8 border-t border-neutral-200 pt-8"
+        data-section-panel={section.id}
+        role="region"
+        aria-labelledby={`heading-${section.id}`}
+      >
+        <!-- Intro and Problems Side by Side on Desktop -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 pb-8 border-b border-neutral-200">
+          <!-- Hook and Intro Text -->
+          <div>
+            <h3 
+              id={`heading-${section.id}`}
+              class="font-display text-2xl md:text-3xl font-bold tracking-tight text-neutral-900 mb-4"
+            >
+              {section.hook}
+            </h3>
+            <p class="text-lg text-neutral-700 leading-relaxed">
+              {section.intro}
+            </p>
+          </div>
+          
+          <!-- Problems I Solve Accordion -->
+          <div>
+            <div class="divide-y divide-neutral-300" data-accordion-group={section.id}>
+              {section.problems.map((problem, pIndex) => (
+                <details 
+                  class="group py-4"
+                  name={`accordion-${section.id}`}
+                >
+                  <summary class="flex items-center justify-between cursor-pointer list-none focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm">
+                    <span class="text-base md:text-lg font-medium text-neutral-900 pr-4">{problem.title}</span>
+                    <svg 
+                      class="w-5 h-5 text-neutral-500 transition-transform duration-300 group-open:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div class="pt-4 pr-10">
+                    <p class="text-neutral-600 leading-relaxed">
+                      {problem.description}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Project with Darker Background -->
+        <div class="bg-neutral-400/40 -mx-6 md:-mx-12 px-6 md:px-12 py-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            <!-- Text Column -->
+            <div class="space-y-4 order-2 lg:order-1">
+              <h4 class="font-display text-xl md:text-2xl font-bold tracking-tight text-neutral-900">
+                {section.featuredProjectTitle}
+              </h4>
+              <p class="text-neutral-700 leading-relaxed" set:html={section.featuredProjectDescription}>
+              </p>
+              {section.featuredProjectLink && (
+                <a 
+                  href={section.featuredProjectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-neutral-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm transition-colors"
+                >
+                  View the scope and sample lessons
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                  <span class="sr-only">(opens in new tab)</span>
+                </a>
+              )}
+            </div>
+            
+            <!-- Image/Video/Interactive Column -->
+            {section.id === "editorial-qa" ? (
+              <div class="relative bg-neutral-100 order-1 lg:order-2 border-[10px] border-white p-6 flex flex-col justify-between min-h-[350px] lg:min-h-[400px] overflow-hidden">
+                <div 
+                  class="absolute inset-0 opacity-10"
+                  style="background-image: url('https://images.unsplash.com/photo-1547921258-fbfcf52f8d5b?w=800&q=80'); background-size: cover; background-position: center;"
+                  aria-hidden="true"
+                ></div>
+                <div class="relative z-10">
+                  <p id="level-heading" class="text-2xl font-serif text-neutral-700 capitalize tracking-tight mb-2">Let's tailor language about AI hallucinations for different audiences.</p>
+                </div>
+                <div class="relative z-10 flex-1 flex items-center py-4">
+                  <p id="level-text" class="text-base md:text-lg text-neutral-800 leading-relaxed pb-[5px]" aria-live="polite">
+                    Sometimes AI says things that are not true. AI is like a student who always wants to answer, but does not always know the correct answer. The AI sounds very sure. But the AI can still be wrong.
+                  </p>
+                </div>
+                <div 
+                  class="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-2"
+                  role="group"
+                  aria-labelledby="level-heading"
+                >
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-200 text-neutral-700 hover:bg-neutral-300 rounded-sm transition-colors"
+                    data-level="4th"
+                    aria-pressed="false"
+                  >
+                    4th Grade
+                  </button>
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-900 text-white rounded-sm"
+                    data-level="4th-ell"
+                    aria-pressed="true"
+                  >
+                    4th Grade ELL
+                  </button>
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-200 text-neutral-700 hover:bg-neutral-300 rounded-sm transition-colors"
+                    data-level="10th"
+                    aria-pressed="false"
+                  >
+                    10th Grade
+                  </button>
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-200 text-neutral-700 hover:bg-neutral-300 rounded-sm transition-colors"
+                    data-level="10th-ell"
+                    aria-pressed="false"
+                  >
+                    10th Grade ELL
+                  </button>
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-200 text-neutral-700 hover:bg-neutral-300 rounded-sm transition-colors"
+                    data-level="pro-technical"
+                    aria-pressed="false"
+                  >
+                    Technical Pro
+                  </button>
+                  <button 
+                    class="level-btn px-3 md:px-4 py-2 text-sm font-medium bg-neutral-200 text-neutral-700 hover:bg-neutral-300 rounded-sm transition-colors"
+                    data-level="pro-executive"
+                    aria-pressed="false"
+                  >
+                    Non-Technical Pro
+                  </button>
+                </div>
+              </div>
+            ) : section.id === "instructional-design" ? (
+              <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
+                <iframe 
+                  src="https://www.youtube.com/embed/1uVlyharOmo?start=42"
+                  class="w-full h-full"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  title="Edmentum Ethnic Studies Course Overview"
+                ></iframe>
+              </div>
+            ) : section.id === "sme" ? (
+              <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
+                <iframe 
+                  src="https://drive.google.com/file/d/1zRhmlQpLJZXyZbvYMTzdfnf6xhlHgjH7/preview"
+                  class="w-full h-full"
+                  allow="autoplay"
+                  title="Working Smarter with Claude presentation"
+                ></iframe>
+              </div>
+            ) : section.id === "content-design" ? (
+              <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
+                <iframe 
+                  src="https://www.youtube.com/embed/jbxHWVpIdRw"
+                  class="w-full h-full"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  title="AP Human Geography Video Lesson Sample"
+                ></iframe>
+              </div>
+            ) : (
+              <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
+                <img 
+                  src={section.featuredImage}
+                  alt={section.featuredImageAlt}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        
+        <!-- Close Panel Button -->
+        <div class="mt-8 pt-6 border-t border-neutral-200">
+          <button
+            type="button"
+            class="text-neutral-500 hover:text-neutral-900 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm"
+            data-close-panel={section.id}
+          >
+            ← Close this panel to return to What I Do.
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  function initExpandingPanels() {
+    const triggers = document.querySelectorAll('[data-section-trigger]');
+    const panels = document.querySelectorAll('[data-section-panel]');
+    const closeButtons = document.querySelectorAll('[data-close-panel]');
+
+    function closeAllPanels() {
+      panels.forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      triggers.forEach(trigger => {
+        trigger.setAttribute('aria-expanded', 'false');
+        const img = trigger.querySelector('img');
+        if (img) {
+          img.classList.add('grayscale');
+        }
+      });
+    }
+
+    function openPanel(sectionId: string) {
+      closeAllPanels();
+      const panel = document.querySelector(`[data-section-panel="${sectionId}"]`);
+      const trigger = document.querySelector(`[data-section-trigger="${sectionId}"]`);
+      
+      if (panel && trigger) {
+        panel.classList.remove('hidden');
+        trigger.setAttribute('aria-expanded', 'true');
+        
+        // Keep selected thumbnail in color
+        const img = trigger.querySelector('img');
+        if (img) {
+          img.classList.remove('grayscale');
+        }
+        
+        // Smooth scroll to panel
+        setTimeout(() => {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+
+        // Move focus to panel heading for accessibility
+        const heading = panel.querySelector('h3');
+        if (heading) {
+          (heading as HTMLElement).setAttribute('tabindex', '-1');
+          (heading as HTMLElement).focus();
+        }
+      }
+    }
+
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const sectionId = trigger.getAttribute('data-section-trigger');
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+          closeAllPanels();
+        } else if (sectionId) {
+          openPanel(sectionId);
+        }
+      });
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        closeAllPanels();
+        // Scroll back to thumbnail grid
+        const grid = document.querySelector('[role="list"]');
+        if (grid) {
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  // Language level toggle functionality
+  function initLanguageLevelToggle() {
+    const levels: Record<string, string> = {
+      "4th": "Sometimes AI makes things up. It's like a classmate who always raises his hand, even when he doesn't know the answer. He sounds sure, but that doesn't mean he's right.",
+      "4th-ell": "Sometimes AI says things that are not true. AI is like a student who always wants to answer, but does not always know the correct answer. The AI sounds very sure. But the AI can still be wrong.",
+      "10th": "AI hallucinations happen when the model produces information that sounds right but isn't. It's predicting what words should come next without knowing whether the content is true.",
+      "10th-ell": "AI hallucinations happen when the model creates information that seems correct but is not. The AI predicts what words should come next. It does not know if the information is true.",
+      "pro-technical": "Large language models hallucinate when pattern-matching produces fluent but unfounded outputs. The model optimizes for coherence, not accuracy. High-stakes content requires human verification.",
+      "pro-executive": "AI can generate confident-sounding content that is factually wrong. This is called hallucination. Any AI-generated content needs human review before publication."
+    };
+
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const level = btn.getAttribute('data-level');
+        const textEl = document.getElementById('level-text');
+        if (level && textEl) {
+          textEl.textContent = levels[level];
+        }
+        
+        // Update button styles and aria-pressed
+        document.querySelectorAll('.level-btn').forEach(b => {
+          b.classList.remove('bg-neutral-900', 'text-white');
+          b.classList.add('bg-neutral-200', 'text-neutral-700');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.remove('bg-neutral-200', 'text-neutral-700');
+        btn.classList.add('bg-neutral-900', 'text-white');
+        btn.setAttribute('aria-pressed', 'true');
+      });
+    });
+  }
+
+  initExpandingPanels();
+  initLanguageLevelToggle();
+</script>
