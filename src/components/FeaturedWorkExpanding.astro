@@ -117,6 +117,7 @@ const { sections = [
     featuredImageAlt: "Presentation title screen that reads: Working Smarter With Claude",
     featuredProjectTitle: "Featured Project: Working Smarter with Claude",
     featuredProjectDescription: "Integrating AI tools into workflows requires understanding the constraints. Usage limits and model behavior can have major impacts on how teams incorporate generative AI models into their processes.<br /><br />I designed this professional development deck to help introduce colleagues to some best practices for using Claude AI. It focuses on teaching users with varying degrees of AI familiarity strategies for getting better results while using fewer tokens.",
+    featuredProjectLink: "https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/view",
     problems: [
       {
         title: "I catch errors that generalist reviewers miss.",
@@ -244,7 +245,7 @@ const { sections = [
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-neutral-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm transition-colors"
                 >
-                  View the scope and sample lessons
+                  {section.id === "sme" ? "View the presentation" : "View the scope and sample lessons"}
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -331,12 +332,12 @@ const { sections = [
               </div>
             ) : section.id === "sme" ? (
               <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
-                <iframe 
-                  src="https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/preview"
-                  class="w-full h-full"
-                  allow="autoplay"
-                  title="Working Smarter with Claude presentation"
-                ></iframe>
+                <img 
+                  src="/images/sme-pd.png"
+                  alt="Presentation title screen that reads: Working Smarter With Claude"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             ) : section.id === "content-design" ? (
               <div class="aspect-[1.85/1] overflow-hidden bg-neutral-200 order-1 lg:order-2 border-[10px] border-white">
