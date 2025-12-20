@@ -245,7 +245,7 @@ const { sections = [
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 text-neutral-900 font-medium hover:text-neutral-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm transition-colors"
                 >
-                  {section.id === "sme" ? "View the presentation" : "View more about the course"}
+{section.id === "sme" ? "View the presentation" : section.id === "instructional-design" ? "View more about this course and Edmentum's learning design" : "View the scope and sample lessons"}
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
