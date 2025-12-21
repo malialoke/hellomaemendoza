@@ -455,11 +455,11 @@ const { sections = [
   function initLanguageLevelToggle() {
     const levels: Record<string, string> = {
       "4th": "Sometimes AI makes things up. It's like a classmate who always raises his hand, even when he doesn't know the answer. He sounds sure, but that doesn't mean he's right.",
-      "4th-ell": "Sometimes AI says things that are not true. AI is like a student who always wants to answer, but does not always know the correct answer. The AI sounds very sure. But the AI can still be wrong.",
-      "10th": "AI hallucinations happen when the model produces information that sounds right but isn't. It's predicting what words should come next without knowing whether the content is true.",
-      "10th-ell": "AI hallucinations happen when the model creates information that seems correct but is not. The AI predicts what words should come next. It does not know if the information is true.",
-      "pro-technical": "Large language models hallucinate when pattern-matching produces fluent but unfounded outputs. The model optimizes for coherence, not accuracy. High-stakes content requires human verification.",
-      "pro-executive": "AI can generate confident-sounding content that is factually wrong. This is called hallucination. Any AI-generated content needs human review before publication."
+      "4th-ell": "Someimes AI says things that are not true. AI is like a student who talks a lot. He sounds very sure. But he is not always right.",
+      "10th": "AI can sometimes generate information that sounds accurate but includes errors or untrue statements. This is called hallucination. The system predicts which words should come next based on patterns, but it has no mechanism for verifying whether the words that fit the pattern are factually correct.",
+      "10th-ell": "Sometimes AI creates information that appears correct even though it contains errors. This is called hallucination. The AI model works by predicting what words commonly follow each other. It uses language patterns, not facts. It cannot tell if its own words are true or false.",
+      "pro-technical": "Large language models hallucinate when next-token prediction produces fluent but ungrounded outputs. The model optimizes for statistical coherence, not factual accuracy. High-stakes content requires human verification.",
+      "pro-executive": "AI can generate confident-sounding content that is factually wrong. This is called hallucination. AI-generated content requires human review before use."
     };
 
     document.querySelectorAll('.level-btn').forEach(btn => {
