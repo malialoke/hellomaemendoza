@@ -2,9 +2,19 @@
 // src/layouts/BaseLayout.astro
 interface Props {
   title?: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title = "Mae Mendoza, Content Designer and SME" } = Astro.props;
+const { 
+  title = "Mae Mendoza | Content Designer & SME",
+  description = "Content Designer and Subject Matter Expert specializing in K-12 EdTech, curriculum development, and instructional design.",
+  ogImage = "/images/preview.png"
+} = Astro.props;
+
+const siteUrl = "https://maemendoza.com";
+const fullImageUrl = `${siteUrl}${ogImage}`;
+
 ---
 
 <html lang="en">
@@ -13,6 +23,19 @@ const { title = "Mae Mendoza, Content Designer and SME" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph (LinkedIn, Facebook) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
