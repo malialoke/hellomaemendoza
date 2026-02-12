@@ -1,695 +1,1142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mae Mendoza | UX Writer & Content Designer</title>
-    <meta name="description" content="Mae Mendoza — UX Writer and Content Designer. Making complex products usable for diverse audiences.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <meta
+      name="description"
+      content="Mae Mendoza — UX Writer and Content Designer. Making complex products usable for diverse audiences."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --color-ink: #1a1814;
-            --color-ink-soft: #3d3a36;
-            --color-ink-tertiary: #6e6962;
-            --color-paper: #faf8f5;
-            --color-paper-warm: #f5f0e8;
-            --color-accent: #d64d7a;
-            --color-accent-soft: #e8a4bc;
-            --color-accent-bg: #fdf2f6;
-            --color-stone: #9c9489;
-            --color-border: #e5e0d8;
-            --color-surface: #ffffff;
-            --color-ai-surface: #f2f0eb;
+      :root {
+        --color-ink: #1a1814;
+        --color-ink-soft: #3d3a36;
+        --color-ink-tertiary: #6e6962;
+        --color-paper: #faf8f5;
+        --color-paper-warm: #f5f0e8;
+        --color-accent: #d64d7a;
+        --color-accent-soft: #e8a4bc;
+        --color-accent-bg: #fdf2f6;
+        --color-stone: #9c9489;
+        --color-border: #e5e0d8;
+        --color-surface: #ffffff;
+        --color-ai-surface: #f2f0eb;
 
-            --font-display: 'Cormorant Garamond', Georgia, serif;
-            --font-body: 'DM Sans', -apple-system, sans-serif;
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-body: "DM Sans", -apple-system, sans-serif;
 
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 3rem;
-            --space-xl: 5rem;
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 3rem;
+        --space-xl: 5rem;
 
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-            --duration-normal: 400ms;
-        }
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --duration-normal: 400ms;
+      }
 
-        [data-theme="dark"] {
-            --color-ink: #e8e4df;
-            --color-ink-soft: #c4bfb8;
-            --color-ink-tertiary: #9c9489;
-            --color-paper: #1a1814;
-            --color-paper-warm: #222019;
-            --color-accent: #e8729a;
-            --color-accent-soft: #8c3a55;
-            --color-accent-bg: #2d1a22;
-            --color-stone: #7a756e;
-            --color-border: #3d3a36;
-            --color-surface: #252320;
-            --color-ai-surface: #2a2722;
-        }
+      [data-theme="dark"] {
+        --color-ink: #e8e4df;
+        --color-ink-soft: #c4bfb8;
+        --color-ink-tertiary: #9c9489;
+        --color-paper: #1a1814;
+        --color-paper-warm: #222019;
+        --color-accent: #e8729a;
+        --color-accent-soft: #8c3a55;
+        --color-accent-bg: #2d1a22;
+        --color-stone: #7a756e;
+        --color-border: #3d3a36;
+        --color-surface: #252320;
+        --color-ai-surface: #2a2722;
+      }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { font-size: 16px; scroll-behavior: smooth; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
 
-        body {
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--color-ink);
-            background-color: var(--color-paper);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            transition: background-color 0.3s, color 0.3s;
-        }
+      body {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-ink);
+        background-color: var(--color-paper);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+      }
 
-        ::selection {
-            background-color: var(--color-accent-soft);
-            color: var(--color-ink);
-        }
-        :focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        a { color: inherit; text-decoration: none; }
-        button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+      ::selection {
+        background-color: var(--color-accent-soft);
+        color: var(--color-ink);
+      }
+      :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
 
-        .container {
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 0 var(--space-md);
-        }
+      .container {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+      }
 
-        /* --- NAV --- */
-        .site-nav {
-            padding: 0.6rem 0;
-            background: var(--color-accent);
-        }
-        .site-nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .site-nav__links {
-            display: flex;
-            gap: var(--space-md);
-        }
-        .site-nav__link {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #fff;
-            opacity: 0.9;
-            transition: opacity 0.2s;
-        }
-        .site-nav__link:hover { opacity: 1; text-decoration: underline; }
+      /* --- NAV --- */
+      .site-nav {
+        padding: 0.6rem 0;
+        background: var(--color-accent);
+      }
+      .site-nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .site-nav__links {
+        display: flex;
+        gap: var(--space-md);
+      }
+      .site-nav__link {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #fff;
+        opacity: 0.9;
+        transition: opacity 0.2s;
+      }
+      .site-nav__link:hover {
+        opacity: 1;
+        text-decoration: underline;
+      }
 
-        /* Dark mode toggle */
-        .theme-toggle {
-            color: #fff;
-            opacity: 0.9;
-            transition: opacity 0.2s;
-            padding: 2px;
-            display: flex;
-            align-items: center;
-        }
-        .theme-toggle:hover { opacity: 1; }
-        .theme-toggle svg { width: 18px; height: 18px; }
-        .theme-toggle__sun { display: none; }
-        .theme-toggle__moon { display: block; }
-        [data-theme="dark"] .theme-toggle__sun { display: block; }
-        [data-theme="dark"] .theme-toggle__moon { display: none; }
+      /* Dark mode toggle */
+      .theme-toggle {
+        color: #fff;
+        opacity: 0.9;
+        transition: opacity 0.2s;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+      }
+      .theme-toggle:hover {
+        opacity: 1;
+      }
+      .theme-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+      .theme-toggle__sun {
+        display: none;
+      }
+      .theme-toggle__moon {
+        display: block;
+      }
+      [data-theme="dark"] .theme-toggle__sun {
+        display: block;
+      }
+      [data-theme="dark"] .theme-toggle__moon {
+        display: none;
+      }
 
-        /* --- HERO --- */
-        .hero { padding: var(--space-xl) 0 var(--space-lg); }
+      /* --- HERO --- */
+      .hero {
+        padding: var(--space-xl) 0 var(--space-lg);
+      }
+      .hero__name {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 500;
+        line-height: 1.15;
+        margin-bottom: 0.25rem;
+      }
+      .hero__name-first {
+        color: var(--color-accent);
+      }
+      .hero__title {
+        font-size: 1rem;
+        color: var(--color-stone);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        margin-bottom: var(--space-md);
+      }
+      .hero__statement {
+        font-size: 1.05rem;
+        line-height: 1.75;
+        max-width: 580px;
+        color: var(--color-ink-soft);
+      }
+
+      /* --- POSITIONING --- */
+      .positioning {
+        padding: 0 0 var(--space-lg);
+      }
+      .positioning p {
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--color-ink-soft);
+        max-width: 620px;
+        margin-bottom: var(--space-sm);
+      }
+      .positioning p:last-child {
+        margin-bottom: 0;
+      }
+      .positioning em {
+        font-style: normal;
+        color: var(--color-ink);
+        font-weight: 500;
+      }
+
+      /* --- DIVIDER --- */
+      .divider {
+        border: none;
+        border-top: 1px solid var(--color-border);
+        margin: var(--space-lg) 0;
+      }
+
+      /* --- SECTION LABEL --- */
+      .section-label {
+        font-family: var(--font-body);
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--color-accent);
+        margin-bottom: var(--space-xs);
+      }
+      .section-heading {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 500;
+        line-height: 1.25;
+        margin-bottom: var(--space-sm);
+      }
+
+      /* --- SKILLS --- */
+      .skills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+        margin-top: var(--space-md);
+      }
+      .skill {
+        padding: var(--space-md);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        transition: border-color var(--duration-normal) var(--ease-out-expo);
+      }
+      .skill:hover {
+        border-color: var(--color-accent-soft);
+      }
+      .skill__label {
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-accent);
+        margin-bottom: var(--space-xs);
+      }
+      .skill__heading {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1.3;
+        margin-bottom: 0.4rem;
+      }
+      .skill__text {
+        font-size: 0.875rem;
+        color: var(--color-ink-soft);
+        line-height: 1.65;
+      }
+      .skill__proof {
+        font-size: 0.8rem;
+        color: var(--color-ink-tertiary);
+        line-height: 1.6;
+        margin-top: var(--space-xs);
+        padding-top: var(--space-xs);
+        border-top: 1px solid var(--color-border);
+      }
+
+      /* --- DEMO --- */
+      .demo {
+        margin-top: var(--space-lg);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .demo__header {
+        padding: var(--space-md) var(--space-md) var(--space-xs);
+      }
+      .demo__heading {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+      }
+      .demo__intro {
+        font-size: 0.875rem;
+        color: var(--color-ink-soft);
+        line-height: 1.6;
+        max-width: 520px;
+      }
+      .demo__tabs {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 var(--space-md);
+        border-bottom: 1px solid var(--color-border);
+        gap: 0;
+      }
+      .demo__tab {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--color-stone);
+        border-bottom: 2px solid transparent;
+        white-space: nowrap;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .demo__tab:hover {
+        color: var(--color-ink-soft);
+      }
+      .demo__tab--active {
+        color: var(--color-accent);
+        border-bottom-color: var(--color-accent);
+      }
+      .demo__body {
+        padding: var(--space-md);
+        min-height: 140px;
+      }
+      .demo__panel {
+        display: none;
+      }
+      .demo__panel--active {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .demo__panel-label {
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-accent);
+        margin-bottom: var(--space-xs);
+      }
+      .demo__panel-text {
+        font-size: 0.95rem;
+        line-height: 1.75;
+      }
+      .demo__panel-note {
+        margin-top: var(--space-xs);
+        font-size: 0.775rem;
+        color: var(--color-stone);
+        font-style: italic;
+        line-height: 1.55;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- AI SECTION --- */
+      .ai-section {
+        background: var(--color-ai-surface);
+        border-radius: 8px;
+        padding: var(--space-md);
+        margin-top: var(--space-lg);
+      }
+      .ai-section .section-heading {
+        margin-bottom: var(--space-xs);
+      }
+      .ai-section__intro {
+        font-size: 0.9rem;
+        color: var(--color-ink-soft);
+        line-height: 1.7;
+        margin-bottom: var(--space-md);
+        max-width: 560px;
+      }
+      .ai-items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      .ai-item {
+        display: grid;
+        grid-template-columns: 1.75rem 1fr;
+        gap: var(--space-sm);
+        align-items: start;
+      }
+      .ai-item__marker {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        margin-top: 1px;
+      }
+      .ai-item__title {
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+      }
+      .ai-item__text {
+        font-size: 0.85rem;
+        color: var(--color-ink-soft);
+        line-height: 1.65;
+      }
+      .ai-item__link {
+        display: inline-block;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        color: var(--color-accent);
+        font-weight: 500;
+      }
+      .ai-item__link:hover {
+        text-decoration: underline;
+      }
+      .ai-section__coda {
+        margin-top: var(--space-md);
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-border);
+        font-size: 0.875rem;
+        color: var(--color-ink-soft);
+        line-height: 1.7;
+        max-width: 540px;
+      }
+
+      /* --- PORTFOLIO --- */
+      .portfolio {
+        margin-top: var(--space-lg);
+      }
+      .portfolio__items {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-top: var(--space-md);
+      }
+      .portfolio__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--color-border);
+        transition: color var(--duration-normal) var(--ease-out-expo);
+      }
+      .portfolio__item:first-child {
+        border-top: 1px solid var(--color-border);
+      }
+      .portfolio__item:hover {
+        color: var(--color-accent);
+      }
+      .portfolio__item-title {
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      .portfolio__item-context {
+        font-size: 0.8rem;
+        color: var(--color-stone);
+        margin-top: 2px;
+      }
+      .portfolio__item:hover .portfolio__item-context {
+        color: var(--color-accent-soft);
+      }
+      .portfolio__item-arrow {
+        font-size: 0.9rem;
+        color: var(--color-stone);
+        flex-shrink: 0;
+        margin-left: var(--space-sm);
+        transition: transform 0.2s;
+      }
+      .portfolio__item:hover .portfolio__item-arrow {
+        color: var(--color-accent);
+        transform: translateX(3px);
+      }
+
+      /* --- CTA --- */
+      .cta {
+        padding: var(--space-xl) 0;
+      }
+      .cta__statement {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.4;
+        max-width: 500px;
+        margin-bottom: var(--space-md);
+      }
+      .cta__links {
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+      }
+      .cta__link {
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 9px 22px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      .cta__link--primary {
+        background: var(--color-accent);
+        color: #fff;
+      }
+      .cta__link--primary:hover {
+        background: #c2446d;
+      }
+      [data-theme="dark"] .cta__link--primary:hover {
+        background: #f08db5;
+      }
+      .cta__link--secondary {
+        border: 1px solid var(--color-border);
+        color: var(--color-ink-soft);
+      }
+      .cta__link--secondary:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+      }
+
+      /* --- FOOTER --- */
+      .site-footer {
+        padding: var(--space-sm) 0;
+        border-top: 1px solid var(--color-border);
+        font-size: 0.75rem;
+        color: var(--color-stone);
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 640px) {
         .hero__name {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            font-weight: 500;
-            line-height: 1.15;
-            margin-bottom: 0.25rem;
+          font-size: 2rem;
         }
-        .hero__name-first { color: var(--color-accent); }
-        .hero__title {
-            font-size: 1rem;
-            color: var(--color-stone);
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            margin-bottom: var(--space-md);
-        }
-        .hero__statement {
-            font-size: 1.05rem;
-            line-height: 1.75;
-            max-width: 580px;
-            color: var(--color-ink-soft);
-        }
-
-        /* --- POSITIONING --- */
-        .positioning { padding: 0 0 var(--space-lg); }
-        .positioning p {
-            font-size: 0.95rem;
-            line-height: 1.75;
-            color: var(--color-ink-soft);
-            max-width: 620px;
-            margin-bottom: var(--space-sm);
-        }
-        .positioning p:last-child { margin-bottom: 0; }
-        .positioning em { font-style: normal; color: var(--color-ink); font-weight: 500; }
-
-        /* --- DIVIDER --- */
-        .divider {
-            border: none;
-            border-top: 1px solid var(--color-border);
-            margin: var(--space-lg) 0;
-        }
-
-        /* --- SECTION LABEL --- */
-        .section-label {
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--color-accent);
-            margin-bottom: var(--space-xs);
+        .skills {
+          grid-template-columns: 1fr;
         }
         .section-heading {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 500;
-            line-height: 1.25;
-            margin-bottom: var(--space-sm);
+          font-size: 1.5rem;
         }
-
-        /* --- SKILLS --- */
-        .skills {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-sm);
-            margin-top: var(--space-md);
-        }
-        .skill {
-            padding: var(--space-md);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            transition: border-color var(--duration-normal) var(--ease-out-expo);
-        }
-        .skill:hover { border-color: var(--color-accent-soft); }
-        .skill__label {
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-accent);
-            margin-bottom: var(--space-xs);
-        }
-        .skill__heading {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 500;
-            line-height: 1.3;
-            margin-bottom: 0.4rem;
-        }
-        .skill__text {
-            font-size: 0.875rem;
-            color: var(--color-ink-soft);
-            line-height: 1.65;
-        }
-        .skill__proof {
-            font-size: 0.8rem;
-            color: var(--color-ink-tertiary);
-            line-height: 1.6;
-            margin-top: var(--space-xs);
-            padding-top: var(--space-xs);
-            border-top: 1px solid var(--color-border);
-        }
-
-        /* --- DEMO --- */
-        .demo {
-            margin-top: var(--space-lg);
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .demo__header { padding: var(--space-md) var(--space-md) var(--space-xs); }
-        .demo__heading {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-        .demo__intro {
-            font-size: 0.875rem;
-            color: var(--color-ink-soft);
-            line-height: 1.6;
-            max-width: 520px;
+        .cta__statement {
+          font-size: 1.3rem;
         }
         .demo__tabs {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 0 var(--space-md);
-            border-bottom: 1px solid var(--color-border);
-            gap: 0;
+          padding: 0 var(--space-sm);
         }
         .demo__tab {
-            padding: var(--space-xs) var(--space-sm);
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--color-stone);
-            border-bottom: 2px solid transparent;
-            white-space: nowrap;
-            transition: color 0.2s, border-color 0.2s;
+          font-size: 0.7rem;
         }
-        .demo__tab:hover { color: var(--color-ink-soft); }
-        .demo__tab--active {
-            color: var(--color-accent);
-            border-bottom-color: var(--color-accent);
-        }
-        .demo__body { padding: var(--space-md); min-height: 140px; }
-        .demo__panel { display: none; }
-        .demo__panel--active { display: block; animation: fadeUp 0.3s ease; }
-        .demo__panel-label {
-            font-size: 0.65rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-accent);
-            margin-bottom: var(--space-xs);
-        }
-        .demo__panel-text { font-size: 0.95rem; line-height: 1.75; }
-        .demo__panel-note {
-            margin-top: var(--space-xs);
-            font-size: 0.775rem;
-            color: var(--color-stone);
-            font-style: italic;
-            line-height: 1.55;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- AI SECTION --- */
         .ai-section {
-            background: var(--color-ai-surface);
-            border-radius: 8px;
-            padding: var(--space-md);
-            margin-top: var(--space-lg);
+          padding: var(--space-sm);
         }
-        .ai-section .section-heading { margin-bottom: var(--space-xs); }
-        .ai-section__intro {
-            font-size: 0.9rem;
-            color: var(--color-ink-soft);
-            line-height: 1.7;
-            margin-bottom: var(--space-md);
-            max-width: 560px;
-        }
-        .ai-items { display: flex; flex-direction: column; gap: var(--space-md); }
-        .ai-item { display: grid; grid-template-columns: 1.75rem 1fr; gap: var(--space-sm); align-items: start; }
-        .ai-item__marker {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-accent);
-            margin-top: 1px;
-        }
-        .ai-item__title { font-weight: 500; font-size: 0.9rem; margin-bottom: 2px; }
-        .ai-item__text { font-size: 0.85rem; color: var(--color-ink-soft); line-height: 1.65; }
-        .ai-item__link {
-            display: inline-block;
-            margin-top: 4px;
-            font-size: 0.8rem;
-            color: var(--color-accent);
-            font-weight: 500;
-        }
-        .ai-item__link:hover { text-decoration: underline; }
-        .ai-section__coda {
-            margin-top: var(--space-md);
-            padding-top: var(--space-sm);
-            border-top: 1px solid var(--color-border);
-            font-size: 0.875rem;
-            color: var(--color-ink-soft);
-            line-height: 1.7;
-            max-width: 540px;
-        }
-
-        /* --- PORTFOLIO --- */
-        .portfolio { margin-top: var(--space-lg); }
-        .portfolio__items { display: flex; flex-direction: column; gap: 0; margin-top: var(--space-md); }
-        .portfolio__item {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--color-border);
-            transition: color var(--duration-normal) var(--ease-out-expo);
-        }
-        .portfolio__item:first-child { border-top: 1px solid var(--color-border); }
-        .portfolio__item:hover { color: var(--color-accent); }
-        .portfolio__item-title { font-weight: 500; font-size: 0.9rem; }
-        .portfolio__item-context { font-size: 0.8rem; color: var(--color-stone); margin-top: 2px; }
-        .portfolio__item:hover .portfolio__item-context { color: var(--color-accent-soft); }
-        .portfolio__item-arrow {
-            font-size: 0.9rem;
-            color: var(--color-stone);
-            flex-shrink: 0;
-            margin-left: var(--space-sm);
-            transition: transform 0.2s;
-        }
-        .portfolio__item:hover .portfolio__item-arrow {
-            color: var(--color-accent);
-            transform: translateX(3px);
-        }
-
-        /* --- CTA --- */
-        .cta { padding: var(--space-xl) 0; }
-        .cta__statement {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            line-height: 1.4;
-            max-width: 500px;
-            margin-bottom: var(--space-md);
-        }
-        .cta__links { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
-        .cta__link {
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 9px 22px;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-        .cta__link--primary { background: var(--color-accent); color: #fff; }
-        .cta__link--primary:hover { background: #c2446d; }
-        [data-theme="dark"] .cta__link--primary:hover { background: #f08db5; }
-        .cta__link--secondary {
-            border: 1px solid var(--color-border);
-            color: var(--color-ink-soft);
-        }
-        .cta__link--secondary:hover { border-color: var(--color-accent); color: var(--color-accent); }
-
-        /* --- FOOTER --- */
-        .site-footer {
-            padding: var(--space-sm) 0;
-            border-top: 1px solid var(--color-border);
-            font-size: 0.75rem;
-            color: var(--color-stone);
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 640px) {
-            .hero__name { font-size: 2rem; }
-            .skills { grid-template-columns: 1fr; }
-            .section-heading { font-size: 1.5rem; }
-            .cta__statement { font-size: 1.3rem; }
-            .demo__tabs { padding: 0 var(--space-sm); }
-            .demo__tab { font-size: 0.7rem; }
-            .ai-section { padding: var(--space-sm); }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <nav class="site-nav">
-        <div class="container">
-            <div class="site-nav__links">
-                <a href="https://maemendoza.com" class="site-nav__link" target="_blank" rel="noopener">Full Portfolio</a>
-                <a href="https://www.linkedin.com/in/maemariamendoza/" class="site-nav__link" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
-                <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </button>
+      <div class="container">
+        <div class="site-nav__links">
+          <a
+            href="https://maemendoza.com"
+            class="site-nav__link"
+            target="_blank"
+            rel="noopener">Full Portfolio</a
+          >
+          <a href="/uxdesignresume" class="site-nav__link">Resume</a>
+          <a
+            href="https://www.linkedin.com/in/maemariamendoza/"
+            class="site-nav__link"
+            target="_blank"
+            rel="noopener">LinkedIn</a
+          >
         </div>
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
+          <svg
+            class="theme-toggle__moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            ></path></svg
+          >
+          <svg
+            class="theme-toggle__sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><circle cx="12" cy="12" r="5"></circle><line
+              x1="12"
+              y1="1"
+              x2="12"
+              y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line
+              x1="4.22"
+              y1="4.22"
+              x2="5.64"
+              y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"
+            ></line><line x1="1" y1="12" x2="3" y2="12"></line><line
+              x1="21"
+              y1="12"
+              x2="23"
+              y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"
+            ></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg
+          >
+        </button>
+      </div>
     </nav>
 
     <section class="hero">
-        <div class="container">
-            <h1 class="hero__name"><span class="hero__name-first">Mae</span> Mendoza</h1>
-            <p class="hero__title">UX Writer &amp; Content Designer</p>
-            <p class="hero__statement">I design content that helps people use complex products. For the past decade, that's meant educational technology. Now I'm bringing those skills to Cloud AI.</p>
-        </div>
+      <div class="container">
+        <h1 class="hero__name">
+          <span class="hero__name-first">Mae</span> Mendoza
+        </h1>
+        <p class="hero__title">UX Writer &amp; Content Designer</p>
+        <p class="hero__statement">
+          I design content that helps people use complex products. For the past
+          decade, that's meant educational technology. Now I'm bringing those
+          skills to Cloud AI.
+        </p>
+      </div>
     </section>
 
     <section class="positioning">
-        <div class="container">
-            <p>I'm a content designer with 5+ years in educational technology, where I design, build, and refine content systems for complex digital products. My work spans content strategy, information architecture, cross-functional product collaboration, and AI-powered workflow design.</p>
-            <p><em>EdTech is a UX problem.</em> The products I work on serve millions of students, and the content I design <em>is</em> the product. Every word I write is interface text&mdash;instructions, navigation, orientation, assessment&mdash;delivered inside a digital platform where clarity directly determines whether a user succeeds or fails.</p>
-        </div>
+      <div class="container">
+        <p>
+          I'm a content designer with 5+ years in educational technology, where
+          I design, build, and refine content systems for complex digital
+          products. My work spans content strategy, information architecture,
+          cross-functional product collaboration, and AI-powered workflow
+          design.
+        </p>
+        <p>
+          <em>EdTech is a UX problem.</em> The products I work on serve millions
+          of students, and the content I design <em>is</em> the product. Every word
+          I write is interface text&mdash;instructions, navigation, orientation,
+          assessment&mdash;delivered inside a digital platform where clarity directly
+          determines whether a user succeeds or fails.
+        </p>
+      </div>
     </section>
 
-    <hr class="divider container">
+    <hr class="divider container" />
 
     <section>
-        <div class="container">
-            <p class="section-label">What I bring</p>
-            <h2 class="section-heading">The skills transfer directly.</h2>
+      <div class="container">
+        <p class="section-label">What I bring</p>
+        <h2 class="section-heading">The skills transfer directly.</h2>
 
-            <div class="skills">
-                <article class="skill">
-                    <p class="skill__label">Content Strategy</p>
-                    <h3 class="skill__heading">Building content systems from scratch.</h3>
-                    <p class="skill__text">Competitive analysis, requirements synthesis, framework design, and delivery&mdash;I define what content needs to exist, how it should be structured, and why.</p>
-                    <p class="skill__proof">Led strategy for Edmentum's national Ethnic Studies course: synthesized requirements across multiple states into a flexible framework and built the content architecture from scratch.</p>
-                </article>
-                <article class="skill">
-                    <p class="skill__label">Accessible Content Design</p>
-                    <h3 class="skill__heading">Writing for the full range of users.</h3>
-                    <p class="skill__text">I adapt complex information across reading levels, languages, and degrees of technical fluency&mdash;without losing accuracy or depth.</p>
-                    <p class="skill__proof">Routinely adapt content across 6+ audience levels. Explaining Vertex AI to both ML engineers and business decision-makers is the same skill.</p>
-                </article>
-                <article class="skill">
-                    <p class="skill__label">Data-Informed Decisions</p>
-                    <h3 class="skill__heading">Using user signals to drive content.</h3>
-                    <p class="skill__text">I identify patterns in user feedback and quality data, then design scalable solutions&mdash;not one-off fixes.</p>
-                    <p class="skill__proof">Analyzed 12+ months of user-submitted defects and internal audits. Designed an AI-powered remediation process that cut development time from 40 hours to 6&ndash;8 per semester.</p>
-                </article>
-                <article class="skill">
-                    <p class="skill__label">Cross-Functional Collaboration</p>
-                    <h3 class="skill__heading">Translating business priorities into content.</h3>
-                    <p class="skill__text">I work across product, sales, media, and editorial to turn market intelligence into content that serves both users and business goals.</p>
-                    <p class="skill__proof">Translate field and product management intelligence into content priorities using a tiered framework. Perform gap analyses to support state-level market adoption.</p>
-                </article>
-            </div>
-
-            <div class="demo" id="languageDemo">
-                <div class="demo__header">
-                    <h3 class="demo__heading">Same concept. Six audiences.</h3>
-                    <p class="demo__intro">Cloud AI serves users from ML engineers to non-technical executives. Here's one concept&mdash;AI hallucinations&mdash;adapted for each.</p>
-                </div>
-                <div class="demo__tabs" role="tablist" aria-label="Audience levels">
-                    <button class="demo__tab demo__tab--active" role="tab" aria-selected="true" id="tab-0" aria-controls="panel-0" data-tab="0">4th Grade</button>
-                    <button class="demo__tab" role="tab" aria-selected="false" id="tab-1" aria-controls="panel-1" data-tab="1">4th ELL</button>
-                    <button class="demo__tab" role="tab" aria-selected="false" id="tab-2" aria-controls="panel-2" data-tab="2">10th Grade</button>
-                    <button class="demo__tab" role="tab" aria-selected="false" id="tab-3" aria-controls="panel-3" data-tab="3">10th ELL</button>
-                    <button class="demo__tab" role="tab" aria-selected="false" id="tab-4" aria-controls="panel-4" data-tab="4">Technical</button>
-                    <button class="demo__tab" role="tab" aria-selected="false" id="tab-5" aria-controls="panel-5" data-tab="5">Non-Technical</button>
-                </div>
-                <div class="demo__body">
-                    <div class="demo__panel demo__panel--active" id="panel-0" role="tabpanel" aria-labelledby="tab-0" data-panel="0">
-                        <p class="demo__panel-label">4th Grade</p>
-                        <p class="demo__panel-text">Sometimes AI makes things up. It's like a classmate who always raises his hand, even when he doesn't know the answer. He sounds sure, but that doesn't mean he's right.</p>
-                        <p class="demo__panel-note">Familiar analogy. Short, declarative sentences. Concrete language.</p>
-                    </div>
-                    <div class="demo__panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" data-panel="1">
-                        <p class="demo__panel-label">4th Grade ELL</p>
-                        <p class="demo__panel-text">Sometimes AI says things that are not true. AI is like a student who always wants to answer, but does not always know the correct answer. The AI sounds very sure. But the AI can still be wrong.</p>
-                        <p class="demo__panel-note">No idioms or metaphor. One idea per sentence. Action-oriented closing.</p>
-                    </div>
-                    <div class="demo__panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" data-panel="2">
-                        <p class="demo__panel-label">10th Grade</p>
-                        <p class="demo__panel-text">AI hallucinations happen when the model produces information that sounds right but isn't. It's predicting what words should come next without knowing whether the content is true.</p>
-                        <p class="demo__panel-note">Introduces terminology. Explains mechanism. Distinguishes intent from behavior.</p>
-                    </div>
-                    <div class="demo__panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" data-panel="3">
-                        <p class="demo__panel-label">10th Grade ELL</p>
-                        <p class="demo__panel-text">AI hallucinations happen when the model creates information that seems correct but is not. The AI predicts what words should come next. It does not know if the information is true.</p>
-                        <p class="demo__panel-note">Key vocabulary retained with immediate context. Shorter sentences. Explicit cause-and-effect.</p>
-                    </div>
-                    <div class="demo__panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" data-panel="4">
-                        <p class="demo__panel-label">Technical Professional</p>
-                        <p class="demo__panel-text">Large language models hallucinate when pattern-matching produces fluent but unfounded outputs. The model optimizes for coherence, not accuracy. High-stakes content requires human verification.</p>
-                        <p class="demo__panel-note">Assumes domain fluency. Precise terminology. Moves to mitigation&mdash;this audience wants solutions.</p>
-                    </div>
-                    <div class="demo__panel" id="panel-5" role="tabpanel" aria-labelledby="tab-5" data-panel="5">
-                        <p class="demo__panel-label">Non-Technical Professional</p>
-                        <p class="demo__panel-text">AI can generate confident-sounding content that is factually wrong. This is called hallucination. Any AI-generated content needs human review before publication.</p>
-                        <p class="demo__panel-note">No jargon. Frames as business risk. Ends with actionable recommendation.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="skills">
+          <article class="skill">
+            <p class="skill__label">Content Strategy</p>
+            <h3 class="skill__heading">
+              Building content systems from scratch.
+            </h3>
+            <p class="skill__text">
+              Competitive analysis, requirements synthesis, framework design,
+              and delivery&mdash;I define what content needs to exist, how it
+              should be structured, and why.
+            </p>
+            <p class="skill__proof">
+              Led strategy for Edmentum's national Ethnic Studies course:
+              synthesized requirements across multiple states into a flexible
+              framework and built the content architecture from scratch.
+            </p>
+          </article>
+          <article class="skill">
+            <p class="skill__label">Accessible Content Design</p>
+            <h3 class="skill__heading">Writing for the full range of users.</h3>
+            <p class="skill__text">
+              I adapt complex information across reading levels, languages, and
+              degrees of technical fluency&mdash;without losing accuracy or
+              depth.
+            </p>
+            <p class="skill__proof">
+              Routinely adapt content across 6+ audience levels. Explaining
+              Vertex AI to both ML engineers and business decision-makers is the
+              same skill.
+            </p>
+          </article>
+          <article class="skill">
+            <p class="skill__label">Data-Informed Decisions</p>
+            <h3 class="skill__heading">Using user signals to drive content.</h3>
+            <p class="skill__text">
+              I identify patterns in user feedback and quality data, then design
+              scalable solutions&mdash;not one-off fixes.
+            </p>
+            <p class="skill__proof">
+              Analyzed 12+ months of user-submitted defects and internal audits.
+              Designed an AI-powered remediation process that cut development
+              time from 40 hours to 6&ndash;8 per semester.
+            </p>
+          </article>
+          <article class="skill">
+            <p class="skill__label">Cross-Functional Collaboration</p>
+            <h3 class="skill__heading">
+              Translating business priorities into content.
+            </h3>
+            <p class="skill__text">
+              I work across product, sales, media, and editorial to turn market
+              intelligence into content that serves both users and business
+              goals.
+            </p>
+            <p class="skill__proof">
+              Translate field and product management intelligence into content
+              priorities using a tiered framework. Perform gap analyses to
+              support state-level market adoption.
+            </p>
+          </article>
         </div>
+
+        <div class="demo" id="languageDemo">
+          <div class="demo__header">
+            <h3 class="demo__heading">Same concept. Six audiences.</h3>
+            <p class="demo__intro">
+              Cloud AI serves users from ML engineers to non-technical
+              executives. Here's one concept&mdash;AI
+              hallucinations&mdash;adapted for each.
+            </p>
+          </div>
+          <div class="demo__tabs" role="tablist" aria-label="Audience levels">
+            <button
+              class="demo__tab demo__tab--active"
+              role="tab"
+              aria-selected="true"
+              id="tab-0"
+              aria-controls="panel-0"
+              data-tab="0">4th Grade</button
+            >
+            <button
+              class="demo__tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-1"
+              aria-controls="panel-1"
+              data-tab="1">4th ELL</button
+            >
+            <button
+              class="demo__tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-2"
+              aria-controls="panel-2"
+              data-tab="2">10th Grade</button
+            >
+            <button
+              class="demo__tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-3"
+              aria-controls="panel-3"
+              data-tab="3">10th ELL</button
+            >
+            <button
+              class="demo__tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-4"
+              aria-controls="panel-4"
+              data-tab="4">Technical</button
+            >
+            <button
+              class="demo__tab"
+              role="tab"
+              aria-selected="false"
+              id="tab-5"
+              aria-controls="panel-5"
+              data-tab="5">Non-Technical</button
+            >
+          </div>
+          <div class="demo__body">
+            <div
+              class="demo__panel demo__panel--active"
+              id="panel-0"
+              role="tabpanel"
+              aria-labelledby="tab-0"
+              data-panel="0"
+            >
+              <p class="demo__panel-label">4th Grade</p>
+              <p class="demo__panel-text">
+                Sometimes AI makes things up. It's like a classmate who always
+                raises his hand, even when he doesn't know the answer. He sounds
+                sure, but that doesn't mean he's right.
+              </p>
+              <p class="demo__panel-note">
+                Familiar analogy. Short, declarative sentences. Concrete
+                language.
+              </p>
+            </div>
+            <div
+              class="demo__panel"
+              id="panel-1"
+              role="tabpanel"
+              aria-labelledby="tab-1"
+              data-panel="1"
+            >
+              <p class="demo__panel-label">4th Grade ELL</p>
+              <p class="demo__panel-text">
+                Sometimes AI says things that are not true. AI is like a student
+                who always wants to answer, but does not always know the correct
+                answer. The AI sounds very sure. But the AI can still be wrong.
+              </p>
+              <p class="demo__panel-note">
+                No idioms or metaphor. One idea per sentence. Action-oriented
+                closing.
+              </p>
+            </div>
+            <div
+              class="demo__panel"
+              id="panel-2"
+              role="tabpanel"
+              aria-labelledby="tab-2"
+              data-panel="2"
+            >
+              <p class="demo__panel-label">10th Grade</p>
+              <p class="demo__panel-text">
+                AI hallucinations happen when the model produces information
+                that sounds right but isn't. It's predicting what words should
+                come next without knowing whether the content is true.
+              </p>
+              <p class="demo__panel-note">
+                Introduces terminology. Explains mechanism. Distinguishes intent
+                from behavior.
+              </p>
+            </div>
+            <div
+              class="demo__panel"
+              id="panel-3"
+              role="tabpanel"
+              aria-labelledby="tab-3"
+              data-panel="3"
+            >
+              <p class="demo__panel-label">10th Grade ELL</p>
+              <p class="demo__panel-text">
+                AI hallucinations happen when the model creates information that
+                seems correct but is not. The AI predicts what words should come
+                next. It does not know if the information is true.
+              </p>
+              <p class="demo__panel-note">
+                Key vocabulary retained with immediate context. Shorter
+                sentences. Explicit cause-and-effect.
+              </p>
+            </div>
+            <div
+              class="demo__panel"
+              id="panel-4"
+              role="tabpanel"
+              aria-labelledby="tab-4"
+              data-panel="4"
+            >
+              <p class="demo__panel-label">Technical Professional</p>
+              <p class="demo__panel-text">
+                Large language models hallucinate when pattern-matching produces
+                fluent but unfounded outputs. The model optimizes for coherence,
+                not accuracy. High-stakes content requires human verification.
+              </p>
+              <p class="demo__panel-note">
+                Assumes domain fluency. Precise terminology. Moves to
+                mitigation&mdash;this audience wants solutions.
+              </p>
+            </div>
+            <div
+              class="demo__panel"
+              id="panel-5"
+              role="tabpanel"
+              aria-labelledby="tab-5"
+              data-panel="5"
+            >
+              <p class="demo__panel-label">Non-Technical Professional</p>
+              <p class="demo__panel-text">
+                AI can generate confident-sounding content that is factually
+                wrong. This is called hallucination. Any AI-generated content
+                needs human review before publication.
+              </p>
+              <p class="demo__panel-note">
+                No jargon. Frames as business risk. Ends with actionable
+                recommendation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
-        <div class="container">
-            <div class="ai-section">
-                <p class="section-label">Why Cloud AI</p>
-                <h2 class="section-heading">I don't just write about AI. I build with it.</h2>
-                <p class="ai-section__intro">The UX writer on this team needs to understand AI deeply enough to explain it clearly. I've designed AI workflows, trained teams on AI tools, and built quality assurance processes for AI-generated content.</p>
+      <div class="container">
+        <div class="ai-section">
+          <p class="section-label">Why Cloud AI</p>
+          <h2 class="section-heading">
+            I don't just write about AI. I build with it.
+          </h2>
+          <p class="ai-section__intro">
+            The UX writer on this team needs to understand AI deeply enough to
+            explain it clearly. I've designed AI workflows, trained teams on AI
+            tools, and built quality assurance processes for AI-generated
+            content.
+          </p>
 
-                <div class="ai-items">
-                    <div class="ai-item">
-                        <span class="ai-item__marker" aria-hidden="true">1</span>
-                        <div>
-                            <p class="ai-item__title">AI Workflow Design</p>
-                            <p class="ai-item__text">Designed an end-to-end AI content generation process for assessment remediation. Defined quality criteria, built human review into the pipeline, reduced development time from 40 hours to 6&ndash;8 per semester, and eliminated contractor dependency.</p>
-                        </div>
-                    </div>
-                    <div class="ai-item">
-                        <span class="ai-item__marker" aria-hidden="true">2</span>
-                        <div>
-                            <p class="ai-item__title">AI Professional Development</p>
-                            <p class="ai-item__text">Designed and delivered Edmentum's first generative AI training. Taught colleagues with varying AI familiarity to use Claude AI effectively&mdash;practical strategies for better results with fewer tokens.</p>
-                            <a href="https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/view" target="_blank" rel="noopener" class="ai-item__link">View the presentation &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="ai-item">
-                        <span class="ai-item__marker" aria-hidden="true">3</span>
-                        <div>
-                            <p class="ai-item__title">AI Content Verification</p>
-                            <p class="ai-item__text">Review and fact-check AI-generated content across K&ndash;12 subjects, catching hallucinations and contextual errors that automated checks and generalist reviewers miss.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="ai-section__coda">I write about AI from the inside&mdash;not as a translator standing outside the technology, but as someone who has designed with it, built processes around it, and taught others to use it well.</p>
+          <div class="ai-items">
+            <div class="ai-item">
+              <span class="ai-item__marker" aria-hidden="true">1</span>
+              <div>
+                <p class="ai-item__title">AI Workflow Design</p>
+                <p class="ai-item__text">
+                  Designed an end-to-end AI content generation process for
+                  assessment remediation. Defined quality criteria, built human
+                  review into the pipeline, reduced development time from 40
+                  hours to 6&ndash;8 per semester, and eliminated contractor
+                  dependency.
+                </p>
+              </div>
             </div>
+            <div class="ai-item">
+              <span class="ai-item__marker" aria-hidden="true">2</span>
+              <div>
+                <p class="ai-item__title">AI Professional Development</p>
+                <p class="ai-item__text">
+                  Designed and delivered Edmentum's first generative AI
+                  training. Taught colleagues with varying AI familiarity to use
+                  Claude AI effectively&mdash;practical strategies for better
+                  results with fewer tokens.
+                </p>
+                <a
+                  href="https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/view"
+                  target="_blank"
+                  rel="noopener"
+                  class="ai-item__link">View the presentation &rarr;</a
+                >
+              </div>
+            </div>
+            <div class="ai-item">
+              <span class="ai-item__marker" aria-hidden="true">3</span>
+              <div>
+                <p class="ai-item__title">AI Content Verification</p>
+                <p class="ai-item__text">
+                  Review and fact-check AI-generated content across K&ndash;12
+                  subjects, catching hallucinations and contextual errors that
+                  automated checks and generalist reviewers miss.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p class="ai-section__coda">
+            I write about AI from the inside&mdash;not as a translator standing
+            outside the technology, but as someone who has designed with it,
+            built processes around it, and taught others to use it well.
+          </p>
         </div>
+      </div>
     </section>
 
     <section class="portfolio">
-        <div class="container">
-            <p class="section-label">Selected work</p>
-            <h2 class="section-heading">See it in practice.</h2>
+      <div class="container">
+        <p class="section-label">Selected work</p>
+        <h2 class="section-heading">See it in practice.</h2>
 
-            <div class="portfolio__items">
-                <a href="https://drive.google.com/drive/folders/1dsayinQN09Xl4-pVtVv1U5DQh7p1t7Jn?usp=drive_link" target="_blank" rel="noopener" class="portfolio__item">
-                    <div>
-                        <p class="portfolio__item-title">AP Human Geography &mdash; Scope &amp; Samples</p>
-                        <p class="portfolio__item-context">Content strategy and information architecture for a complex course.</p>
-                    </div>
-                    <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/view" target="_blank" rel="noopener" class="portfolio__item">
-                    <div>
-                        <p class="portfolio__item-title">Working Smarter with Claude</p>
-                        <p class="portfolio__item-context">AI training for mixed-fluency audiences.</p>
-                    </div>
-                    <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="https://maemendoza.com" target="_blank" rel="noopener" class="portfolio__item">
-                    <div>
-                        <p class="portfolio__item-title">Full Portfolio</p>
-                        <p class="portfolio__item-context">Content design, editorial, and SME consulting.</p>
-                    </div>
-                    <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
-                </a>
+        <div class="portfolio__items">
+          <a
+            href="https://drive.google.com/drive/folders/1dsayinQN09Xl4-pVtVv1U5DQh7p1t7Jn?usp=drive_link"
+            target="_blank"
+            rel="noopener"
+            class="portfolio__item"
+          >
+            <div>
+              <p class="portfolio__item-title">
+                AP Human Geography &mdash; Scope &amp; Samples
+              </p>
+              <p class="portfolio__item-context">
+                Content strategy and information architecture for a complex
+                course.
+              </p>
             </div>
+            <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href="https://drive.google.com/file/d/1D1jco04IIJ3uSVkVib0nPFDFIZalggS1/view"
+            target="_blank"
+            rel="noopener"
+            class="portfolio__item"
+          >
+            <div>
+              <p class="portfolio__item-title">Working Smarter with Claude</p>
+              <p class="portfolio__item-context">
+                AI training for mixed-fluency audiences.
+              </p>
+            </div>
+            <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a
+            href="https://maemendoza.com"
+            target="_blank"
+            rel="noopener"
+            class="portfolio__item"
+          >
+            <div>
+              <p class="portfolio__item-title">Full Portfolio</p>
+              <p class="portfolio__item-context">
+                Content design, editorial, and SME consulting.
+              </p>
+            </div>
+            <span class="portfolio__item-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
+      </div>
     </section>
 
-    <hr class="divider container">
+    <hr class="divider container" />
 
     <section class="cta">
-        <div class="container">
-            <p class="cta__statement">I've spent a decade designing content that helps people navigate complex information. Google Cloud AI is the next version of that same problem&mdash;and I'm ready to solve it at scale.</p>
-            <div class="cta__links">
-                <a href="https://www.linkedin.com/in/maemariamendoza/" target="_blank" rel="noopener" class="cta__link cta__link--primary">Connect on LinkedIn</a>
-                <a href="https://maemendoza.com" target="_blank" rel="noopener" class="cta__link cta__link--secondary">Full portfolio</a>
-            </div>
+      <div class="container">
+        <p class="cta__statement">
+          I've spent a decade designing content that helps people navigate
+          complex information. Google Cloud AI is the next version of that same
+          problem&mdash;and I'm ready to solve it at scale.
+        </p>
+        <div class="cta__links">
+          <a
+            href="https://www.linkedin.com/in/maemariamendoza/"
+            target="_blank"
+            rel="noopener"
+            class="cta__link cta__link--primary">Connect on LinkedIn</a
+          >
+          <a
+            href="https://maemendoza.com"
+            target="_blank"
+            rel="noopener"
+            class="cta__link cta__link--secondary">Full portfolio</a
+          >
         </div>
+      </div>
     </section>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 Mae Mendoza</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2026 Mae Mendoza</p>
+      </div>
     </footer>
 
     <script is:inline>
-        // --- Dark mode ---
-        (function() {
-            var toggle = document.getElementById('themeToggle');
-            var html = document.documentElement;
+      // --- Dark mode ---
+      (function () {
+        var toggle = document.getElementById("themeToggle");
+        var html = document.documentElement;
 
-            // Check saved preference or system preference
-            var saved = localStorage.getItem('theme');
-            if (saved) {
-                html.setAttribute('data-theme', saved);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                html.setAttribute('data-theme', 'dark');
+        // Check saved preference or system preference
+        var saved = localStorage.getItem("theme");
+        if (saved) {
+          html.setAttribute("data-theme", saved);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          html.setAttribute("data-theme", "dark");
+        }
+
+        toggle.addEventListener("click", function () {
+          var current = html.getAttribute("data-theme");
+          var next = current === "dark" ? "light" : "dark";
+          if (next === "light") {
+            html.removeAttribute("data-theme");
+          } else {
+            html.setAttribute("data-theme", "dark");
+          }
+          localStorage.setItem("theme", next);
+        });
+      })();
+
+      // --- Language demo tabs ---
+      (function () {
+        var tabs = document.querySelectorAll(".demo__tab");
+        var panels = document.querySelectorAll(".demo__panel");
+
+        function activateTab(tab) {
+          var target = tab.getAttribute("data-tab");
+
+          tabs.forEach(function (t) {
+            t.classList.remove("demo__tab--active");
+            t.setAttribute("aria-selected", "false");
+            t.setAttribute("tabindex", "-1");
+          });
+
+          tab.classList.add("demo__tab--active");
+          tab.setAttribute("aria-selected", "true");
+          tab.removeAttribute("tabindex");
+
+          panels.forEach(function (p) {
+            p.classList.remove("demo__panel--active");
+          });
+
+          var targetPanel = document.querySelector(
+            '[data-panel="' + target + '"]'
+          );
+          if (targetPanel) {
+            targetPanel.classList.add("demo__panel--active");
+          }
+        }
+
+        tabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            activateTab(tab);
+          });
+
+          tab.addEventListener("keydown", function (e) {
+            var arr = Array.prototype.slice.call(tabs);
+            var i = arr.indexOf(tab);
+            var n;
+
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+              e.preventDefault();
+              n = (i + 1) % arr.length;
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+              e.preventDefault();
+              n = (i - 1 + arr.length) % arr.length;
             }
 
-            toggle.addEventListener('click', function() {
-                var current = html.getAttribute('data-theme');
-                var next = current === 'dark' ? 'light' : 'dark';
-                if (next === 'light') {
-                    html.removeAttribute('data-theme');
-                } else {
-                    html.setAttribute('data-theme', 'dark');
-                }
-                localStorage.setItem('theme', next);
-            });
-        })();
-
-        // --- Language demo tabs ---
-        (function() {
-            var tabs = document.querySelectorAll('.demo__tab');
-            var panels = document.querySelectorAll('.demo__panel');
-
-            function activateTab(tab) {
-                var target = tab.getAttribute('data-tab');
-
-                tabs.forEach(function(t) {
-                    t.classList.remove('demo__tab--active');
-                    t.setAttribute('aria-selected', 'false');
-                    t.setAttribute('tabindex', '-1');
-                });
-
-                tab.classList.add('demo__tab--active');
-                tab.setAttribute('aria-selected', 'true');
-                tab.removeAttribute('tabindex');
-
-                panels.forEach(function(p) {
-                    p.classList.remove('demo__panel--active');
-                });
-
-                var targetPanel = document.querySelector('[data-panel="' + target + '"]');
-                if (targetPanel) {
-                    targetPanel.classList.add('demo__panel--active');
-                }
+            if (n !== undefined) {
+              activateTab(arr[n]);
+              arr[n].focus();
             }
-
-            tabs.forEach(function(tab) {
-                tab.addEventListener('click', function() {
-                    activateTab(tab);
-                });
-
-                tab.addEventListener('keydown', function(e) {
-                    var arr = Array.prototype.slice.call(tabs);
-                    var i = arr.indexOf(tab);
-                    var n;
-
-                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                        e.preventDefault();
-                        n = (i + 1) % arr.length;
-                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                        e.preventDefault();
-                        n = (i - 1 + arr.length) % arr.length;
-                    }
-
-                    if (n !== undefined) {
-                        activateTab(arr[n]);
-                        arr[n].focus();
-                    }
-                });
-            });
-        })();
+          });
+        });
+      })();
     </script>
-</body>
+  </body>
 </html>
