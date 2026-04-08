@@ -1,0 +1,80 @@
+---
+// src/components/FeaturedWork.astro
+interface WorkItem {
+  title: string;
+  image: string;
+  alt: string;
+  href?: string;
+}
+
+interface Props {
+  items?: WorkItem[];
+}
+
+const {
+  items = [
+    {
+      title: "Content Design",
+      image:
+        "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80",
+      alt: "Notebook with pen on wooden desk",
+      href: "#content-design",
+    },
+    {
+      title: "Editorial & QA",
+      image:
+        "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80",
+      alt: "Person editing documents with red pen",
+      href: "#editorial",
+    },
+    {
+      title: "Instructional Design",
+      image:
+        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80",
+      alt: "Classroom with students at desks",
+      href: "#instructional-design",
+    },
+    {
+      title: "Subject Matter Expertise",
+      image:
+        "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80",
+      alt: "Stack of open books with notes",
+      href: "#sme",
+    },
+  ],
+} = Astro.props;
+---
+
+<section
+  class="bg-neutral-50 py-16 md:py-24"
+  aria-labelledby="featured-work-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <h2 id="featured-work-heading" class="font-display text-3xl md:text-4xl font-bold uppercase tracking-tight text-neutral-900 mb-8">What I Do</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        items.map((item) => (
+          <a
+            href={item.href || "#"}
+            class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 rounded-sm"
+          >
+            <article class="space-y-4">
+              <div class="aspect-[4/3] overflow-hidden bg-neutral-200">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-focus-visible:grayscale-0 transition-all duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="text-neutral-900 font-medium text-lg group-hover:text-neutral-600 transition-colors">
+                {item.title}
+              </h3>
+            </article>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
