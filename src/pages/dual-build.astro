@@ -1,0 +1,1640 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Dual Build Case Study — Mae Mendoza" skipTarget="#main-content">
+<style is:inline>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ========== DARK MODE — Aubergine Studio Bold ========== */
+[data-theme="dark"] {
+  --bg-primary: #0e0b12;
+  --bg-secondary: #141018;
+  --bg-card: rgba(22, 18, 28, 0.75);
+  --bg-glass: rgba(255,255,255,0.03);
+  --text-primary: #f2eff6;
+  --text-body: #c8c2d1;
+  --text-muted: #8a8296;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.14);
+
+  /* Primary accent — hot pink-magenta */
+  --accent: #e8457a;
+  --accent-dim: rgba(232,69,122,0.12);
+  --accent-glow: rgba(232,69,122,0.3);
+
+  /* Tier scale — violet → magenta → burnt orange → gold → sage */
+  --tier-a: #7b4dcc;
+  --tier-b: #d64d7a;
+  --tier-c: #d4762e;
+  --tier-d: #c9a633;
+  --tier-e: #7a9e6e;
+
+  --tier-a-dim: rgba(123,77,204,0.15);
+  --tier-b-dim: rgba(214,77,122,0.15);
+  --tier-c-dim: rgba(212,118,46,0.15);
+  --tier-d-dim: rgba(201,166,51,0.15);
+  --tier-e-dim: rgba(122,158,110,0.15);
+
+  /* Semantic */
+  --green: #7a9e6e;
+  --green-dim: rgba(122,158,110,0.12);
+  --sky: #b8a8d8;
+
+  --grain-opacity: 0.025;
+  --radial-accent: rgba(232,69,122,0.06);
+  --radial-violet: rgba(123,77,204,0.05);
+  --radial-warm: rgba(212,118,46,0.04);
+
+  --toggle-bg: rgba(255,255,255,0.08);
+  --shadow-card: 0 2px 20px rgba(0,0,0,0.3);
+  --popover-bg: #1e1826;
+  --flip-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  --map-stroke: rgba(0,0,0,0.4);
+}
+
+/* ========== LIGHT MODE — Ink & Signal ========== */
+[data-theme="light"] {
+  --bg-primary: #f7f7f5;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255,255,255,0.92);
+  --bg-glass: rgba(0,0,0,0.02);
+  --text-primary: #1a1520;
+  --text-body: #4a4358;
+  --text-muted: #7a7388;
+  --border-subtle: rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.16);
+
+  /* Shifted accent for contrast on light */
+  --accent: #c93162;
+  --accent-dim: rgba(201,49,98,0.08);
+  --accent-glow: rgba(201,49,98,0.2);
+
+  /* Tier scale — deeper/muted for light bg */
+  --tier-a: #6240a8;
+  --tier-b: #b83d66;
+  --tier-c: #b86324;
+  --tier-d: #a8892a;
+  --tier-e: #5e8252;
+
+  --tier-a-dim: rgba(98,64,168,0.1);
+  --tier-b-dim: rgba(184,61,102,0.1);
+  --tier-c-dim: rgba(184,99,36,0.1);
+  --tier-d-dim: rgba(168,137,42,0.1);
+  --tier-e-dim: rgba(94,130,82,0.1);
+
+  --green: #5e8252;
+  --green-dim: rgba(94,130,82,0.08);
+  --sky: #6240a8;
+
+  --grain-opacity: 0.012;
+  --radial-accent: rgba(201,49,98,0.04);
+  --radial-violet: rgba(98,64,168,0.03);
+  --radial-warm: rgba(184,99,36,0.03);
+
+  --toggle-bg: rgba(0,0,0,0.06);
+  --shadow-card: 0 1px 12px rgba(0,0,0,0.06);
+  --popover-bg: #ffffff;
+  --flip-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  --map-stroke: #ffffff;
+}
+
+/* ========== RAINBOW MODE — Neon Editorial ========== */
+[data-theme="rainbow"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0e0e0e;
+  --bg-card: rgba(14, 14, 14, 0.92);
+  --bg-glass: rgba(255,255,255,0.03);
+  --text-primary: #ffffff;
+  --text-body: #c8c8c8;
+  --text-muted: #888888;
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+
+  /* Primary accent — hot magenta */
+  --accent: #ff2d78;
+  --accent-dim: rgba(255,45,120,0.15);
+  --accent-glow: rgba(255,45,120,0.4);
+
+  /* Tier scale — neon editorial */
+  --tier-a: #c4b5fd;
+  --tier-b: #ff2d78;
+  --tier-c: #ffb020;
+  --tier-d: #34d399;
+  --tier-e: #22d3ee;
+
+  --tier-a-dim: rgba(196,181,253,0.15);
+  --tier-b-dim: rgba(255,45,120,0.15);
+  --tier-c-dim: rgba(255,176,32,0.15);
+  --tier-d-dim: rgba(52,211,153,0.15);
+  --tier-e-dim: rgba(34,211,238,0.15);
+
+  /* Semantic */
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.12);
+  --sky: #c4b5fd;
+
+  --grain-opacity: 0.015;
+  --radial-accent: rgba(255,45,120,0.06);
+  --radial-violet: rgba(196,181,253,0.05);
+  --radial-warm: rgba(255,176,32,0.04);
+
+  --toggle-bg: rgba(255,255,255,0.1);
+  --shadow-card: 0 2px 24px rgba(0,0,0,0.5);
+  --popover-bg: #141414;
+  --flip-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  --map-stroke: rgba(0,0,0,0.4);
+}
+
+
+/* ===== RAINBOW — EDITORIAL PRINT ===== */
+
+/* Rainbow hero — FULL saturated gradient + dot overlay */
+[data-theme="rainbow"] .hero {
+  background:
+    linear-gradient(135deg,
+      #e8457a 0%, #f4845f 18%, #f6c744 36%,
+      #34d399 54%, #22d3ee 72%, #60a5fa 86%, #c4b5fd 100%
+    );
+  position: relative;
+}
+/* Hero dots as pseudo-element over the gradient */
+[data-theme="rainbow"] .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.12) 100px, transparent 100px),
+    radial-gradient(circle, rgba(0,0,0,0.12) 100px, transparent 100px);
+  background-size: 280px 280px;
+  background-position: 0 0, 140px 140px;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="rainbow"] .hero > * { position: relative; z-index: 1; }
+[data-theme="rainbow"] .hero h1 {
+  color: #ffffff;
+  text-shadow: 2px 4px 8px rgba(0,0,0,0.4);
+}
+[data-theme="rainbow"] .hero h1 em { color: #ffffff; }
+[data-theme="rainbow"] .hero-label {
+  background: rgba(0,0,0,0.7);
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 3px;
+  color: #ffffff;
+}
+[data-theme="rainbow"] .hero-sub {
+  color: #ffffff;
+  background: rgba(0,0,0,0.55);
+  display: inline;
+  padding: 5px 12px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 2.1;
+  border-radius: 2px;
+}
+[data-theme="rainbow"] .hero-meta span {
+  color: #ffffff;
+  background: rgba(0,0,0,0.55);
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+[data-theme="rainbow"] .scroll-cue span { color: rgba(255,255,255,0.8); }
+[data-theme="rainbow"] .scroll-line { background: linear-gradient(to bottom, #fff, transparent); }
+
+/* ===== LABEL TREATMENT — ALL SECTION HEADERS ===== */
+[data-theme="rainbow"] .section-num {
+  background: rgba(0,0,0,0.65);
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 3px;
+  color: #ffffff;
+}
+[data-theme="rainbow"] .section-title {
+  color: #ffffff;
+  text-shadow: 1px 2px 6px rgba(0,0,0,0.35);
+}
+[data-theme="rainbow"] .section-lead {
+  color: rgba(255,255,255,0.9);
+}
+
+/* ===== SECTIONS 01–06: ROYGBIV FLOW + POLKA DOTS ===== */
+
+/* 01 — RED / MAGENTA */
+[data-theme="rainbow"] .problem-section {
+  background:
+    linear-gradient(170deg, rgba(232,69,122,0.45) 0%, rgba(255,45,120,0.3) 40%, rgba(244,132,95,0.15) 80%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* 02 — ORANGE / CORAL */
+[data-theme="rainbow"] .compound-section {
+  background:
+    linear-gradient(190deg, rgba(244,132,95,0.4) 0%, rgba(246,199,68,0.3) 40%, rgba(255,176,32,0.15) 80%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* 03 — YELLOW / GREEN */
+[data-theme="rainbow"] .tier-section {
+  background:
+    linear-gradient(170deg, rgba(246,199,68,0.35) 0%, rgba(52,211,153,0.3) 40%, rgba(34,211,238,0.15) 80%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* 04 — GREEN / TEAL */
+[data-theme="rainbow"] .dual-section {
+  background:
+    linear-gradient(190deg, rgba(52,211,153,0.4) 0%, rgba(0,255,213,0.25) 40%, rgba(34,211,238,0.15) 80%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* 05 — BLUE / INDIGO */
+[data-theme="rainbow"] .outcomes-section {
+  background:
+    linear-gradient(170deg, rgba(34,211,238,0.35) 0%, rgba(96,165,250,0.3) 40%, rgba(196,181,253,0.2) 80%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* 06 — VIOLET / MAGENTA */
+[data-theme="rainbow"] .roi-section {
+  background:
+    linear-gradient(190deg, rgba(196,181,253,0.4) 0%, rgba(232,69,122,0.25) 50%, transparent 100%),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 100px, transparent 100px),
+    #0a0a0a;
+  background-size: 100% 100%, 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 0 0, 140px 140px, 0 0;
+}
+
+/* ===== 07 — TAKEAWAY ===== */
+[data-theme="rainbow"] .cta-section {
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.04) 100px, transparent 100px),
+    radial-gradient(circle, rgba(255,255,255,0.04) 100px, transparent 100px),
+    #050505;
+  background-size: 280px 280px, 280px 280px, 100% 100%;
+  background-position: 0 0, 140px 140px, 0 0;
+}
+[data-theme="rainbow"] .cta-section .section-num {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.45);
+}
+[data-theme="rainbow"] .cta-section .section-title {
+  color: rgba(255,255,255,0.8);
+  text-shadow: none;
+}
+[data-theme="rainbow"] .cta-section .section-title em {
+  background: linear-gradient(90deg, #ff2d78, #f4845f, #f6c744, #34d399, #22d3ee, #60a5fa, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+[data-theme="rainbow"] .cta-sub {
+  color: rgba(255,255,255,0.45);
+}
+[data-theme="rainbow"] .footer-meta { color: rgba(255,255,255,0.25); }
+[data-theme="rainbow"] .back-link {
+  border-color: rgba(255,45,120,0.3);
+  background: rgba(10,10,10,0.8);
+}
+[data-theme="rainbow"] .back-link:hover {
+  background: linear-gradient(135deg, #ff2d78, #ff6b35, #ffd600, #00e87b, #00c2ff, #a855f7);
+  color: #0a0a0a;
+  border-color: transparent;
+  font-weight: 500;
+}
+
+/* ===== CARDS ===== */
+[data-theme="rainbow"] .expand-card:hover,
+[data-theme="rainbow"] .outcome-card:hover {
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 4px 30px rgba(255,45,120,0.12), 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* Flip cards — rainbow bar, thick */
+[data-theme="rainbow"] .flash-front::before,
+[data-theme="rainbow"] .flash-back::before {
+  height: 4px;
+  background: linear-gradient(90deg, #ff2d78, #f4845f, #f6c744, #34d399, #22d3ee, #c4b5fd);
+}
+[data-theme="rainbow"] .flash-card:nth-child(2) .flash-front::before,
+[data-theme="rainbow"] .flash-card:nth-child(2) .flash-back::before {
+  background: linear-gradient(90deg, #c4b5fd, #22d3ee, #34d399, #f6c744, #f4845f, #ff2d78);
+}
+[data-theme="rainbow"] .flash-score { color: #ff2d78; }
+[data-theme="rainbow"] .flash-card:nth-child(2) .flash-score { color: #22d3ee; }
+
+/* Expand card bars — neon, thick */
+[data-theme="rainbow"] .expand-card::before { height: 4px; }
+[data-theme="rainbow"] .expand-card:nth-child(1)::before { background: #c4b5fd; }
+[data-theme="rainbow"] .expand-card:nth-child(2)::before { background: #ff2d78; }
+[data-theme="rainbow"] .expand-card:nth-child(3)::before { background: #ffb020; }
+[data-theme="rainbow"] .expand-card:nth-child(4)::before { background: #34d399; }
+
+/* Outcome icons — neon */
+[data-theme="rainbow"] .outcome-card:nth-child(1) .outcome-icon { background: rgba(255,176,32,0.2); color: #ffb020; }
+[data-theme="rainbow"] .outcome-card:nth-child(2) .outcome-icon { background: rgba(52,211,153,0.2); color: #34d399; }
+[data-theme="rainbow"] .outcome-card:nth-child(3) .outcome-icon { background: rgba(255,45,120,0.2); color: #ff2d78; }
+[data-theme="rainbow"] .outcome-card:nth-child(4) .outcome-icon { background: rgba(34,211,238,0.2); color: #22d3ee; }
+
+/* Quote block — rainbow gradient border */
+[data-theme="rainbow"] .quote-block {
+  border-left-width: 4px;
+  border-left-color: transparent;
+  border-image: linear-gradient(180deg, #ff2d78, #f6c744, #34d399, #22d3ee, #c4b5fd) 1;
+  background: rgba(196,181,253,0.06);
+}
+[data-theme="rainbow"] .quote-block p { color: #c4b5fd; }
+
+/* ===== DATA VIZ — NEON ===== */
+[data-theme="rainbow"] .tier-a { background: #c4b5fd; color: #0a0a0a; }
+[data-theme="rainbow"] .tier-b { background: #ff2d78; }
+[data-theme="rainbow"] .tier-c { background: #ffb020; color: #0a0a0a; }
+[data-theme="rainbow"] .tier-d { background: #34d399; color: #0a0a0a; }
+[data-theme="rainbow"] .tier-e { background: #22d3ee; color: #0a0a0a; }
+
+[data-theme="rainbow"] .dual-bar-standard { background: #60a5fa; opacity: 0.7; }
+[data-theme="rainbow"] .dual-bar-advanced { background: #34d399; opacity: 0.85; }
+[data-theme="rainbow"] .dual-bar-col:hover .dual-bar-standard { opacity: 0.9; }
+[data-theme="rainbow"] .dual-bar-col:hover .dual-bar-advanced { opacity: 1; }
+[data-theme="rainbow"] .dual-bar-advanced::after { border-bottom-color: rgba(255,255,255,0.2); }
+[data-theme="rainbow"] .dbl-standard { background: #60a5fa; opacity: 0.7; }
+[data-theme="rainbow"] .dbl-advanced { background: #34d399; opacity: 0.85; }
+
+[data-theme="rainbow"] .dual-connector-line {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  color: #ffffff;
+}
+[data-theme="rainbow"] .bracket-block { border-color: rgba(255,255,255,0.1); }
+[data-theme="rainbow"] .bracket-num { color: #ffffff; }
+[data-theme="rainbow"] .bracket-sub span { filter: brightness(1.4); }
+
+[data-theme="rainbow"] .roi-marker.done {
+  background: rgba(255,45,120,0.2);
+  color: #ff2d78;
+}
+[data-theme="rainbow"] .roi-item strong { color: #ffffff; }
+
+[data-theme="rainbow"] .nav-dot.active {
+  background: #ff2d78;
+  box-shadow: 0 0 12px rgba(255,45,120,0.6);
+}
+
+/* Rainbow text utility — gradient clip in rainbow mode, accent in others */
+.rainbow-text { color: var(--accent); }
+[data-theme="rainbow"] .rainbow-text {
+  background: linear-gradient(90deg, #ff2d78, #f4845f, #f6c744, #34d399, #22d3ee, #60a5fa, #c4b5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== LIGHT MODE — Section Background Textures ===== */
+
+/* Light: graph-paper grid on hero, section 04, and closing */
+[data-theme="light"] .hero {
+  background:
+    linear-gradient(rgba(100,120,140,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,120,140,0.08) 1px, transparent 1px),
+    radial-gradient(ellipse 80% 60% at 70% 40%, var(--radial-violet) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, var(--radial-accent) 0%, transparent 60%),
+    var(--bg-primary);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%, 100% 100%;
+}
+[data-theme="light"] .dual-section {
+  background:
+    linear-gradient(rgba(100,120,140,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,120,140,0.08) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 50% at 40% 50%, var(--radial-warm) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+}
+[data-theme="light"] .cta-section {
+  background:
+    linear-gradient(rgba(100,120,140,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,120,140,0.08) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 50% at 50% 50%, var(--radial-violet) 0%, transparent 70%),
+    var(--bg-secondary);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+}
+
+/* Light: subtle polka dots on sections 02 and 05 */
+[data-theme="light"] .compound-section {
+  background:
+    radial-gradient(circle, rgba(214,58,110,0.09) 60px, transparent 60px),
+    radial-gradient(circle, rgba(214,58,110,0.09) 60px, transparent 60px),
+    radial-gradient(ellipse 60% 50% at 60% 40%, var(--radial-accent) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 200px 200px, 200px 200px, 100% 100%, 100% 100%;
+  background-position: 30px 20px, 130px 120px, 0 0, 0 0;
+}
+[data-theme="light"] .outcomes-section {
+  background:
+    radial-gradient(circle, rgba(214,58,110,0.09) 60px, transparent 60px),
+    radial-gradient(circle, rgba(214,58,110,0.09) 60px, transparent 60px),
+    radial-gradient(ellipse 60% 60% at 50% 50%, var(--radial-warm) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 200px 200px, 200px 200px, 100% 100%, 100% 100%;
+  background-position: 30px 20px, 130px 120px, 0 0, 0 0;
+}
+
+/* ===== DARK MODE — Section Background Textures ===== */
+
+/* Dark: graph-paper grid on sections 01 and 06 */
+[data-theme="dark"] .problem-section {
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    radial-gradient(ellipse 70% 50% at 30% 50%, var(--radial-accent) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+}
+[data-theme="dark"] .roi-section {
+  background:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+}
+
+/* Dark: subtle polka dots on sections 02 and 05 */
+[data-theme="dark"] .compound-section {
+  background:
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px),
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px),
+    radial-gradient(ellipse 60% 50% at 60% 40%, var(--radial-accent) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 200px 200px, 200px 200px, 100% 100%, 100% 100%;
+  background-position: 30px 20px, 130px 120px, 0 0, 0 0;
+}
+[data-theme="dark"] .outcomes-section {
+  background:
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px),
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px),
+    radial-gradient(ellipse 60% 60% at 50% 50%, var(--radial-warm) 0%, transparent 70%),
+    var(--bg-primary);
+  background-size: 200px 200px, 200px 200px, 100% 100%, 100% 100%;
+  background-position: 30px 20px, 130px 120px, 0 0, 0 0;
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 18px; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background .4s, color .4s;
+  line-height: 1.65;
+}
+
+/* Film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ========== THEME TOGGLE ========== */
+.theme-toggle {
+  position: fixed; top: 24px; right: 24px; z-index: 10000;
+  display: flex; align-items: center; gap: 0;
+  background: var(--bg-card); backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle); border-radius: 40px;
+  padding: 4px; cursor: pointer;
+  transition: all .3s; user-select: none;
+}
+.theme-toggle:hover { border-color: var(--border-hover); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle-icon {
+  font-size: .82rem; line-height: 1;
+  width: 32px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 20px; transition: all .3s;
+  color: var(--text-muted);
+}
+/* Active icon for each theme */
+[data-theme="dark"] .theme-toggle-icon[data-mode="dark"],
+[data-theme="light"] .theme-toggle-icon[data-mode="light"],
+[data-theme="rainbow"] .theme-toggle-icon[data-mode="rainbow"] {
+  background: var(--accent);
+  color: #fff;
+}
+[data-theme="rainbow"] .theme-toggle-icon[data-mode="rainbow"] {
+  background: linear-gradient(135deg, #ff2d78, #ffb020, #34d399, #22d3ee, #c4b5fd);
+  color: #fff;
+}
+
+/* ========== SECTIONS ========== */
+section {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 100px clamp(28px, 8vw, 140px);
+  position: relative;
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace; font-size: .7rem;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+  color: var(--text-primary); line-height: 1.18;
+  max-width: 720px; margin-bottom: 20px;
+}
+.section-lead {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: var(--text-muted); max-width: 620px;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ========== REVEAL ANIMATION ========== */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity .7s, transform .7s;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-label, .hero h1, .hero-sub, .hero-meta, .scroll-cue { opacity: 1; animation: none; }
+  .scroll-line { animation: none; }
+  .flash-card-inner, .dual-flip-inner { transition: none; }
+}
+
+/* ========== HERO ========== */
+.hero {
+  align-items: flex-start;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, var(--radial-violet) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, var(--radial-accent) 0%, transparent 60%),
+    var(--bg-primary);
+}
+.hero-label {
+  font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 28px;
+  opacity: 0; animation: fadeUp .8s ease forwards .3s;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  line-height: 1.1; color: var(--text-primary);
+  max-width: 780px; opacity: 0;
+  animation: fadeUp .8s ease forwards .5s;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  margin-top: 32px; font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 300; color: var(--text-muted);
+  max-width: 580px; line-height: 1.7;
+  opacity: 0; animation: fadeUp .8s ease forwards .7s;
+}
+.hero-meta {
+  margin-top: 52px; display: flex; gap: 28px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .8s ease forwards .9s;
+}
+.hero-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem; letter-spacing: .1em; color: var(--text-muted);
+}
+.scroll-cue {
+  position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp .8s ease forwards 1.2s;
+}
+.scroll-cue span {
+  font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted);
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========== 01 — FLASH CARDS ========== */
+.problem-section {
+  background: radial-gradient(ellipse 70% 50% at 30% 50%, var(--radial-accent) 0%, transparent 70%), var(--bg-primary);
+}
+.problem-narrative { margin-top: 40px; max-width: 640px; }
+.problem-narrative p { font-size: 1rem; line-height: 1.75; margin-bottom: 20px; }
+.problem-narrative strong { color: var(--text-primary); font-weight: 600; }
+
+.flash-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; max-width: 800px; }
+.flash-card { perspective: 800px; cursor: pointer; min-height: 250px; }
+.flash-card-inner {
+  position: relative; width: 100%; height: 100%; min-height: 250px;
+  transition: transform .6s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+}
+.flash-card.flipped .flash-card-inner { transform: rotateY(180deg); }
+.flash-card-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 14px; border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.flash-front {
+  background: var(--bg-card); padding: 36px 32px;
+  justify-content: center; align-items: center; text-align: center;
+}
+.flash-front::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--accent);
+}
+.flash-card:nth-child(2) .flash-front::before,
+.flash-card:nth-child(2) .flash-back::before { background: var(--tier-d); }
+.flash-card:nth-child(2) .flash-score { color: var(--tier-d); }
+.flash-card:nth-child(2) .detail-tag { color: var(--tier-d); }
+.flash-front h3 {
+  font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+  color: var(--text-primary); margin-bottom: 20px; line-height: 1.3;
+}
+.flash-score {
+  font-family: 'DM Serif Display', serif; font-size: 3.5rem;
+  color: var(--accent); line-height: 1; margin-bottom: 6px;
+}
+.flash-score-label {
+  font-family: 'JetBrains Mono', monospace; font-size: .65rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted);
+}
+.flash-tap-hint {
+  position: absolute; bottom: 16px; right: 18px;
+  font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); opacity: .6;
+}
+.flash-back {
+  background: var(--bg-secondary); padding: 28px 26px;
+  transform: rotateY(180deg); overflow-y: auto;
+}
+.flash-back::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--accent);
+}
+.flash-back h4 { font-weight: 600; font-size: .9rem; color: var(--text-primary); margin-bottom: 12px; }
+.flash-back p { font-size: .88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
+.flash-back .detail-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 4px; display: block;
+}
+.flash-close-hint {
+  position: absolute; bottom: 14px; right: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); opacity: .6;
+}
+
+/* ========== 02 — EXPANDABLE CARDS ========== */
+.compound-section {
+  background: radial-gradient(ellipse 60% 50% at 60% 40%, var(--radial-accent) 0%, transparent 70%), var(--bg-primary);
+}
+.compound-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; max-width: 800px; }
+.expand-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 24px 26px;
+  box-shadow: var(--shadow-card); cursor: pointer;
+  transition: border-color .3s; overflow: hidden;
+}
+.expand-card:hover { border-color: var(--border-hover); }
+.expand-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.expand-card::before {
+  content: ''; display: block; width: 32px; height: 3px;
+  border-radius: 2px; margin-bottom: 14px;
+}
+.expand-card:nth-child(1)::before { background: var(--tier-a); }
+.expand-card:nth-child(2)::before { background: var(--tier-b); }
+.expand-card:nth-child(3)::before { background: var(--tier-d); }
+.expand-card:nth-child(4)::before { background: var(--tier-e); }
+.expand-header { display: flex; justify-content: space-between; align-items: center; }
+.expand-header h3 { font-weight: 600; font-size: .98rem; color: var(--text-primary); }
+.expand-arrow {
+  font-size: .8rem; color: var(--text-muted);
+  transition: transform .3s; flex-shrink: 0; margin-left: 12px;
+}
+.expand-card.open .expand-arrow { transform: rotate(180deg); }
+.expand-body { max-height: 0; overflow: hidden; transition: max-height .4s ease, opacity .3s; opacity: 0; }
+.expand-card.open .expand-body { max-height: 300px; opacity: 1; }
+.expand-body p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; padding-top: 14px; }
+
+/* ========== 03 — TIER MAP + BAR ========== */
+.tier-section {
+  background: radial-gradient(ellipse 60% 50% at 60% 40%, var(--radial-violet) 0%, transparent 70%), var(--bg-primary);
+}
+.tier-bar-container { margin-top: 48px; max-width: 800px; }
+
+#coverageMap { max-width: 800px; margin-bottom: 24px; position: relative; }
+#coverageMap svg { width: 100%; }
+#coverageMap path.state { cursor: pointer; transition: opacity .15s; }
+#coverageMap path.state:hover { opacity: .8; }
+#mapTooltip {
+  position: absolute; display: none;
+  background: var(--popover-bg); border: 1px solid var(--border-hover);
+  border-radius: 8px; padding: 10px 14px; font-size: .82rem;
+  pointer-events: none; z-index: 10; max-width: 260px;
+  box-shadow: var(--flip-shadow);
+}
+#mapTooltip .mt-name { font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+#mapTooltip .mt-tier { font-size: .75rem; }
+#mapTooltip .mt-desc { font-size: .78rem; color: var(--text-muted); margin-top: 3px; }
+
+.tier-bar-wrap {
+  display: flex; height: 52px; border-radius: 8px;
+  overflow: visible; margin-bottom: 12px; position: relative;
+}
+.tier-segment {
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: .78rem; font-weight: 500;
+  cursor: pointer; transition: filter .2s, transform .2s; position: relative;
+}
+.tier-segment:first-child { border-radius: 8px 0 0 8px; }
+.tier-segment:last-child { border-radius: 0 8px 8px 0; }
+.tier-segment:hover { filter: brightness(1.15); transform: scaleY(1.06); z-index: 2; }
+.tier-segment:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+
+.tier-a { background: var(--tier-a); flex: 18; color: #fff; }
+.tier-b { background: var(--tier-b); flex: 16; color: #fff; }
+.tier-c { background: var(--tier-c); flex: 9; color: var(--bg-primary); }
+.tier-d { background: var(--tier-d); flex: 4; color: var(--bg-primary); font-size: .7rem; }
+.tier-e { background: var(--tier-e); flex: 3; color: var(--bg-primary); font-size: .65rem; }
+
+.tier-popover {
+  display: none; position: absolute; top: 64px; left: 0; right: 0;
+  background: var(--popover-bg); border: 1px solid var(--border-hover);
+  border-radius: 12px; padding: 24px 28px;
+  box-shadow: var(--flip-shadow); z-index: 10; animation: popIn .25s ease;
+}
+.tier-popover.show { display: block; }
+.tier-popover h4 { font-weight: 600; font-size: .95rem; color: var(--text-primary); margin-bottom: 6px; }
+.tier-popover .tier-desc { font-size: .88rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
+.tier-popover .tier-states {
+  font-family: 'JetBrains Mono', monospace; font-size: .75rem;
+  color: var(--accent); line-height: 1.8; letter-spacing: .02em;
+}
+.tier-popover .close-pop {
+  position: absolute; top: 12px; right: 16px;
+  background: none; border: none; color: var(--text-muted);
+  cursor: pointer; font-size: 1.1rem; padding: 4px; line-height: 1;
+}
+.tier-popover .close-pop:hover { color: var(--text-primary); }
+
+.tier-legend { display: flex; flex-wrap: wrap; gap: 18px; margin: 16px 0 28px; }
+.tier-legend-item { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--text-muted); }
+.tier-dot { width: 10px; height: 10px; border-radius: 3px; }
+.tier-dot.a { background: var(--tier-a); }
+.tier-dot.b { background: var(--tier-b); }
+.tier-dot.c { background: var(--tier-c); }
+.tier-dot.d { background: var(--tier-d); }
+.tier-dot.e { background: var(--tier-e); }
+
+.bracket { display: flex; gap: 16px; }
+.bracket-block {
+  flex: 1; padding: 22px 26px; border-radius: 10px;
+  border: 1px solid var(--border-subtle); background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+.bracket-num { font-family: 'DM Serif Display', serif; font-size: 2.6rem; color: var(--text-primary); line-height: 1; }
+.bracket-label { font-size: .88rem; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
+.bracket-sub { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--accent); margin-top: 8px; letter-spacing: .08em; }
+
+/* ========== 04 — MODULAR FIT / DUAL FLIP ========== */
+.dual-section {
+  background: radial-gradient(ellipse 60% 50% at 40% 50%, var(--radial-warm) 0%, transparent 70%), var(--bg-primary);
+}
+.dual-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; max-width: 860px; }
+.dual-flip { perspective: 900px; cursor: pointer; min-height: 300px; }
+.dual-flip-inner {
+  position: relative; width: 100%; height: 100%; min-height: 300px;
+  transition: transform .6s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+}
+.dual-flip.flipped .dual-flip-inner { transform: rotateY(180deg); }
+.dual-face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border-radius: 14px; border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card); padding: 30px 28px;
+  display: flex; flex-direction: column;
+}
+.dual-front { background: var(--bg-card); }
+.dual-back { background: var(--bg-secondary); transform: rotateY(180deg); overflow-y: auto; }
+
+.dual-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: .65rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px; display: inline-block;
+  margin-bottom: 14px; width: fit-content;
+}
+.dual-tag.standard { background: var(--tier-a-dim); color: var(--tier-a); }
+.dual-tag.advanced { background: var(--tier-c-dim); color: var(--tier-c); }
+.dual-face h3 { font-weight: 600; font-size: 1.08rem; color: var(--text-primary); margin-bottom: 12px; }
+.dual-face p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; }
+.dual-face .tap-hint {
+  margin-top: auto; padding-top: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); opacity: .6;
+}
+
+.cluster-list { list-style: none; padding: 0; margin-top: 8px; }
+.cluster-list li {
+  font-size: .85rem; color: var(--text-body); padding: 7px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; justify-content: space-between;
+}
+.cluster-list li:last-child { border-bottom: none; }
+.cluster-list .cl-name { color: var(--text-primary); font-weight: 500; }
+.cluster-list .cl-count {
+  font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--accent);
+}
+
+.dual-connector { display: flex; justify-content: center; margin-top: 24px; max-width: 860px; }
+.dual-connector-line {
+  font-family: 'JetBrains Mono', monospace; font-size: .75rem;
+  color: var(--accent); letter-spacing: .06em;
+  padding: 10px 20px; border: 1px dashed var(--accent-dim);
+  border-radius: 8px; background: var(--bg-glass);
+}
+
+/* ========== 04 — STACKED BAR ARCHITECTURE DIAGRAM ========== */
+.dual-bars-wrap { max-width: 860px; margin-top: 48px; }
+
+.dual-bars-legend {
+  display: flex; gap: 24px; margin-bottom: 20px;
+}
+.dual-bars-legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .78rem; color: var(--text-muted);
+}
+.dbl-swatch {
+  width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0;
+}
+.dbl-standard { background: var(--accent); opacity: 0.5; }
+.dbl-advanced { background: var(--tier-a); opacity: 0.7; }
+
+.dual-bars {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px;
+  height: 280px; align-items: end;
+  padding: 0 4px;
+}
+.dual-bar-col {
+  display: flex; flex-direction: column; align-items: stretch;
+  justify-content: flex-end; height: 100%;
+  position: relative; cursor: default;
+  border-radius: 6px 6px 0 0; overflow: visible;
+}
+
+/* Standard bar (bottom) */
+.dual-bar-standard {
+  height: var(--std-h, 50%);
+  background: var(--accent); opacity: 0.45;
+  border-radius: 0 0 4px 4px;
+  transition: opacity .3s;
+}
+
+/* Advanced extension (top, stacked above standard) */
+.dual-bar-advanced {
+  height: var(--adv-h, 30%);
+  background: var(--tier-a); opacity: 0.6;
+  border-radius: 6px 6px 0 0;
+  transition: opacity .3s;
+  position: relative;
+}
+/* Dashed line separating advanced from standard */
+.dual-bar-advanced::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; border-bottom: 2px dashed rgba(255,255,255,0.2);
+}
+[data-theme="light"] .dual-bar-advanced::after {
+  border-bottom-color: rgba(0,0,0,0.12);
+}
+
+/* Standard-only columns (no advanced extension) */
+.dual-bar-col.standard-only .dual-bar-standard {
+  border-radius: 6px 6px 4px 4px;
+}
+
+/* Hover effects */
+.dual-bar-col:hover .dual-bar-standard { opacity: 0.7; }
+.dual-bar-col:hover .dual-bar-advanced { opacity: 0.85; }
+
+/* Tooltip */
+.dual-bar-tooltip {
+  position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  background: var(--popover-bg); border: 1px solid var(--border-hover);
+  border-radius: 8px; padding: 8px 12px;
+  font-size: .78rem; color: var(--text-primary); text-align: center;
+  white-space: nowrap; pointer-events: none;
+  opacity: 0; transition: opacity .2s;
+  box-shadow: var(--shadow-card); z-index: 5;
+  margin-bottom: 8px;
+}
+.dual-bar-tooltip span {
+  font-family: 'JetBrains Mono', monospace; font-size: .65rem;
+  color: var(--accent); display: block; margin-top: 2px;
+}
+.dual-bar-col:hover .dual-bar-tooltip { opacity: 1; }
+
+/* Axis */
+.dual-bars-axis {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px;
+  padding: 8px 4px 0;
+}
+.dual-bars-axis span {
+  text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: .6rem; color: var(--text-muted); letter-spacing: .05em;
+}
+.dual-bars-axis-label {
+  text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 6px; opacity: 0.7;
+}
+
+/* Summary stats */
+.dual-bars-summary {
+  display: flex; gap: 24px; margin-top: 36px; flex-wrap: wrap;
+}
+.dual-bars-stat {
+  flex: 1; min-width: 160px;
+  padding: 20px 24px; border-radius: 10px;
+  border: 1px solid var(--border-subtle); background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  display: flex; align-items: baseline; gap: 12px;
+}
+.arch-stat-num {
+  font-family: 'DM Serif Display', serif; font-size: 2.2rem;
+  color: var(--text-primary); line-height: 1;
+}
+.arch-stat-label {
+  font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text-muted); line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .dual-bars { height: 200px; gap: 4px; }
+  .dual-bars-summary { flex-direction: column; }
+  .dual-bars-legend { flex-direction: column; gap: 8px; }
+}
+
+/* ========== 05 — OUTCOMES ========== */
+.outcomes-section {
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, var(--radial-warm) 0%, transparent 70%),
+    var(--bg-primary);
+}
+.outcomes-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin-top: 48px; max-width: 960px;
+}
+.outcome-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 14px; box-shadow: var(--shadow-card);
+  cursor: pointer; transition: border-color .3s, transform .2s;
+  overflow: hidden;
+}
+.outcome-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+.outcome-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.outcome-front {
+  padding: 28px 20px; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.outcome-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 16px;
+  transition: transform .3s;
+}
+.outcome-card:hover .outcome-icon { transform: scale(1.08); }
+.outcome-front h3 {
+  font-weight: 600; font-size: .92rem;
+  color: var(--text-primary); line-height: 1.3;
+}
+
+.outcome-detail {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height .4s ease, opacity .3s, padding .3s;
+  padding: 0 20px;
+}
+.outcome-card.open .outcome-detail {
+  max-height: 200px; opacity: 1;
+  padding: 0 20px 24px;
+}
+.outcome-detail p {
+  font-size: .82rem; color: var(--text-muted);
+  line-height: 1.6; text-align: center;
+}
+
+.quote-block {
+  margin-top: 40px; padding: 24px 28px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-glass); border-radius: 0 10px 10px 0;
+  max-width: 640px;
+}
+.quote-block p {
+  font-family: 'DM Serif Display', serif; font-size: 1.08rem;
+  font-style: italic; color: var(--sky); line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .outcomes-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== 06 — ROI ========== */
+.roi-section {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.roi-list { margin-top: 40px; max-width: 640px; }
+.roi-section {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+.roi-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; max-width: 900px; }
+.roi-col h3 { font-weight: 600; font-size: 1.02rem; color: var(--accent); margin-bottom: 20px; }
+.roi-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+.roi-marker {
+  width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; flex-shrink: 0; margin-top: 3px;
+}
+.roi-marker.done { background: var(--accent-dim); color: var(--accent); }
+.roi-marker.process { background: var(--tier-a-dim); color: var(--tier-a); }
+.roi-marker.scale { background: var(--tier-c-dim); color: var(--tier-c); }
+.roi-item p { font-size: .92rem; color: var(--text-muted); line-height: 1.6; }
+.roi-item strong { color: var(--text-primary); font-weight: 600; }
+
+/* ========== CTA ========== */
+.cta-section {
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, var(--radial-violet) 0%, transparent 70%), var(--bg-secondary);
+  text-align: center; align-items: center;
+}
+.cta-section .section-title { max-width: 680px; text-align: center; }
+.cta-sub {
+  font-size: 1.02rem; color: var(--text-muted);
+  max-width: 540px; line-height: 1.7; font-weight: 300; margin-top: 18px;
+}
+.footer-meta {
+  margin-top: 56px; font-family: 'JetBrains Mono', monospace;
+  font-size: .62rem; color: var(--text-muted); letter-spacing: .1em;
+}
+.back-link {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 200;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 30px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  transition: all .3s;
+}
+.back-link:hover {
+  color: var(--accent);
+  border-color: var(--border-hover);
+}
+
+/* ========== NAV DOTS ========== */
+.nav-dots {
+  position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 12px; z-index: 10001;
+}
+.nav-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border-subtle); cursor: pointer;
+  transition: all .3s; border: none; padding: 0;
+}
+.nav-dot.active { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+.nav-dot:hover { background: var(--text-muted); }
+.nav-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  html { font-size: 16px; }
+  .flash-cards, .compound-grid,
+  .roi-columns { grid-template-columns: 1fr; }
+  .bracket { flex-direction: column; }
+  .hero-meta { flex-direction: column; gap: 10px; }
+  .nav-dots { display: none; }
+  .theme-toggle { top: 16px; right: 16px; }
+  .back-link { top: 16px; left: 16px; font-size: .6rem; padding: 6px 10px; }
+  .tier-bar-wrap { height: 44px; }
+}
+
+/* ========== SKIP LINK ========== */
+.skip-link {
+  position: absolute; top: -100px; left: 16px;
+  background: var(--accent); color: #fff;
+  padding: 8px 16px; border-radius: 4px; z-index: 9999;
+  font-family: 'JetBrains Mono', monospace; font-size: .75rem;
+  text-decoration: none;
+}
+.skip-link:focus { top: 16px; }
+
+/* ========== KEYFRAMES ========== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pulse { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+@keyframes popIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+
+<!-- Skip link for accessibility -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<a href="/#section-2" class="back-link">&larr; Back</a>
+
+<!-- Theme toggle -->
+<div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Cycle between dark, light, and rainbow themes">
+  <span class="theme-toggle-icon" data-mode="dark" aria-hidden="true">&#9790;</span>
+  <span class="theme-toggle-icon" data-mode="light" aria-hidden="true">&#9788;</span>
+  <span class="theme-toggle-icon" data-mode="rainbow" aria-hidden="true">&#10022;</span>
+</div>
+
+<!-- Nav dots -->
+<nav class="nav-dots" id="navDots" aria-label="Page navigation"></nav>
+
+<main id="main-content">
+
+<!-- HERO -->
+<section class="hero" data-section="0">
+  <div class="hero-label">Case Study: Localized Product Content</div>
+  <h1>You can <em>solve two problems</em> at once if you know where to look.</h1>
+  <p class="hero-sub">I analyzed every state's requirements, found the overlapping structure no one had documented, and designed a modular architecture that could serve 43 markets from a single content base — and support two product tiers without a separate build.</p>
+  <div class="hero-meta"><span>Mae Mendoza</span><span>Content Design &times; Product Localization</span></div>
+  <div class="scroll-cue" aria-hidden="true"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- 01 — THE STARTING POINT -->
+<section class="problem-section" data-section="1">
+  <div class="reveal">
+    <div class="section-num">01 &mdash; The Starting Point</div>
+    <h2 class="section-title">Two related products in the ecosystem. Both failed the QA audit.</h2>
+    <div class="problem-narrative">
+      <p>Both products showed their age: created in the mid-2000s, relying on outdated data and disproven frameworks, with information architectures degraded by years of putting quick patches on defects.</p>
+      <p><strong>The products needed to be rebuilt from the ground up for today's user.</strong></p>
+    </div>
+  </div>
+  <div class="flash-cards reveal" style="transition-delay:.15s">
+    <div class="flash-card" role="button" tabindex="0" aria-label="Legacy Product A details. Click to flip." onclick="this.classList.toggle('flipped')">
+      <div class="flash-card-inner">
+        <div class="flash-card-face flash-front">
+          <h3>Legacy Product A<br><span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);text-transform:uppercase">Product Line 1</span></h3>
+          <div class="flash-score">0</div>
+          <div class="flash-score-label">QA Audit Score</div>
+          <div class="flash-tap-hint" aria-hidden="true">Click for details &rarr;</div>
+        </div>
+        <div class="flash-card-face flash-back">
+          <h4>Legacy Product A</h4>
+          <span class="detail-tag">The core problem</span>
+          <p>Content created in 2008, still using the original information architecture today. Years of quick fixes resulted in the product no longer functioning as a coherent experience.</p>
+          <div class="flash-close-hint" aria-hidden="true">&larr; Click to close</div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-card" role="button" tabindex="0" aria-label="Legacy Product B details. Click to flip." onclick="this.classList.toggle('flipped')">
+      <div class="flash-card-inner">
+        <div class="flash-card-face flash-front">
+          <h3>Legacy Product B<br><span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);text-transform:uppercase">Product Line 2</span></h3>
+          <div class="flash-score">0</div>
+          <div class="flash-score-label">QA Audit Score</div>
+          <div class="flash-tap-hint" aria-hidden="true">Click for details &rarr;</div>
+        </div>
+        <div class="flash-card-face flash-back">
+          <h4>Legacy Product B</h4>
+          <span class="detail-tag">The core problem</span>
+          <p>Years of building new by repurposing old content eroded the original structure and purpose. Product users complained about poor user experience as a result.</p>
+          <div class="flash-close-hint" aria-hidden="true">&larr; Click to close</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — COMPOUNDING COST -->
+<section class="compound-section" data-section="2">
+  <div class="reveal">
+    <div class="section-num">02 &mdash; The Compounding Cost</div>
+    <h2 class="section-title">The longer we patched, the more expensive the problem became.</h2>
+    <p class="section-lead">Every product in the ecosystem had the same structural failures at different stages of decay.</p>
+  </div>
+  <div class="compound-grid reveal" style="transition-delay:.15s">
+    <div class="expand-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="expand-header"><h3>The Quick Fix Trap</h3><span class="expand-arrow" aria-hidden="true">&#9662;</span></div>
+      <div class="expand-body"><p>Fixing one outdated reference created conflicts elsewhere. Successive patches eroded the original content structure and the user experience. Every fix cascaded into new problems.</p></div>
+    </div>
+    <div class="expand-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="expand-header"><h3>Regional Requirements Pressure</h3><span class="expand-arrow" aria-hidden="true">&#9662;</span></div>
+      <div class="expand-body"><p>Every regional revision cycle generated a new gap analysis. Without a systematic approach to coverage mapping, updates were reactive, manual, and perpetually behind the curve.</p></div>
+    </div>
+    <div class="expand-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="expand-header"><h3>Updates Don't Scale</h3><span class="expand-arrow" aria-hidden="true">&#9662;</span></div>
+      <div class="expand-body"><p>Two product lines and an extensive content portfolio, with material weighted toward 10+ years of age. The same subject matter expert doing the review was also doing the mechanical work of locating requirements.</p></div>
+    </div>
+    <div class="expand-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="expand-header"><h3>Competitive Risk</h3><span class="expand-arrow" aria-hidden="true">&#9662;</span></div>
+      <div class="expand-body"><p>An advanced-tier product was a known gap in the portfolio. Competitors already offered one. Every quarter without a credible option was a quarter the sales team had no answer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — MAP + TIER BAR -->
+<section class="tier-section" data-section="3">
+  <div class="reveal">
+    <div class="section-num">03 &mdash; The Opportunity</div>
+    <h2 class="section-title">A 50-state coverage analysis revealed the potential reach.</h2>
+    <p class="section-lead">I mapped every region's requirements against 10 core content categories. Hover over any state or click a tier in the bar below.</p>
+  </div>
+  <div id="coverageMap" class="reveal" style="transition-delay:.15s" role="img" aria-label="Interactive US map showing content coverage by region, colored by tier from full coverage (violet) to minimal coverage (sage green)">
+    <div id="mapTooltip" role="tooltip"><div class="mt-name"></div><div class="mt-tier"></div><div class="mt-desc"></div></div>
+  </div>
+  <div class="tier-bar-container reveal" style="transition-delay:.25s">
+    <div class="tier-bar-wrap" id="tierBar" role="group" aria-label="Tier distribution bar">
+      <div class="tier-segment tier-a" data-tier="a" role="button" tabindex="0" aria-label="Full coverage: 18 states">18</div>
+      <div class="tier-segment tier-b" data-tier="b" role="button" tabindex="0" aria-label="Strong coverage: 16 states">16</div>
+      <div class="tier-segment tier-c" data-tier="c" role="button" tabindex="0" aria-label="Moderate coverage: 9 states">9</div>
+      <div class="tier-segment tier-d" data-tier="d" role="button" tabindex="0" aria-label="Limited coverage: 4 states">4</div>
+      <div class="tier-segment tier-e" data-tier="e" role="button" tabindex="0" aria-label="Minimal coverage: 3 states">3</div>
+    </div>
+    <div class="tier-popover" id="tierPopover" role="dialog" aria-label="Tier details">
+      <button class="close-pop" onclick="closeTierPop()" aria-label="Close tier details">&times;</button>
+      <h4 id="tierPopTitle"></h4>
+      <p class="tier-desc" id="tierPopDesc"></p>
+      <div class="tier-states" id="tierPopStates"></div>
+    </div>
+    <div class="tier-legend" role="list" aria-label="Map legend">
+      <div class="tier-legend-item" role="listitem"><div class="tier-dot a" aria-hidden="true"></div>Full coverage (18)</div>
+      <div class="tier-legend-item" role="listitem"><div class="tier-dot b" aria-hidden="true"></div>Strong coverage (16)</div>
+      <div class="tier-legend-item" role="listitem"><div class="tier-dot c" aria-hidden="true"></div>Moderate (9)</div>
+      <div class="tier-legend-item" role="listitem"><div class="tier-dot d" aria-hidden="true"></div>Limited (4)</div>
+      <div class="tier-legend-item" role="listitem"><div class="tier-dot e" aria-hidden="true"></div>Minimal (3)</div>
+    </div>
+    <div class="bracket">
+      <div class="bracket-block">
+        <div class="bracket-num">34</div>
+        <div class="bracket-label">Core market: full or strong coverage</div>
+        <div class="bracket-sub"><span style="color:var(--tier-a)">Full</span> + <span style="color:var(--tier-b)">Strong</span></div>
+      </div>
+      <div class="bracket-block">
+        <div class="bracket-num">43</div>
+        <div class="bracket-label">Extended market: moderate or better coverage</div>
+        <div class="bracket-sub"><span style="color:var(--tier-a)">Full</span> + <span style="color:var(--tier-b)">Strong</span> + <span style="color:var(--tier-c)">Moderate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — WHY MODULAR WORKS -->
+<section class="dual-section" data-section="4">
+  <div class="reveal">
+    <div class="section-num">04 &mdash; Why Modular Works Here</div>
+    <h2 class="section-title">The content is already organized by domain. The architecture should be too.</h2>
+    <p class="section-lead">Regional requirements share structural patterns. Modular architecture mirrors that: each domain is a self-contained module that can be updated without touching the others.</p>
+  </div>
+
+  <!-- Stacked bar architecture diagram -->
+  <div class="dual-bars-wrap reveal" style="transition-delay:.15s" role="figure" aria-label="Stacked bar diagram showing 10 content domains. Bar height reflects how many states require that domain. The lower portion is the standard tier; the upper extension is the advanced tier built on the same base.">
+
+    <div class="dual-bars-legend">
+      <div class="dual-bars-legend-item"><span class="dbl-swatch dbl-standard"></span>Standard tier (shared base)</div>
+      <div class="dual-bars-legend-item"><span class="dbl-swatch dbl-advanced"></span>Advanced tier (extended depth)</div>
+    </div>
+
+    <div class="dual-bars">
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 1<br><span>48 states</span></div><div class="dual-bar-advanced" style="--adv-h:40%"></div><div class="dual-bar-standard" style="--std-h:96%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 2<br><span>47 states</span></div><div class="dual-bar-advanced" style="--adv-h:35%"></div><div class="dual-bar-standard" style="--std-h:94%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 3<br><span>44 states</span></div><div class="dual-bar-advanced" style="--adv-h:38%"></div><div class="dual-bar-standard" style="--std-h:88%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 4<br><span>44 states</span></div><div class="dual-bar-advanced" style="--adv-h:42%"></div><div class="dual-bar-standard" style="--std-h:88%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 5<br><span>43 states</span></div><div class="dual-bar-advanced" style="--adv-h:36%"></div><div class="dual-bar-standard" style="--std-h:86%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 6<br><span>42 states</span></div><div class="dual-bar-advanced" style="--adv-h:30%"></div><div class="dual-bar-standard" style="--std-h:84%"></div></div>
+      <div class="dual-bar-col"><div class="dual-bar-tooltip">Domain 7<br><span>38 states</span></div><div class="dual-bar-advanced" style="--adv-h:34%"></div><div class="dual-bar-standard" style="--std-h:76%"></div></div>
+      <div class="dual-bar-col standard-only"><div class="dual-bar-tooltip">Domain 8<br><span>35 states</span></div><div class="dual-bar-standard" style="--std-h:70%"></div></div>
+      <div class="dual-bar-col standard-only"><div class="dual-bar-tooltip">Domain 9<br><span>30 states</span></div><div class="dual-bar-standard" style="--std-h:60%"></div></div>
+      <div class="dual-bar-col standard-only"><div class="dual-bar-tooltip">Domain 10<br><span>24 states</span></div><div class="dual-bar-standard" style="--std-h:48%"></div></div>
+    </div>
+
+    <div class="dual-bars-axis">
+      <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+      <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+    <div class="dual-bars-axis-label">Content domains, sorted by regional coverage</div>
+
+    <div class="dual-bars-summary">
+      <div class="dual-bars-stat">
+        <span class="arch-stat-num">34</span>
+        <span class="arch-stat-label">states served at launch</span>
+      </div>
+      <div class="dual-bars-stat">
+        <span class="arch-stat-num">1</span>
+        <span class="arch-stat-label">build produces both tiers</span>
+      </div>
+      <div class="dual-bars-stat">
+        <span class="arch-stat-num">0</span>
+        <span class="arch-stat-label">content duplication</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dual-connector reveal" style="transition-delay:.25s">
+    <div class="dual-connector-line">The advanced tier extends the base. It doesn't duplicate it.</div>
+  </div>
+</section>
+
+<!-- 05 — WHAT THE ARCHITECTURE DELIVERS -->
+<section class="outcomes-section" data-section="5">
+  <div class="reveal">
+    <div class="section-num">05 &mdash; What the Architecture Delivers</div>
+    <h2 class="section-title">A model for maintaining complex systems at scale.</h2>
+  </div>
+  <div class="outcomes-grid reveal" style="transition-delay:.15s">
+
+    <div class="outcome-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="outcome-front">
+        <div class="outcome-icon" style="background:var(--tier-c-dim);color:var(--tier-c)" aria-hidden="true">&#x25CE;</div>
+        <h3>Maximum Coverage</h3>
+      </div>
+      <div class="outcome-detail"><p>Every content domain earns its place by appearing across the most regions. The methodology applies anywhere regional requirements can be mapped.</p></div>
+    </div>
+
+    <div class="outcome-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="outcome-front">
+        <div class="outcome-icon" style="background:var(--tier-d-dim);color:var(--tier-d)" aria-hidden="true">&#x2795;</div>
+        <h3>Efficient Updates</h3>
+      </div>
+      <div class="outcome-detail"><p>When a region adopts new requirements, a module gets added. One region's change never cascades into another region's content.</p></div>
+    </div>
+
+    <div class="outcome-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="outcome-front">
+        <div class="outcome-icon" style="background:var(--tier-b-dim);color:var(--tier-b)" aria-hidden="true">&#x2194;</div>
+        <h3>Dual-Build</h3>
+      </div>
+      <div class="outcome-detail"><p>One content base, two product tiers. One build replacing several aging products while enabling region-specific customization.</p></div>
+    </div>
+
+    <div class="outcome-card" role="button" tabindex="0" aria-expanded="false" onclick="this.classList.toggle('open');this.setAttribute('aria-expanded',this.classList.contains('open'))">
+      <div class="outcome-front">
+        <div class="outcome-icon" style="background:var(--green-dim);color:var(--green)" aria-hidden="true">&#x2691;</div>
+        <h3>Competitive Positioning</h3>
+      </div>
+      <div class="outcome-detail"><p>Region-specific coverage data no competitor could match. Quantified, evidence-based positioning instead of one-size-fits-all claims.</p></div>
+    </div>
+
+  </div>
+
+  <div class="quote-block reveal" style="transition-delay:.3s">
+    <p>This is how you move from reactive maintenance to content systems that absorb regional changes instead of breaking under them.</p>
+  </div>
+</section>
+
+<!-- 06 — ROI -->
+<section class="roi-section" data-section="6">
+  <div class="reveal">
+    <div class="section-num">06 &mdash; The Result</div>
+    <h2 class="section-title"><span class="rainbow-text">A repeatable process</span> for the product ecosystem.</h2>
+    <p class="section-lead"> </p>
+  </div>
+  <div class="roi-list reveal" style="transition-delay:.15s">
+    <div class="roi-item"><div class="roi-marker done" aria-hidden="true">&#10003;</div><p><strong>Two product tiers from one build.</strong><br>A standard and an advanced content system from a shared content base.</p></div>
+    <div class="roi-item"><div class="roi-marker done" aria-hidden="true">&#10003;</div><p><strong>34-region core market on launch.</strong><br>Documented path to 43 via modular supplements.</p></div>
+    <div class="roi-item"><div class="roi-marker done" aria-hidden="true">&#10003;</div><p><strong>Evidence-based positioning.</strong><br>Region-specific coverage data no competitor could match.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" data-section="7">
+  <div class="reveal">
+    <div class="section-num">The Takeaway</div>
+    <h2 class="section-title">The content problem<br>was really a <em style="font-family:'DM Serif Display',serif;color:var(--accent)">systems problem.</em></h2>
+    <p class="cta-sub">Two failing products. Fifty sets of regional requirements. One modular architecture that turned a catalog liability into a scalable framework.</p>
+    <div class="footer-meta">Mae Mendoza &mdash; Content Design &times; Product Localization</div>
+  </div>
+</section>
+
+</main>
+
+<!-- D3 + TopoJSON -->
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
+<script is:inline>
+// ========== Theme Toggle (3-state: dark → light → rainbow) ==========
+const toggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+const themeOrder = ['dark', 'light', 'rainbow'];
+
+toggle.addEventListener('click', () => {
+  const current = html.dataset.theme || 'dark';
+  const idx = themeOrder.indexOf(current);
+  const next = themeOrder[(idx + 1) % themeOrder.length];
+  html.dataset.theme = next;
+  try { localStorage.setItem('mae-theme', next); } catch(e) {}
+});
+toggle.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle.click(); }
+});
+// Theme defaults to whatever data-theme is set on <html>. Toggle saves preference for the session.
+
+// ========== Reveal on Scroll ==========
+const rObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('visible');
+}), { threshold: .12, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+
+// ========== Nav Dots ==========
+const sections = document.querySelectorAll('section[data-section]');
+const dotsC = document.getElementById('navDots');
+sections.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'nav-dot';
+  d.setAttribute('aria-label', 'Go to section ' + (i + 1));
+  d.addEventListener('click', () => sections[i].scrollIntoView({ behavior: 'smooth' }));
+  dotsC.appendChild(d);
+});
+const dots = dotsC.querySelectorAll('.nav-dot');
+const sObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    const i = parseInt(e.target.dataset.section);
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  }
+}), { threshold: .35 });
+sections.forEach(s => sObs.observe(s));
+
+// ========== Keyboard support for flip cards ==========
+document.querySelectorAll('.flash-card, .dual-flip').forEach(card => {
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
+
+// ========== Tier Data ==========
+// Tier colors read from CSS variables at runtime
+const getTC = () => {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    A: s.getPropertyValue('--tier-a').trim(),
+    B: s.getPropertyValue('--tier-b').trim(),
+    C: s.getPropertyValue('--tier-c').trim(),
+    D: s.getPropertyValue('--tier-d').trim(),
+    E: s.getPropertyValue('--tier-e').trim()
+  };
+};
+
+const tiers = {
+  Arkansas:'A',Florida:'A',Georgia:'A',Hawaii:'A',Indiana:'A',Iowa:'A',Louisiana:'A',
+  Minnesota:'A',Mississippi:'A','North Dakota':'A',Ohio:'A',Oklahoma:'A',
+  'South Carolina':'A',Tennessee:'A',Texas:'A',Utah:'A',Virginia:'A','West Virginia':'A',
+  Alabama:'B',Alaska:'B',California:'B',Colorado:'B',Illinois:'B',Kentucky:'B',
+  Michigan:'B',Montana:'B',Nebraska:'B','New Hampshire':'B','New York':'B',
+  Oregon:'B','Rhode Island':'B','South Dakota':'B',Washington:'B',Wisconsin:'B',
+  Arizona:'C',Connecticut:'C',Delaware:'C',Kansas:'C',Nevada:'C','New Mexico':'C',
+  Pennsylvania:'C',Vermont:'C',Wyoming:'C',
+  Maine:'D',Maryland:'D','New Jersey':'D','North Carolina':'D',
+  Idaho:'E',Massachusetts:'E',Missouri:'E'
+};
+
+const tierInfo = {
+  A: { label: 'Full Coverage', desc: 'Content addresses 90–100% of regional requirements.' },
+  B: { label: 'Strong Coverage', desc: 'Broad coverage, minor structural gaps.' },
+  C: { label: 'Moderate Coverage', desc: 'Majority covered, multiple domain gaps.' },
+  D: { label: 'Limited Coverage', desc: 'Content thin or incidental in this region.' },
+  E: { label: 'Minimal / None', desc: 'No relevant requirements or near-zero coverage.' }
+};
+
+const tierData = {
+  a: { title: 'Full Coverage (18 states)', desc: 'Content addresses 90–100% of regional requirements.', states: 'AR, FL, GA, HI, IN, IA, LA, MN, MS, ND, OH, OK, SC, TN, TX, UT, VA, WV' },
+  b: { title: 'Strong Coverage (16 states)', desc: 'Broad coverage with minor gaps. May need light supplementation in 1–2 areas.', states: 'AL, AK, CA, CO, IL, KY, MI, MT, NE, NH, NY, OR, RI, SD, WA, WI' },
+  c: { title: 'Moderate Coverage (9 states)', desc: 'Content covers majority of requirements but has multiple domain gaps. Viable with caveats.', states: 'AZ, CT, DE, KS, NV, NM, PA, VT, WY' },
+  d: { title: 'Limited Coverage (4 states)', desc: 'Content is thin or incidental. Product exceeds regional requirements.', states: 'ME, MD, NJ, NC' },
+  e: { title: 'Minimal Coverage (3 states)', desc: 'No relevant requirements or no assessable content.', states: 'ID, MA, MO' }
+};
+
+// ========== Coverage Map ==========
+const mapContainer = document.getElementById('coverageMap');
+const mapSvg = d3.select('#coverageMap').append('svg')
+  .attr('viewBox', '0 0 975 610')
+  .attr('width', '100%')
+  .attr('role', 'img')
+  .attr('aria-label', 'US map showing content coverage tiers by region');
+
+const mapTooltip = d3.select('#mapTooltip');
+
+// Function to paint map with current theme colors
+let statePaths;
+function paintMap() {
+  const tc = getTC();
+  if (statePaths) {
+    statePaths.attr('fill', d => {
+      const t = tiers[d.properties.name];
+      return t ? tc[t] : '#555';
+    });
+  }
+}
+
+d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json').then(us => {
+  statePaths = mapSvg.selectAll('path')
+    .data(topojson.feature(us, us.objects.states).features)
+    .join('path')
+    .attr('class', 'state')
+    .attr('d', d3.geoPath())
+    .attr('stroke', 'var(--map-stroke)')
+    .attr('stroke-width', 1.25)
+    .attr('vector-effect', 'non-scaling-stroke')
+    .attr('fill', d => {
+      const tc = getTC();
+      const t = tiers[d.properties.name];
+      return t ? tc[t] : '#555';
+    })
+    .on('mouseenter', (e, d) => {
+      const tc = getTC();
+      const n = d.properties.name, t = tiers[n] || '?', info = tierInfo[t] || {};
+      mapTooltip.style('display', 'block');
+      mapTooltip.select('.mt-name').text(n);
+      mapTooltip.select('.mt-tier').text(info.label || '').style('color', tc[t] || '#888');
+      mapTooltip.select('.mt-desc').text(info.desc || '');
+    })
+    .on('mousemove', e => {
+      const rect = mapContainer.getBoundingClientRect();
+      mapTooltip.style('left', (e.clientX - rect.left + 14) + 'px')
+        .style('top', (e.clientY - rect.top - 30) + 'px');
+    })
+    .on('mouseleave', () => mapTooltip.style('display', 'none'));
+
+  // State borders
+  mapSvg.append('path')
+    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+    .attr('fill', 'none')
+    .attr('stroke', 'var(--map-stroke)')
+    .attr('stroke-width', 1.25)
+    .attr('d', d3.geoPath());
+});
+
+// Repaint map on theme change
+const themeObs = new MutationObserver(() => paintMap());
+themeObs.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ========== Tier Bar Popover ==========
+const pop = document.getElementById('tierPopover');
+let activeTier = null;
+document.querySelectorAll('.tier-segment').forEach(seg => {
+  const handler = e => {
+    e.stopPropagation();
+    const t = seg.dataset.tier;
+    if (activeTier === t) { closeTierPop(); return; }
+    activeTier = t;
+    const d = tierData[t];
+    document.getElementById('tierPopTitle').textContent = d.title;
+    document.getElementById('tierPopDesc').textContent = d.desc;
+    document.getElementById('tierPopStates').textContent = d.states;
+    pop.classList.add('show');
+  };
+  seg.addEventListener('click', handler);
+  seg.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(e); }
+  });
+});
+function closeTierPop() { pop.classList.remove('show'); activeTier = null; }
+document.addEventListener('click', e => {
+  if (!pop.contains(e.target) && !e.target.closest('.tier-segment')) closeTierPop();
+});
+</script>
+</BaseLayout>

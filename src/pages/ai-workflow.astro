@@ -1,0 +1,830 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="AI-Assisted QA Workflow — Mae Mendoza" skipTarget="#main-content">
+<style is:inline>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ========== DARK MODE — Aubergine Studio ========== */
+[data-theme="dark"] {
+  --bg-primary: #0e0b12;
+  --bg-secondary: #141018;
+  --bg-card: rgba(22, 18, 28, 0.75);
+  --text-primary: #f2eff6;
+  --text-body: #c8c2d1;
+  --text-muted: #8a8296;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.14);
+  --accent: #e8457a;
+  --accent-dim: rgba(232,69,122,0.12);
+  --accent-glow: rgba(232,69,122,0.3);
+  --green: #7a9e6e;
+  --green-dim: rgba(122,158,110,0.12);
+  --grain-opacity: 0.025;
+  --toggle-bg: rgba(255,255,255,0.08);
+  --shadow-card: 0 2px 20px rgba(0,0,0,0.3);
+  --ai-color: #7b4dcc;
+  --ai-dim: rgba(123,77,204,0.12);
+  --human-color: #e8457a;
+  --human-dim: rgba(232,69,122,0.12);
+  --hybrid-color: #d4762e;
+  --hybrid-dim: rgba(212,118,46,0.12);
+}
+
+/* ========== LIGHT MODE — Ink & Signal ========== */
+[data-theme="light"] {
+  --bg-primary: #f7f7f5;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255,255,255,0.92);
+  --text-primary: #1a1520;
+  --text-body: #4a4358;
+  --text-muted: #7a7388;
+  --border-subtle: rgba(0,0,0,0.08);
+  --border-hover: rgba(0,0,0,0.16);
+  --accent: #c23062;
+  --accent-dim: rgba(194,48,98,0.08);
+  --accent-glow: rgba(194,48,98,0.2);
+  --green: #5f8252;
+  --green-dim: rgba(95,130,82,0.08);
+  --grain-opacity: 0;
+  --toggle-bg: rgba(0,0,0,0.06);
+  --shadow-card: 0 2px 16px rgba(0,0,0,0.08);
+  --ai-color: #6b3fa8;
+  --ai-dim: rgba(107,63,168,0.08);
+  --human-color: #c23062;
+  --human-dim: rgba(194,48,98,0.08);
+  --hybrid-color: #b8621e;
+  --hybrid-dim: rgba(184,98,30,0.08);
+}
+
+/* ========== RAINBOW MODE — Neon Editorial ========== */
+[data-theme="rainbow"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0e0e0e;
+  --bg-card: rgba(14, 14, 14, 0.92);
+  --text-primary: #ffffff;
+  --text-body: #d4d4d4;
+  --text-muted: #999999;
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --accent: #ff2d78;
+  --accent-dim: rgba(255,45,120,0.15);
+  --accent-glow: rgba(255,45,120,0.4);
+  --green: #34d399;
+  --green-dim: rgba(52,211,153,0.12);
+  --grain-opacity: 0.015;
+  --toggle-bg: rgba(255,255,255,0.1);
+  --shadow-card: 0 2px 24px rgba(0,0,0,0.5);
+  --ai-color: #c4b5fd;
+  --ai-dim: rgba(196,181,253,0.15);
+  --human-color: #ff2d78;
+  --human-dim: rgba(255,45,120,0.15);
+  --hybrid-color: #ffb020;
+  --hybrid-dim: rgba(255,176,32,0.15);
+}
+
+/* ==========================================================
+   SECTION TEXTURES — Per-mode, per-section backgrounds
+   ========================================================== */
+
+/* ---------- DARK MODE TEXTURES ---------- */
+/* Hero: plain black */
+/* S01: graph-paper grid */
+[data-theme="dark"] section[data-index="1"] {
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* S02: plain black */
+/* S03: graph-paper grid */
+[data-theme="dark"] section[data-index="3"] {
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* S04: graph-paper grid */
+[data-theme="dark"] section[data-index="4"] {
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* S05: magenta polka dots */
+[data-theme="dark"] section[data-index="5"] {
+  background-image:
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px),
+    radial-gradient(circle, rgba(232,69,122,0.06) 60px, transparent 60px);
+  background-size: 200px 200px;
+  background-position: 30px 20px, 130px 120px;
+}
+/* S06: graph-paper grid */
+[data-theme="dark"] section[data-index="6"] {
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ---------- LIGHT MODE TEXTURES ---------- */
+/* Hero: graph-paper grid */
+[data-theme="light"] .hero {
+  background-image: linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px) !important;
+  background-size: 32px 32px !important;
+  background-color: var(--bg-primary) !important;
+}
+/* S01: plain white */
+/* S02: pink polka dots */
+[data-theme="light"] section[data-index="2"] {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle, rgba(194,48,98,0.09) 60px, transparent 60px),
+    radial-gradient(circle, rgba(194,48,98,0.09) 60px, transparent 60px);
+  background-size: 200px 200px;
+  background-position: 30px 20px, 130px 120px;
+}
+/* S03: plain white */
+/* S04: graph-paper grid */
+[data-theme="light"] section[data-index="4"] {
+  background-image: linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* S05: plain white */
+/* S06: graph-paper grid */
+[data-theme="light"] section[data-index="6"] {
+  background-image: linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ---------- RAINBOW MODE TEXTURES ---------- */
+/* Global polka dot base */
+[data-theme="rainbow"] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.06) 80px, transparent 80px),
+    radial-gradient(circle, rgba(255,255,255,0.06) 80px, transparent 80px);
+  background-size: 260px 260px;
+  background-position: 0 0, 130px 130px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hero: full rainbow spectrum polka dots */
+[data-theme="rainbow"] .hero {
+  background:
+    radial-gradient(circle at 10% 30%, rgba(255,45,120,0.12) 80px, transparent 80px),
+    radial-gradient(circle at 25% 70%, rgba(255,176,32,0.1) 60px, transparent 60px),
+    radial-gradient(circle at 45% 20%, rgba(52,211,153,0.1) 70px, transparent 70px),
+    radial-gradient(circle at 60% 80%, rgba(34,211,238,0.08) 60px, transparent 60px),
+    radial-gradient(circle at 80% 40%, rgba(196,181,253,0.1) 80px, transparent 80px),
+    radial-gradient(circle at 90% 10%, rgba(255,45,120,0.08) 50px, transparent 50px),
+    radial-gradient(circle at 35% 50%, rgba(255,220,60,0.06) 70px, transparent 70px),
+    radial-gradient(circle at 70% 60%, rgba(96,165,250,0.08) 60px, transparent 60px),
+    #0a0a0a !important;
+}
+
+/* S01: red hue */
+[data-theme="rainbow"] section[data-index="1"] {
+  background: linear-gradient(160deg, rgba(255,45,120,0.1) 0%, rgba(255,80,60,0.06) 100%);
+}
+/* S02: orange/gold hue */
+[data-theme="rainbow"] section[data-index="2"] {
+  background: linear-gradient(160deg, rgba(255,176,32,0.1) 0%, rgba(255,220,60,0.06) 100%);
+}
+/* S03: green hue */
+[data-theme="rainbow"] section[data-index="3"] {
+  background: linear-gradient(160deg, rgba(52,211,153,0.1) 0%, rgba(34,211,100,0.05) 100%);
+}
+/* S04: teal hue */
+[data-theme="rainbow"] section[data-index="4"] {
+  background: linear-gradient(160deg, rgba(34,211,238,0.1) 0%, rgba(96,165,250,0.06) 100%);
+}
+/* S05: violet hue */
+[data-theme="rainbow"] section[data-index="5"] {
+  background: linear-gradient(160deg, rgba(139,92,246,0.1) 0%, rgba(196,181,253,0.06) 100%);
+}
+/* S06 (takeaway): black/gray polka dots, no color hue */
+[data-theme="rainbow"] section[data-index="6"] {
+  background: #0a0a0a;
+}
+
+/* Rainbow: label-maker text strips */
+[data-theme="rainbow"] .section-title {
+  display: inline;
+  background: rgba(0,0,0,0.7);
+  padding: 0.05em 0.25em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 1.5;
+}
+
+/* Rainbow: neon glows */
+[data-theme="rainbow"] .pipeline-stage.active .pipeline-card {
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4), 0 0 20px color-mix(in srgb, var(--stage-color, #ff2d78) 20%, transparent);
+}
+[data-theme="rainbow"] .pipeline-stage.active .pipeline-node {
+  box-shadow: 0 0 12px color-mix(in srgb, var(--stage-color, #ff2d78) 40%, transparent);
+}
+[data-theme="rainbow"] .scale-unit.reviewed {
+  box-shadow: 0 0 12px rgba(255,45,120,0.5), 0 0 24px rgba(255,45,120,0.2);
+}
+[data-theme="rainbow"] .content-block.highlight-gap {
+  box-shadow: 0 0 12px rgba(255,45,120,0.4), 0 0 24px rgba(255,45,120,0.15);
+}
+[data-theme="rainbow"] .content-block.highlight-flag {
+  box-shadow: 0 0 8px rgba(255,176,32,0.3);
+}
+[data-theme="rainbow"] .attention-toggle-btn.active {
+  box-shadow: 0 0 16px rgba(255,45,120,0.3);
+}
+[data-theme="rainbow"] .shift-card.ai:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 16px rgba(196,181,253,0.15);
+}
+[data-theme="rainbow"] .shift-card.human:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 16px rgba(255,45,120,0.15);
+}
+[data-theme="rainbow"] .shift-divider {
+  background: linear-gradient(90deg, transparent, rgba(255,45,120,0.3), rgba(196,181,253,0.3), transparent);
+}
+
+/* Rainbow text utility */
+.rainbow-text { color: var(--accent); }
+[data-theme="rainbow"] .rainbow-text {
+  background: linear-gradient(90deg, #ff2d78, #f4845f, #f6c744, #34d399, #22d3ee, #60a5fa, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-body);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3 { font-family: 'DM Serif Display', serif; color: var(--text-primary); line-height: 1.15; }
+.section-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.75rem;
+}
+.section-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 1rem; }
+.section-lead { font-size: 1.1rem; color: var(--text-body); max-width: 640px; line-height: 1.7; }
+.container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 6rem 0; position: relative; z-index: 1; }
+
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== THEME TOGGLE ========== */
+.theme-toggle {
+  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 9999;
+  display: flex; align-items: center; background: var(--toggle-bg);
+  border: 1px solid var(--border-subtle); border-radius: 20px; padding: 3px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.theme-toggle-option {
+  width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--text-muted); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); padding: 0;
+}
+.theme-toggle-option.active {
+  background: var(--text-primary); color: var(--bg-primary); box-shadow: 0 1px 8px rgba(0,0,0,0.2);
+}
+[data-theme="rainbow"] .theme-toggle-option[data-theme="rainbow"].active {
+  background: linear-gradient(135deg, #ff2d78, #ffb020, #34d399, #22d3ee, #c4b5fd); color: #0a0a0a;
+}
+
+/* ========== NAV DOTS ========== */
+.nav-dots { position: fixed; right: 1.25rem; top: 50%; transform: translateY(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-subtle); border: none; cursor: pointer; transition: all 0.3s; padding: 0; }
+.nav-dot:hover { background: var(--text-muted); }
+.nav-dot.active { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+[data-theme="rainbow"] .nav-dot.active { background: #ff2d78; box-shadow: 0 0 12px rgba(255,45,120,0.6); }
+
+/* ========== HERO (left-aligned, matching Dual Build) ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-primary);
+}
+.hero-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* LEFT-ALIGNED like Dual Build */
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+  max-width: 780px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+[data-theme="rainbow"] .hero h1 em {
+  background: linear-gradient(90deg, #ff2d78, #ffb020, #34d399);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+[data-theme="rainbow"] .hero h1 { text-shadow: 0 0 80px rgba(255,45,120,0.2); }
+.hero-sub {
+  font-size: 1.15rem; color: var(--text-body); max-width: 560px; line-height: 1.7;
+}
+
+/* ========== SECTION 01 — SCALE GRID ========== */
+.scale-grid { display: grid; grid-template-columns: repeat(auto-fill, 28px); gap: 4px; max-width: 640px; margin: 2.5rem 0; }
+.scale-unit { width: 28px; height: 28px; border-radius: 4px; background: var(--border-subtle); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+.scale-unit.reviewed { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+.scale-grid-legend { display: flex; gap: 1.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.scale-grid-legend-item { display: flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--text-muted); }
+.scale-grid-legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+
+/* ========== SECTION 02 — THESIS ========== */
+.thesis-section { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.thesis-statement {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  line-height: 0.95; color: var(--text-primary); text-align: center;
+  max-width: 900px; margin: 0 auto 2.5rem; letter-spacing: -0.02em;
+}
+.thesis-keyword { color: var(--accent); }
+[data-theme="rainbow"] .thesis-keyword {
+  background: linear-gradient(90deg, #ff2d78, #ffb020, #34d399, #22d3ee, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+[data-theme="dark"] .thesis-keyword { text-shadow: 0 0 60px var(--accent-glow), 0 0 120px rgba(232,69,122,0.15); }
+[data-theme="rainbow"] .thesis-statement { text-shadow: 0 0 100px rgba(255,45,120,0.15), 0 0 200px rgba(196,181,253,0.1); }
+.thesis-body { text-align: center; font-size: 1.15rem; color: var(--text-body); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+/* ========== SECTION 03 — PIPELINE ========== */
+.pipeline { position: relative; margin: 3rem 0; }
+.pipeline-line { position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: var(--border-subtle); z-index: 0; }
+.pipeline-line-fill { position: absolute; left: 0; top: 0; width: 100%; height: 0%; background: var(--accent); transition: height 1.2s cubic-bezier(0.22, 1, 0.36, 1); border-radius: 1px; }
+[data-theme="rainbow"] .pipeline-line-fill { background: linear-gradient(180deg, #ff2d78, #ffb020, #34d399, #c4b5fd); }
+.pipeline-stage { position: relative; z-index: 1; padding-left: 64px; margin-bottom: 1rem; cursor: pointer; }
+.pipeline-node {
+  position: absolute; left: 12px; top: 14px; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--border-subtle); background: var(--bg-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 500;
+  color: var(--text-muted); transition: all 0.4s; z-index: 2;
+}
+.pipeline-stage.active .pipeline-node, .pipeline-stage.passed .pipeline-node {
+  border-color: var(--stage-color, var(--accent)); background: var(--stage-color, var(--accent)); color: #fff;
+}
+.pipeline-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px;
+  padding: 1.25rem 1.5rem; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.pipeline-stage:hover .pipeline-card { border-color: var(--border-hover); }
+.pipeline-stage.active .pipeline-card { border-color: var(--stage-color, var(--border-hover)); box-shadow: var(--shadow-card); }
+.pipeline-card-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.pipeline-card-title-group { flex: 1; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.pipeline-card-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: var(--text-primary); }
+.pipeline-card-role {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 20px;
+  background: var(--stage-dim, var(--accent-dim)); color: var(--stage-color, var(--accent)); white-space: nowrap;
+}
+.pipeline-card-toggle {
+  width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border-subtle);
+  background: transparent; color: var(--text-muted); display: flex; align-items: center;
+  justify-content: center; font-size: 0.8rem; transition: all 0.3s; flex-shrink: 0; cursor: pointer;
+}
+.pipeline-stage.active .pipeline-card-toggle { transform: rotate(45deg); border-color: var(--stage-color, var(--accent)); color: var(--stage-color, var(--accent)); }
+.pipeline-card-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s; opacity: 0; }
+.pipeline-stage.active .pipeline-card-body { max-height: 400px; opacity: 1; }
+.pipeline-card-body-inner { padding-top: 1rem; margin-top: 1rem; border-top: 1px solid var(--border-subtle); }
+.pipeline-task-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.pipeline-task { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; color: var(--text-body); line-height: 1.5; }
+.pipeline-task-marker { width: 6px; height: 6px; border-radius: 50%; background: var(--stage-color, var(--accent)); flex-shrink: 0; margin-top: 0.5rem; }
+
+/* ========== SECTION 04 — SHIFT CARDS ========== */
+.shift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0; }
+@media (max-width: 700px) { .shift-grid { grid-template-columns: 1fr; } }
+.shift-card {
+  background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px;
+  padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all 0.4s;
+}
+.shift-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); }
+.shift-card-icon {
+  width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+}
+.shift-card.ai .shift-card-icon { background: var(--ai-dim); color: var(--ai-color); }
+.shift-card.human .shift-card-icon { background: var(--human-dim); color: var(--human-color); }
+.shift-card-content { flex: 1; }
+.shift-card-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.25rem;
+}
+.shift-card.ai .shift-card-label { color: var(--ai-color); }
+.shift-card.human .shift-card-label { color: var(--human-color); }
+.shift-card-text { font-size: 0.95rem; color: var(--text-primary); line-height: 1.45; font-weight: 500; }
+.shift-divider { grid-column: 1 / -1; height: 1px; background: var(--border-subtle); margin: 0.5rem 0; }
+.shift-note {
+  grid-column: 1 / -1; margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.03em; text-align: center;
+}
+
+/* ========== SECTION 05 — ATTENTION DEMO ========== */
+.attention-demo { margin: 2.5rem 0; }
+.attention-toggle-bar { display: flex; justify-content: center; gap: 0; margin-bottom: 2rem; }
+.attention-toggle-btn {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.5rem;
+  border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all 0.3s;
+}
+.attention-toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+.attention-toggle-btn:last-child { border-radius: 0 8px 8px 0; }
+.attention-toggle-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.attention-view { display: none; animation: fadeAttention 0.5s ease; }
+.attention-view.active { display: block; }
+@keyframes fadeAttention { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.content-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 5px; }
+.content-block { height: 36px; border-radius: 4px; background: var(--border-subtle); transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.content-block.highlight-gap { background: var(--human-color); opacity: 0.85; box-shadow: 0 0 8px var(--accent-glow); }
+.content-block.highlight-ok { background: var(--green); opacity: 0.45; }
+.content-block.highlight-flag { background: var(--hybrid-color); opacity: 0.7; }
+.attention-caption { margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-body); line-height: 1.6; max-width: 580px; }
+.attention-legend { display: flex; gap: 1.25rem; margin-top: 1rem; flex-wrap: wrap; }
+.attention-legend-item { display: flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.05em; color: var(--text-muted); }
+.attention-legend-swatch { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ========== TAKEAWAY ========== */
+.takeaway { text-align: center; padding: 8rem 0; }
+.takeaway-text {
+  font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--text-primary); max-width: 620px; margin: 0 auto 1.5rem; line-height: 1.35;
+}
+[data-theme="rainbow"] .takeaway-text {
+  background: linear-gradient(90deg, #ff2d78, #ffb020, #34d399, #22d3ee, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.takeaway-sub { font-size: 0.95rem; color: var(--text-muted); max-width: 500px; margin: 0 auto 2rem; line-height: 1.6; }
+.takeaway-note { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 2rem; opacity: 0.6; }
+.back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:30px;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);transition:all .3s}
+.back-link:hover{color:var(--accent);border-color:var(--border-hover)}
+[data-theme="rainbow"] .back-link{
+  background:rgba(14,14,14,0.8);border-color:rgba(255,255,255,0.1);
+  color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-image:linear-gradient(90deg,#ff2d78,#ffb020,#34d399,#22d3ee,#c4b5fd);
+  -webkit-background-clip:unset;background-clip:unset;color:var(--text-muted);
+}
+[data-theme="rainbow"] .back-link:hover{color:#ff2d78;border-color:rgba(255,45,120,0.4)}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  section { padding: 4rem 0; }
+  .container { padding: 0 1.25rem; }
+  .pipeline-stage { padding-left: 48px; }
+  .pipeline-line { left: 16px; }
+  .pipeline-node { left: 4px; width: 22px; height: 22px; }
+  .hero h1 { font-size: 2.2rem; }
+  .thesis-statement { font-size: 2.4rem; }
+  .nav-dots { display: none; }
+  .shift-grid { grid-template-columns: 1fr; }
+  .back-link{top:16px;left:16px;font-size:.6rem;padding:6px 10px}
+}
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .pipeline-line-fill { transition: none; }
+  .pipeline-card { transition: none; }
+  .pipeline-node { transition: none; }
+  .theme-toggle-option { transition: none; }
+  .scale-unit { transition: none; }
+  .nav-dot { transition: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+
+
+<a href="/#section-2" class="back-link">&larr; Back</a>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle" role="radiogroup" aria-label="Theme selector">
+  <button class="theme-toggle-option" data-theme="dark" aria-label="Dark mode" title="Dark" role="radio" aria-checked="false">☾</button>
+  <button class="theme-toggle-option active" data-theme="light" aria-label="Light mode" title="Light" role="radio" aria-checked="true">☀</button>
+  <button class="theme-toggle-option" data-theme="rainbow" aria-label="Rainbow mode" title="Rainbow" role="radio" aria-checked="false">✦</button>
+</div>
+
+<!-- Nav Dots -->
+<nav class="nav-dots" aria-label="Section navigation">
+  <button class="nav-dot active" data-section="0" aria-label="Hero"></button>
+  <button class="nav-dot" data-section="1" aria-label="The Problem"></button>
+  <button class="nav-dot" data-section="2" aria-label="Core Thesis"></button>
+  <button class="nav-dot" data-section="3" aria-label="Workflow"></button>
+  <button class="nav-dot" data-section="4" aria-label="What Shifts"></button>
+  <button class="nav-dot" data-section="5" aria-label="Attention"></button>
+  <button class="nav-dot" data-section="6" aria-label="Takeaway"></button>
+</nav>
+
+<!-- HERO (left-aligned) -->
+<section class="hero" data-index="0">
+  <div class="hero-content">
+    <span class="hero-eyebrow reveal">Process Design · AI-Assisted QA</span>
+    <h1 class="reveal" style="transition-delay:.1s">A <em>decade</em> of content and no way to review it all at human pace.</h1>
+    <p class="hero-sub reveal" style="transition-delay:.2s">I designed a four-stage workflow where AI handles extraction and flagging, and the subject matter expert focuses on the judgment calls. The system doesn't replace the reviewer. It makes the review possible.</p>
+  </div>
+</section>
+
+<!-- 01 — THE PROBLEM -->
+<section data-index="1">
+  <div class="container">
+    <span class="section-num reveal">01</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">Human review is essential. It doesn't scale.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">A large content catalog spanning two platforms. A quality audit found that many products, some over a decade old, didn't meet current requirements. Expert review catches what automation can't, but there wasn't enough expert time to review everything.</p>
+    <div class="scale-grid reveal" style="transition-delay:.2s" id="scaleGrid" aria-label="Catalog scale vs. review capacity"></div>
+    <div class="scale-grid-legend reveal" style="transition-delay:.25s">
+      <div class="scale-grid-legend-item"><div class="scale-grid-legend-swatch" style="background:var(--accent);"></div>Reviewed at human pace</div>
+      <div class="scale-grid-legend-item"><div class="scale-grid-legend-swatch" style="background:var(--border-subtle);"></div>Waiting</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — CORE THESIS -->
+<section data-index="2" class="thesis-section">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center;">
+    <span class="section-num reveal" style="text-align:center;">02</span>
+    <div class="thesis-statement reveal" style="transition-delay:.1s">AI <span class="thesis-keyword">Briefings,</span><br>Not AI <span class="thesis-keyword">Decisions.</span></div>
+    <p class="thesis-body reveal" style="transition-delay:.25s">The AI doesn't replace the expert's review. It produces a briefing that makes the review faster, more targeted, and better documented. The content designer steers the loop.</p>
+  </div>
+</section>
+
+<!-- 03 — FOUR-STAGE WORKFLOW -->
+<section data-index="3">
+  <div class="container">
+    <span class="section-num reveal">03</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">Four stages. Judgment stays human.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">Generalizable across domains. Tailored by each content designer.</p>
+    <div class="pipeline reveal" style="transition-delay:.2s" id="pipeline">
+      <div class="pipeline-line"><div class="pipeline-line-fill" id="pipelineFill"></div></div>
+
+      <!-- Rainbow order: S1=red/magenta, S2=orange, S3=green/teal, S4=violet -->
+      <div class="pipeline-stage" data-stage="1" style="--stage-color:var(--ai-color);--stage-dim:var(--ai-dim);">
+        <div class="pipeline-node">1</div>
+        <div class="pipeline-card">
+          <div class="pipeline-card-header">
+            <div class="pipeline-card-title-group"><div class="pipeline-card-title">Structural Inventory</div><span class="pipeline-card-role">AI-driven</span></div>
+            <div class="pipeline-card-toggle">+</div>
+          </div>
+          <div class="pipeline-card-body"><div class="pipeline-card-body-inner">
+            <ul class="pipeline-task-list">
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Map content to requirements at page level</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Compile key terms with source locations</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Build citations inventory across all material</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="pipeline-stage" data-stage="2" style="--stage-color:var(--hybrid-color);--stage-dim:var(--hybrid-dim);">
+        <div class="pipeline-node">2</div>
+        <div class="pipeline-card">
+          <div class="pipeline-card-header">
+            <div class="pipeline-card-title-group"><div class="pipeline-card-title">Analytical Flagging</div><span class="pipeline-card-role">AI-driven, expert-designed</span></div>
+            <div class="pipeline-card-toggle">+</div>
+          </div>
+          <div class="pipeline-card-body"><div class="pipeline-card-body-inner">
+            <ul class="pipeline-task-list">
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Coverage confidence: depth, not just presence</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Gap and bridge opportunities for new material</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Quality flags: outdated content, sensitivity concerns</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Accessibility: language complexity, vocabulary load</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="pipeline-stage" data-stage="3" style="--stage-color:var(--human-color);--stage-dim:var(--human-dim);">
+        <div class="pipeline-node">3</div>
+        <div class="pipeline-card">
+          <div class="pipeline-card-header">
+            <div class="pipeline-card-title-group"><div class="pipeline-card-title">Expert Deep Read</div><span class="pipeline-card-role">Human-driven, AI-informed</span></div>
+            <div class="pipeline-card-toggle">+</div>
+          </div>
+          <div class="pipeline-card-body"><div class="pipeline-card-body-inner">
+            <ul class="pipeline-task-list">
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Evaluate whether AI assessments hold up</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Triage flagged issues: real problems or false positives</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Catch what the AI missed</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="pipeline-stage" data-stage="4" style="--stage-color:var(--green);--stage-dim:var(--green-dim);">
+        <div class="pipeline-node">4</div>
+        <div class="pipeline-card">
+          <div class="pipeline-card-header">
+            <div class="pipeline-card-title-group"><div class="pipeline-card-title">Synthesis &amp; Documentation</div><span class="pipeline-card-role">Human-driven</span></div>
+            <div class="pipeline-card-toggle">+</div>
+          </div>
+          <div class="pipeline-card-body"><div class="pipeline-card-body-inner">
+            <ul class="pipeline-task-list">
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Final coverage map: met, partial, or missing</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Prioritized remediation recommendations</li>
+              <li class="pipeline-task"><span class="pipeline-task-marker"></span>Documentation that accelerates the next cycle</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — WHAT SHIFTS / WHAT STAYS -->
+<section data-index="4">
+  <div class="container">
+    <span class="section-num reveal">04</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">Drawing the line.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">The workflow redraws where human attention goes.</p>
+    <div class="shift-grid" id="shiftGrid">
+      <div class="shift-card ai reveal" style="transition-delay:.15s"><div class="shift-card-icon">⚡</div><div class="shift-card-content"><div class="shift-card-label">Shifts to AI</div><div class="shift-card-text">Locating where requirements appear across hundreds of pages</div></div></div>
+      <div class="shift-card human reveal" style="transition-delay:.2s"><div class="shift-card-icon">◉</div><div class="shift-card-content"><div class="shift-card-label">Stays with the expert</div><div class="shift-card-text">The deep read and all coverage judgments</div></div></div>
+      <div class="shift-card ai reveal" style="transition-delay:.25s"><div class="shift-card-icon">⚡</div><div class="shift-card-content"><div class="shift-card-label">Shifts to AI</div><div class="shift-card-text">Compiling documentation alongside development</div></div></div>
+      <div class="shift-card human reveal" style="transition-delay:.3s"><div class="shift-card-icon">◉</div><div class="shift-card-content"><div class="shift-card-label">Stays with the expert</div><div class="shift-card-text">Designing the evaluation framework and quality criteria</div></div></div>
+      <div class="shift-card ai reveal" style="transition-delay:.35s"><div class="shift-card-icon">⚡</div><div class="shift-card-content"><div class="shift-card-label">Shifts to AI</div><div class="shift-card-text">Initial scan for coverage and quality flags</div></div></div>
+      <div class="shift-card human reveal" style="transition-delay:.4s"><div class="shift-card-icon">◉</div><div class="shift-card-content"><div class="shift-card-label">Stays with the expert</div><div class="shift-card-text">Sensitivity and bias assessment</div></div></div>
+      <div class="shift-divider"></div>
+      <p class="shift-note reveal" style="transition-delay:.45s">Each expert tailors the evaluation framework to their content area.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — DIRECTED ATTENTION -->
+<section data-index="5">
+  <div class="container">
+    <span class="section-num reveal">05</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">Directed attention, not diffuse.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">Without the briefing, the expert reads everything looking for everything. With it, they know where to focus and what to interrogate.</p>
+    <div class="attention-demo reveal" style="transition-delay:.2s" id="attentionDemo">
+      <div class="attention-toggle-bar">
+        <button class="attention-toggle-btn active" data-view="without">Without briefing</button>
+        <button class="attention-toggle-btn" data-view="with">With briefing</button>
+      </div>
+      <div class="attention-view active" data-view="without">
+        <div class="content-wall" id="wallWithout"></div>
+        <p class="attention-caption">Every page looks the same. The expert reads all of it with equal attention, hunting for where problems might be.</p>
+      </div>
+      <div class="attention-view" data-view="with">
+        <div class="content-wall" id="wallWith"></div>
+        <p class="attention-caption">The briefing marks what needs scrutiny. The expert's time goes to judgment, not hunting.</p>
+        <div class="attention-legend">
+          <div class="attention-legend-item"><div class="attention-legend-swatch" style="background:var(--human-color);"></div>Gap identified</div>
+          <div class="attention-legend-item"><div class="attention-legend-swatch" style="background:var(--hybrid-color);"></div>Quality flag</div>
+          <div class="attention-legend-item"><div class="attention-legend-swatch" style="background:var(--green);opacity:0.5;"></div>Coverage confirmed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — TAKEAWAY -->
+<section class="takeaway" data-index="6">
+  <div class="container">
+    <span class="section-num reveal">06</span>
+    <p class="takeaway-text reveal" style="transition-delay:.1s">Designing where human attention goes is the content design problem.</p>
+    <p class="takeaway-sub reveal" style="transition-delay:.2s">The thinking is the work: figuring out what the expert actually needs, and structuring the experience around that.</p>
+    <p class="takeaway-note reveal" style="transition-delay:.3s">Designed and proposed as a pilot process. Not a shipped implementation with measured results.</p>
+  </div>
+</section>
+
+
+<script is:inline>
+// THEME TOGGLE
+const html = document.documentElement;
+const themeButtons = document.querySelectorAll('.theme-toggle-option');
+function setTheme(t) {
+  html.dataset.theme = t;
+  themeButtons.forEach(b => b.classList.toggle('active', b.dataset.theme === t));
+  themeButtons.forEach(b => {
+    b.setAttribute('aria-checked', b.dataset.theme === t ? 'true' : 'false');
+  });
+  try { localStorage.setItem('mae-theme', t); } catch(e) {}
+}
+themeButtons.forEach(b => b.addEventListener('click', () => setTheme(b.dataset.theme)));
+// Restore saved theme
+try {
+  const saved = localStorage.getItem('mae-theme');
+  if (saved) setTheme(saved);
+} catch(e) {}
+// Theme defaults to whatever data-theme is set on <html>.
+
+// SCROLL REVEAL
+const revealObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// NAV DOTS
+const sections = document.querySelectorAll('section[data-index]');
+const dots = document.querySelectorAll('.nav-dot');
+dots.forEach(d => d.addEventListener('click', () => sections[parseInt(d.dataset.section)]?.scrollIntoView({ behavior: 'smooth' })));
+const dotObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { dots.forEach(d => d.classList.remove('active')); document.querySelector(`.nav-dot[data-section="${e.target.dataset.index}"]`)?.classList.add('active'); }
+}), { threshold: 0.35 });
+sections.forEach(s => dotObs.observe(s));
+
+// SCALE GRID
+const sg = document.getElementById('scaleGrid');
+if (sg) { const rev = [3,11,27,42,58,71,89,104]; for (let i=0;i<120;i++) { const b=document.createElement('div'); b.className='scale-unit'; if(rev.includes(i))b.classList.add('reviewed'); sg.appendChild(b); } }
+
+// PIPELINE — rainbow mode recolors stages to ROYGBIV order
+const stages = document.querySelectorAll('.pipeline-stage');
+const pf = document.getElementById('pipelineFill');
+const rainbowStageColors = ['#ff2d78','#ffb020','#34d399','#c4b5fd']; // red, orange, green, violet
+
+function applyRainbowColors() {
+  const isRainbow = html.dataset.theme === 'rainbow';
+  stages.forEach((s, i) => {
+    if (isRainbow) {
+      s.style.setProperty('--stage-color', rainbowStageColors[i]);
+      s.style.setProperty('--stage-dim', rainbowStageColors[i] + '22');
+    } else {
+      s.style.removeProperty('--stage-color');
+      s.style.removeProperty('--stage-dim');
+    }
+  });
+}
+
+// Re-apply on theme change
+const origSetTheme = setTheme;
+// Patch setTheme to also update rainbow colors
+const _origBtnHandlers = [];
+themeButtons.forEach(b => {
+  b.removeEventListener('click', () => {}); // can't remove anonymous, so we re-bind
+});
+// Re-bind with rainbow color application
+themeButtons.forEach(b => {
+  const handler = () => { setTheme(b.dataset.theme); applyRainbowColors(); };
+  b.addEventListener('click', handler);
+});
+applyRainbowColors();
+
+function openStage(s) {
+  const was = s.classList.contains('active');
+  stages.forEach(x => { x.classList.remove('active','passed'); x.setAttribute('aria-expanded','false'); });
+  if (!was) {
+    s.classList.add('active'); s.setAttribute('aria-expanded','true');
+    const idx = parseInt(s.dataset.stage);
+    stages.forEach(x => { if (parseInt(x.dataset.stage) < idx) x.classList.add('passed'); });
+    if (pf) pf.style.height = (idx / stages.length * 100) + '%';
+  } else { if (pf) pf.style.height = '0%'; }
+}
+stages.forEach(s => { s.addEventListener('click', () => openStage(s)); s.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){e.preventDefault();openStage(s);} }); s.setAttribute('tabindex','0'); s.setAttribute('role','button'); s.setAttribute('aria-expanded','false'); });
+const po = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){setTimeout(()=>openStage(stages[0]),600);po.disconnect();} }), {threshold:0.25});
+const pe = document.getElementById('pipeline'); if(pe) po.observe(pe);
+
+// ATTENTION DEMO
+document.querySelectorAll('.attention-toggle-btn').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.attention-toggle-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.attention-view').forEach(v=>v.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelector(`.attention-view[data-view="${btn.dataset.view}"]`)?.classList.add('active');
+}));
+const ww=document.getElementById('wallWithout'), wv=document.getElementById('wallWith');
+const gaps=[5,12,23,34,51,67], flags=[8,19,31,44,56,72];
+for(let i=0;i<80;i++){
+  const a=document.createElement('div'); a.className='content-block'; ww?.appendChild(a);
+  const b=document.createElement('div'); b.className='content-block';
+  if(gaps.includes(i))b.classList.add('highlight-gap'); else if(flags.includes(i))b.classList.add('highlight-flag'); else b.classList.add('highlight-ok');
+  wv?.appendChild(b);
+}
+
+// Watch for theme changes via MutationObserver to reapply rainbow colors
+new MutationObserver(() => applyRainbowColors()).observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+// Sync toggle button states with restored theme
+const restoredTheme = document.documentElement.getAttribute('data-theme');
+if (restoredTheme) {
+  document.querySelectorAll('.theme-toggle-option').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === restoredTheme);
+    b.setAttribute('aria-checked', b.dataset.theme === restoredTheme ? 'true' : 'false');
+  });
+}
+</script>
+</BaseLayout>
