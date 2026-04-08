@@ -22,6 +22,24 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style is:inline>
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 99999;
+      padding: 8px 16px;
+      background: #c23062;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-decoration: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
 </head>
 <body>
   <a href={skipTarget} class="skip-link">Skip to content</a>

@@ -1,0 +1,618 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Audience Localization — Mae Mendoza" skipTarget="#section-hero">
+<style is:inline>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ========== DARK MODE ========== */
+[data-theme="dark"]{
+  --bg-primary:#0e0b12;--bg-secondary:#141018;--bg-card:rgba(22,18,28,0.75);--bg-glass:rgba(255,255,255,0.03);
+  --text-primary:#f2eff6;--text-body:#c8c2d1;--text-muted:#8a8296;
+  --border-subtle:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.14);
+  --accent:#e8457a;--accent-dim:rgba(232,69,122,0.12);--accent-glow:rgba(232,69,122,0.3);
+  --grain-opacity:0.025;--toggle-bg:rgba(255,255,255,0.08);--shadow-card:0 2px 20px rgba(0,0,0,0.3);
+  --doc-bg:rgba(30,26,38,0.9);--doc-border:rgba(255,255,255,0.08);--doc-header:rgba(232,69,122,0.06);
+  --tab-inactive-bg:rgba(255,255,255,0.04);--tab-inactive-text:#8a8296;
+  --source-ref:rgba(232,69,122,0.15);
+}
+/* ========== LIGHT MODE ========== */
+[data-theme="light"]{
+  --bg-primary:#f7f7f5;--bg-secondary:#ffffff;--bg-card:rgba(255,255,255,0.92);--bg-glass:rgba(0,0,0,0.02);
+  --text-primary:#1a1520;--text-body:#4a4358;--text-muted:#7a7388;
+  --border-subtle:rgba(0,0,0,0.08);--border-hover:rgba(0,0,0,0.16);
+  --accent:#c23062;--accent-dim:rgba(194,48,98,0.08);--accent-glow:rgba(194,48,98,0.2);
+  --grain-opacity:0;--toggle-bg:rgba(0,0,0,0.06);--shadow-card:0 2px 16px rgba(0,0,0,0.08);
+  --doc-bg:#ffffff;--doc-border:rgba(0,0,0,0.1);--doc-header:rgba(194,48,98,0.04);
+  --tab-inactive-bg:rgba(0,0,0,0.03);--tab-inactive-text:#7a7388;
+  --source-ref:rgba(194,48,98,0.06);
+}
+/* ========== RAINBOW MODE ========== */
+[data-theme="rainbow"]{
+  --bg-primary:#0a0a0a;--bg-secondary:#0e0e0e;--bg-card:rgba(14,14,14,0.92);--bg-glass:rgba(255,255,255,0.04);
+  --text-primary:#ffffff;--text-body:#d4d4d4;--text-muted:#999999;
+  --border-subtle:rgba(255,255,255,0.08);--border-hover:rgba(255,255,255,0.18);
+  --accent:#ff2d78;--accent-dim:rgba(255,45,120,0.12);--accent-glow:rgba(255,45,120,0.4);
+  --grain-opacity:0.025;--toggle-bg:rgba(255,255,255,0.08);--shadow-card:0 2px 24px rgba(0,0,0,0.4);
+  --doc-bg:rgba(14,14,14,0.95);--doc-border:rgba(255,255,255,0.1);--doc-header:rgba(255,45,120,0.08);
+  --tab-inactive-bg:rgba(255,255,255,0.06);--tab-inactive-text:#999999;
+  --source-ref:rgba(255,45,120,0.1);
+}
+
+/* ========== BASE ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:18px}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background .4s,color .4s;line-height:1.65}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:var(--grain-opacity);pointer-events:none;z-index:9999}
+[data-theme="rainbow"] body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle,rgba(255,45,120,0.05) 60px,transparent 60px),
+    radial-gradient(circle,rgba(0,232,123,0.04) 45px,transparent 45px),
+    radial-gradient(circle,rgba(0,194,255,0.05) 55px,transparent 55px),
+    radial-gradient(circle,rgba(255,214,0,0.04) 40px,transparent 40px),
+    radial-gradient(circle,rgba(168,85,247,0.05) 50px,transparent 50px);
+  background-size:320px 320px,260px 280px,280px 300px,240px 260px,300px 280px;
+  background-position:40px 30px,180px 160px,80px 240px,220px 60px,140px 140px}
+
+/* ========== CHROME ========== */
+.theme-toggle{position:fixed;top:24px;right:24px;z-index:200;display:flex;gap:0;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);border-radius:40px;padding:4px;transition:all .3s}
+.theme-toggle-option{background:none;border:none;cursor:pointer;padding:7px 12px;border-radius:30px;font-size:.82rem;line-height:1;color:var(--text-muted);transition:all .3s}
+.theme-toggle-option.active{background:var(--accent);color:#fff}
+.theme-toggle-option:hover:not(.active){color:var(--text-primary)}
+[data-theme="rainbow"] .theme-toggle-option.active{background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7)}
+.back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:30px;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);transition:all .3s}
+.back-link:hover{color:var(--accent);border-color:var(--border-hover)}
+.nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border-subtle);cursor:pointer;transition:all .3s;border:none;padding:0}
+.nav-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+.nav-dot:hover{background:var(--text-muted)}
+
+/* ========== SECTIONS ========== */
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:100px clamp(28px,8vw,120px);position:relative;z-index:1}
+.container{max-width:960px;width:100%;margin:0 auto}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--text-primary);line-height:1.18;max-width:720px;margin-bottom:20px}
+.section-title em{font-style:italic;color:var(--accent)}
+.section-lead{font-size:clamp(1rem,1.3vw,1.1rem);color:var(--text-muted);max-width:620px;line-height:1.7;font-weight:300}
+[data-theme="rainbow"] .section-title{background:rgba(0,0,0,0.7);display:inline;padding:4px 10px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.5}
+[data-theme="rainbow"] .section-num{display:block}
+[data-theme="rainbow"] .section-title em{background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ========== HERO ========== */
+.hero{align-items:center;min-height:100vh}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;opacity:0;animation:fadeUp .8s ease forwards .3s}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,6vw,4.2rem);line-height:1.1;color:var(--text-primary);opacity:0;animation:fadeUp .8s ease forwards .5s}
+.hero h1 em{font-style:italic;color:var(--accent)}
+[data-theme="rainbow"] .hero h1{background:none;display:block;padding:0}
+[data-theme="rainbow"] .hero h1 em{background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{margin-top:32px;font-size:clamp(1.05rem,1.6vw,1.15rem);max-width:680px;font-weight:300;color:var(--text-muted);line-height:1.7;opacity:0;animation:fadeUp .8s ease forwards .7s}
+.hero-meta{margin-top:52px;display:flex;gap:28px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards .9s}
+.hero-meta span{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--text-muted)}
+.scroll-cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease forwards 1.2s}
+.scroll-cue span{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:pulse 2s ease-in-out infinite}
+
+/* ========== REVEAL ========== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(0.22,1,0.36,1),transform .7s cubic-bezier(0.22,1,0.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== SOURCE DOC ========== */
+.source-doc{max-width:860px;margin-top:40px;border:1px solid var(--doc-border);border-radius:12px;overflow:hidden;background:var(--doc-bg);box-shadow:var(--shadow-card)}
+.source-header{padding:12px 20px;background:var(--doc-header);border-bottom:1px solid var(--doc-border);display:flex;align-items:center;gap:10px}
+.source-header .dot{width:8px;height:8px;border-radius:50%;background:var(--text-muted);opacity:.3}
+.source-header .filename{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);letter-spacing:.05em}
+.source-body{padding:28px 32px;max-height:420px;overflow-y:auto}
+.source-body::-webkit-scrollbar{width:6px}
+.source-body::-webkit-scrollbar-track{background:var(--bg-glass);border-radius:3px}
+.source-body::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:3px;opacity:.5}
+.source-body::-webkit-scrollbar-thumb:hover{opacity:.8}
+.source-h2{font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;color:var(--text-primary);margin-bottom:6px}
+.source-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;margin-top:24px}
+.source-label:first-child{margin-top:0}
+.source-p{font-size:.82rem;color:var(--text-body);line-height:1.65;margin-bottom:10px}
+.ref{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-muted);background:var(--source-ref);padding:1px 5px;border-radius:3px}
+.source-tier{padding:12px 16px;border-left:3px solid var(--accent);background:var(--bg-glass);border-radius:0 8px 8px 0;margin:10px 0;font-size:.82rem;color:var(--text-body);line-height:1.6}
+.source-tier strong{color:var(--text-primary);font-weight:600}
+.source-fade{position:relative}
+.source-fade::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(transparent,var(--doc-bg));pointer-events:none}
+.source-note{text-align:center;padding:10px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:.08em;border-top:1px solid var(--doc-border)}
+/* Audience drop-off annotations */
+.dropoff{display:flex;align-items:center;gap:8px;margin:14px 0;padding:8px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase}
+.dropoff .dropoff-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dropoff-exec{background:rgba(255,140,0,0.08);color:#e89020;border:1px solid rgba(255,140,0,0.15)}
+.dropoff-exec .dropoff-dot{background:#e89020}
+.dropoff-ic{background:rgba(100,160,255,0.08);color:#6496e8;border:1px solid rgba(100,160,255,0.15)}
+.dropoff-ic .dropoff-dot{background:#6496e8}
+
+/* ========== FORMAT SWITCHER ========== */
+.format-switcher{max-width:860px;margin-top:40px}
+.format-tabs{display:flex;gap:4px;background:var(--tab-inactive-bg);border-radius:12px 12px 0 0;padding:4px 4px 0 4px;border:1px solid var(--border-subtle);border-bottom:none}
+.format-tab{flex:1;padding:12px 16px;border:none;background:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tab-inactive-text);border-radius:8px 8px 0 0;transition:all .3s}
+.format-tab.active{background:var(--doc-bg);color:var(--text-primary);font-weight:500}
+.format-tab:hover:not(.active){color:var(--text-primary)}
+.format-panel{display:none;border:1px solid var(--border-subtle);border-top:none;border-radius:0 0 12px 12px;background:var(--doc-bg);box-shadow:var(--shadow-card);overflow:hidden}
+.format-panel.active{display:block;animation:panelIn .4s ease}
+
+/* ========== TWO-COLUMN TEASER LAYOUT ========== */
+.teaser-layout{display:grid;grid-template-columns:65% 30%;gap:5%;padding:32px 36px;align-items:start}
+.teaser-copy h3{font-family:'DM Serif Display',serif;font-size:1.35rem;color:var(--text-primary);line-height:1.3;margin-bottom:20px}
+[data-theme="rainbow"] .teaser-copy h3{background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.teaser-copy .tc-desc{font-size:.84rem;color:var(--text-muted);line-height:1.65;font-weight:300;margin-bottom:10px}
+.teaser-copy .tc-desc:last-of-type{margin-bottom:24px}
+.teaser-cta{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.06em;color:var(--accent);text-decoration:none;padding:12px 28px;border:1px solid var(--accent);border-radius:8px;transition:all .3s;background:var(--accent-dim)}
+.teaser-cta:hover{background:var(--accent);color:#fff}
+
+/* Teaser sidebar: spec card */
+.spec-card{margin-bottom:16px}
+.spec-item{padding:6px 0;font-size:.78rem;line-height:1.5}
+.spec-item:not(:last-child){border-bottom:1px solid var(--border-subtle)}
+.spec-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+.spec-value{color:var(--text-body);display:block}
+
+/* ========== ARTIFACT MINIATURES ========== */
+.artifact-mini{border-radius:8px;overflow:hidden;border:1px solid var(--border-subtle);box-shadow:var(--shadow-card);aspect-ratio:4/3;position:relative}
+
+/* -- Tech Reference Mini -- */
+.mini-tech{background:#FAFAF7;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.mini-tech .mt-header{height:6px;width:55%;background:#1A8A8A;border-radius:2px;opacity:.3;margin-bottom:4px}
+.mini-tech .mt-tier{height:18px;border-radius:0 3px 3px 0;background:rgba(0,0,0,0.03);border-left:2px solid #ccc;padding-left:6px;display:flex;align-items:center}
+.mini-tech .mt-tier .mt-line{height:3px;border-radius:1px;background:rgba(0,0,0,0.12)}
+.mini-tech .mt-tier.t1{border-left-color:#C4652A}
+.mini-tech .mt-tier.t1 .mt-line{width:80%}
+.mini-tech .mt-tier.t2{border-left-color:#B08D3E}
+.mini-tech .mt-tier.t2 .mt-line{width:70%}
+.mini-tech .mt-tier.t3{border-left-color:#1A8A8A}
+.mini-tech .mt-tier.t3 .mt-line{width:60%}
+.mini-tech .mt-tier.t4{border-left-color:#A69882}
+.mini-tech .mt-tier.t4 .mt-line{width:45%}
+.mini-tech .mt-action{height:2px;width:40%;background:#1A8A8A;border-radius:1px;opacity:.25;margin:2px 0 2px 8px}
+.mini-tech .mt-sep{height:1px;background:rgba(0,0,0,0.06);margin:4px 0}
+.mini-tech .mt-cat-row{display:flex;gap:4px;align-items:center}
+.mini-tech .mt-badge{display:inline-block;height:8px;width:24px;border-radius:2px;opacity:.5}
+.mini-tech .mt-badge.ba{background:rgba(196,101,42,0.2)}
+.mini-tech .mt-badge.bb{background:rgba(176,141,62,0.2)}
+.mini-tech .mt-cat-line{height:3px;flex:1;border-radius:1px;background:rgba(0,0,0,0.08)}
+
+/* -- Exec Narrative Mini -- */
+.mini-exec{background:#0A1628;padding:0;display:flex;flex-direction:column}
+.mini-exec .me-section{flex:1;padding:8px 12px;display:flex;flex-direction:column;justify-content:center;position:relative}
+.mini-exec .me-section:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.04)}
+.mini-exec .me-hero{background:radial-gradient(ellipse at 70% 40%,rgba(0,177,171,0.1),transparent)}
+.mini-exec .me-kicker{height:2px;width:28px;background:#00B1AB;border-radius:1px;margin-bottom:4px;opacity:.6}
+.mini-exec .me-headline{height:4px;width:70%;background:rgba(255,255,255,0.7);border-radius:1px;margin-bottom:3px}
+.mini-exec .me-headline.short{width:45%}
+.mini-exec .me-body{height:2px;width:55%;background:rgba(255,255,255,0.15);border-radius:1px;margin-bottom:2px}
+.mini-exec .me-stats{display:flex;gap:4px;margin-top:3px}
+.mini-exec .me-stat{flex:1;height:16px;border-radius:3px;background:rgba(15,32,57,0.8);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center}
+.mini-exec .me-stat-num{height:5px;width:14px;background:#00B1AB;border-radius:1px;opacity:.7}
+.mini-exec .me-tiers{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px}
+.mini-exec .me-tier{height:14px;border-radius:2px;background:rgba(15,32,57,0.8);border:1px solid rgba(255,255,255,0.06);border-left:2px solid #00B1AB}
+.mini-exec .me-tier.high{border-left-color:#EC0C6D}
+.mini-exec .me-tier.mid{border-left-color:#F6A41A}
+.mini-exec .me-dots{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px}
+.mini-exec .me-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.12)}
+.mini-exec .me-dot.active{background:#00B1AB}
+
+/* -- Training Deck Mini -- */
+.mini-deck{background:#0A1628;padding:0;display:flex;flex-direction:column}
+.mini-deck .md-viewport{flex:1;display:flex;overflow:hidden;position:relative}
+.mini-deck .md-slide{min-width:100%;padding:8px 12px;display:flex;flex-direction:column;justify-content:center}
+.mini-deck .md-kicker{height:2px;width:24px;background:#00B1AB;border-radius:1px;margin-bottom:4px;opacity:.6}
+.mini-deck .md-headline{height:4px;width:65%;background:rgba(255,255,255,0.7);border-radius:1px;margin-bottom:3px}
+.mini-deck .md-body{height:2px;width:50%;background:rgba(255,255,255,0.15);border-radius:1px;margin-bottom:6px}
+.mini-deck .md-cards{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.mini-deck .md-card{height:14px;border-radius:2px;background:rgba(15,32,57,0.8);border:1px solid rgba(255,255,255,0.06);border-left:2px solid #EC0C6D}
+.mini-deck .md-card:nth-child(2){border-left-color:#F6A41A}
+.mini-deck .md-card:nth-child(3){border-left-color:#00B1AB}
+.mini-deck .md-card:nth-child(4){border-left-color:#8B9DB0}
+.mini-deck .md-nav{display:flex;align-items:center;justify-content:center;gap:3px;padding:6px 0;border-top:1px solid rgba(255,255,255,0.04)}
+.mini-deck .md-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.12)}
+.mini-deck .md-dot.active{background:#00B1AB;box-shadow:0 0 3px rgba(0,177,171,0.4)}
+.mini-deck .md-arrow{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 3px}
+.mini-deck .md-arrow-inner{width:0;height:0;border-top:2px solid transparent;border-bottom:2px solid transparent;border-left:3px solid rgba(255,255,255,0.2)}
+.mini-deck .md-arrow.prev .md-arrow-inner{border-left:none;border-right:3px solid rgba(255,255,255,0.2)}
+
+/* ========== TAKEAWAY ========== */
+.takeaway-text{font-family:'Outfit',sans-serif;font-size:clamp(.95rem,1.5vw,1.05rem);font-weight:300;color:var(--text-body);line-height:1.7;max-width:640px;margin-top:24px}
+.footer-meta{margin-top:48px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--text-muted)}
+.footer-meta a.footer-link{color:var(--accent);text-decoration:none}.footer-meta a.footer-link:hover{text-decoration:underline}
+
+/* Light mode: pink section 03 */
+[data-theme="light"] section[data-index="3"]{background-color:rgba(194,48,98,0.75);background-image:linear-gradient(rgba(255,255,255,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.08) 1px,transparent 1px);background-size:32px 32px}
+[data-theme="light"] section[data-index="3"] .section-num{color:rgba(255,255,255,0.9)}
+[data-theme="light"] section[data-index="3"] .section-title{color:#1a1520}
+[data-theme="light"] section[data-index="3"] .section-title em{color:rgba(255,255,255,0.9)}
+[data-theme="light"] section[data-index="3"] .takeaway-text{color:rgba(0,0,0,0.8)}
+[data-theme="light"] section[data-index="3"] .footer-meta{display:inline-block;padding:8px 16px;border-radius:6px;background:#fff;color:var(--accent)}
+[data-theme="light"] section[data-index="3"] .footer-meta a.footer-link{color:var(--accent)}
+
+/* Dark mode: standard dark background */
+[data-theme="dark"] section[data-index="3"]{background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px}
+
+/* ========== SECTION TEXTURES ========== */
+[data-theme="light"] .hero{background-image:linear-gradient(rgba(0,0,0,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.06) 1px,transparent 1px);background-size:32px 32px}
+[data-theme="light"] section[data-index="2"]{background-image:radial-gradient(circle,rgba(194,48,98,0.09) 60px,transparent 60px),radial-gradient(circle,rgba(194,48,98,0.09) 60px,transparent 60px);background-size:200px 200px;background-position:30px 20px,130px 120px}
+[data-theme="dark"] section[data-index="1"]{background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px}
+[data-theme="dark"] section[data-index="2"]{background-image:radial-gradient(circle,rgba(232,69,122,0.06) 60px,transparent 60px),radial-gradient(circle,rgba(232,69,122,0.06) 60px,transparent 60px);background-size:200px 200px;background-position:30px 20px,130px 120px}
+[data-theme="rainbow"] .hero{background:
+  radial-gradient(circle at 8% 15%,rgba(255,45,120,0.18) 90px,transparent 90px),
+  radial-gradient(circle at 25% 8%,rgba(255,107,53,0.14) 50px,transparent 50px),
+  radial-gradient(circle at 55% 12%,rgba(255,214,0,0.12) 70px,transparent 70px),
+  radial-gradient(circle at 78% 20%,rgba(0,232,123,0.13) 60px,transparent 60px),
+  radial-gradient(circle at 92% 35%,rgba(0,194,255,0.14) 80px,transparent 80px),
+  radial-gradient(circle at 85% 70%,rgba(168,85,247,0.16) 75px,transparent 75px),
+  radial-gradient(circle at 65% 80%,rgba(255,45,120,0.1) 55px,transparent 55px),
+  radial-gradient(circle at 40% 65%,rgba(0,232,123,0.1) 45px,transparent 45px),
+  radial-gradient(circle at 15% 75%,rgba(0,194,255,0.12) 65px,transparent 65px),
+  radial-gradient(circle at 48% 40%,rgba(255,107,53,0.08) 40px,transparent 40px),
+  radial-gradient(circle at 30% 90%,rgba(168,85,247,0.1) 50px,transparent 50px),
+  radial-gradient(circle at 70% 50%,rgba(255,214,0,0.08) 35px,transparent 35px),
+  #0a0a0a}
+[data-theme="rainbow"] section[data-index="1"]{background:
+  linear-gradient(rgba(255,45,120,0.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,107,53,0.06) 1px,transparent 1px),
+  linear-gradient(180deg,rgba(255,45,78,0.04) 0%,rgba(168,85,247,0.03) 100%),
+  #0a0a0a;background-size:32px 32px,32px 32px,100% 100%}
+[data-theme="rainbow"] section[data-index="1"] .section-num{margin-bottom:24px}
+[data-theme="rainbow"] section[data-index="2"]{background:
+  linear-gradient(rgba(0,232,123,0.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,194,255,0.05) 1px,transparent 1px),
+  linear-gradient(180deg,rgba(255,165,0,0.04) 0%,rgba(0,194,255,0.03) 100%),
+  #0a0a0a;background-size:32px 32px,32px 32px,100% 100%}
+[data-theme="rainbow"] section[data-index="3"]{
+  background:
+    radial-gradient(circle at 10% 20%,rgba(255,45,120,0.25) 80px,transparent 80px),
+    radial-gradient(circle at 85% 15%,rgba(255,107,53,0.2) 60px,transparent 60px),
+    radial-gradient(circle at 50% 50%,rgba(255,214,0,0.15) 90px,transparent 90px),
+    radial-gradient(circle at 20% 80%,rgba(0,232,123,0.2) 70px,transparent 70px),
+    radial-gradient(circle at 75% 75%,rgba(0,194,255,0.22) 75px,transparent 75px),
+    radial-gradient(circle at 90% 50%,rgba(168,85,247,0.18) 65px,transparent 65px),
+    radial-gradient(circle at 40% 30%,rgba(0,194,255,0.12) 50px,transparent 50px),
+    radial-gradient(circle at 60% 85%,rgba(255,45,120,0.15) 55px,transparent 55px),
+    #0a0a0a !important}
+[data-theme="rainbow"] section[data-index="3"] .section-num{
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:24px}
+[data-theme="rainbow"] section[data-index="3"] .section-title{
+  background:none;padding:0;font-size:clamp(2.2rem,4.5vw,3.2rem)}
+[data-theme="rainbow"] section[data-index="3"] .section-title em{
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+[data-theme="rainbow"] section[data-index="3"] .takeaway-text{
+  color:#fff;font-size:clamp(1rem,1.6vw,1.1rem);font-weight:400}
+[data-theme="rainbow"] section[data-index="3"] .footer-meta{
+  display:inline-block;padding:10px 20px;border-radius:8px;
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  color:#0a0a0a;font-weight:500}
+[data-theme="rainbow"] section[data-index="3"] .footer-meta a.footer-link{color:#0a0a0a;opacity:1}
+
+/* Rainbow source doc glow */
+[data-theme="rainbow"] .source-doc{
+  border-color:transparent;
+  box-shadow:0 0 0 1px rgba(255,45,120,0.2),0 0 30px rgba(255,45,120,0.08),0 0 30px rgba(0,194,255,0.06)}
+[data-theme="rainbow"] .source-header{
+  background:linear-gradient(90deg,rgba(255,45,120,0.1),rgba(255,107,53,0.08),rgba(255,214,0,0.06),rgba(0,232,123,0.06),rgba(0,194,255,0.08),rgba(168,85,247,0.1))}
+[data-theme="rainbow"] .dropoff-exec{
+  background:linear-gradient(90deg,rgba(255,107,53,0.1),rgba(255,214,0,0.06));
+  border-color:rgba(255,107,53,0.25)}
+[data-theme="rainbow"] .dropoff-ic{
+  background:linear-gradient(90deg,rgba(0,194,255,0.1),rgba(168,85,247,0.06));
+  border-color:rgba(0,194,255,0.25)}
+
+/* Rainbow back link */
+[data-theme="rainbow"] .back-link{
+  border-color:rgba(255,45,120,0.3);background:rgba(10,10,10,0.8)}
+[data-theme="rainbow"] .back-link:hover{
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  color:#0a0a0a;border-color:transparent;font-weight:500}
+
+[data-theme="rainbow"] section[data-index="2"]{background:
+  radial-gradient(circle,rgba(255,255,255,0.04) 60px,transparent 60px),
+  radial-gradient(circle,rgba(255,255,255,0.04) 60px,transparent 60px),
+  #0a0a0a;background-size:200px 200px;background-position:30px 20px,130px 120px}
+
+/* Rainbow format switcher */
+[data-theme="rainbow"] .format-tab.active{
+  box-shadow:0 -2px 16px rgba(255,45,120,0.2);
+  background:var(--doc-bg);
+  background-image:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+[data-theme="rainbow"] .format-panel.active{
+  border-color:transparent;
+  box-shadow:0 0 0 1px rgba(255,45,120,0.15),0 0 24px rgba(168,85,247,0.08),0 0 24px rgba(0,194,255,0.06)}
+[data-theme="rainbow"] .teaser-copy .tc-desc{font-size:.94rem;line-height:1.75}
+[data-theme="rainbow"] .teaser-cta{
+  background:rgba(255,255,255,0.06);color:#d4d4d4;
+  border:1px solid rgba(255,45,120,0.4);
+  box-shadow:0 0 12px rgba(255,45,120,0.1),0 0 12px rgba(168,85,247,0.08)}
+[data-theme="rainbow"] .teaser-cta:hover{
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  color:#0a0a0a;border-color:transparent;font-weight:500;
+  box-shadow:0 0 20px rgba(255,45,120,0.25),0 0 20px rgba(0,194,255,0.15)}
+[data-theme="rainbow"] .spec-label{
+  display:inline-block;
+  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Rainbow nav dots: each a different color */
+[data-theme="rainbow"] .nav-dot:nth-child(1).active{background:#ff2d78;box-shadow:0 0 8px rgba(255,45,120,0.5)}
+[data-theme="rainbow"] .nav-dot:nth-child(2).active{background:#ffd600;box-shadow:0 0 8px rgba(255,214,0,0.5)}
+[data-theme="rainbow"] .nav-dot:nth-child(3).active{background:#00e87b;box-shadow:0 0 8px rgba(0,232,123,0.5)}
+[data-theme="rainbow"] .nav-dot:nth-child(4).active{background:#a855f7;box-shadow:0 0 8px rgba(168,85,247,0.5)}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:700px){
+  html{font-size:16px}section{padding:80px 20px}
+  .transfer-grid{grid-template-columns:1fr}.nav-dots{display:none}.theme-toggle{top:16px;right:16px}
+  .back-link{top:16px;left:16px;font-size:.6rem;padding:6px 10px}.source-body{padding:20px}
+  .format-tab{font-size:.56rem;padding:10px 6px;letter-spacing:.04em}
+  .teaser-layout{grid-template-columns:1fr;gap:24px;padding:24px 20px}
+  .teaser-sidebar{order:-1}
+  .artifact-mini{aspect-ratio:16/9}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-eyebrow,.hero h1,.hero-sub,.hero-meta,.scroll-cue{opacity:1;animation:none}
+  @keyframes fadeUp{from{opacity:1;transform:none}to{opacity:1;transform:none}}
+  @keyframes panelIn{from{opacity:1;transform:none}to{opacity:1;transform:none}}
+}
+</style>
+
+
+<a href="/#section-2" class="back-link">&larr; Back</a>
+<div class="theme-toggle" role="radiogroup" aria-label="Theme selector">
+  <button class="theme-toggle-option" data-theme="dark" role="radio" aria-checked="false" aria-label="Dark mode" title="Dark">&#9790;</button>
+  <button class="theme-toggle-option active" data-theme="light" role="radio" aria-checked="true" aria-label="Light mode" title="Light">&#9788;</button>
+  <button class="theme-toggle-option" data-theme="rainbow" role="radio" aria-checked="false" aria-label="Rainbow mode" title="Rainbow">&#10022;</button>
+</div>
+<nav class="nav-dots" id="navDots" aria-label="Page navigation"></nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero" data-index="0">
+  <div class="container">
+    <div class="hero-eyebrow">Content Adaptation &middot; Audience Localization</div>
+    <h1>Everything you need is here. <em>Good luck</em> finding it.</h1>
+    <p class="hero-sub">I developed a comprehensive data governance framework for the team. Then I adapted it for every other audience that had to understand it. The information doesn't change. The structure, pacing, and entry points do.</p>
+    <div class="hero-meta"><span>Mae Mendoza</span><span>Content Adaptation</span></div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ====== 01 — SOURCE AS PROBLEM ====== -->
+<section data-index="1">
+  <div class="container">
+    <span class="section-num reveal">01</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">I wrote the complex <em>technical</em> documentation for the immediate team.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">The original ran 34 pages, crafted for the people that owned the process and structured around how they think about it. The excerpt below shows where each audience stops reading.</p>
+
+    <div class="source-doc reveal" style="transition-delay:.2s">
+      <div class="source-header">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span class="filename">data-governance-framework-v2.4.docx</span>
+      </div>
+      <div class="source-body source-fade">
+        <div class="source-label">Section 3.2</div>
+        <div class="source-h2">Data Classification Tiers</div>
+        <p class="source-p">All organizational data assets are classified into four tiers based on sensitivity, regulatory exposure, and business impact upon unauthorized disclosure.</p>
+
+        <div class="source-tier"><strong>Tier 1 &mdash; Restricted:</strong> Data subject to explicit regulatory mandate <span class="ref">GDPR Art. 9</span>, <span class="ref">CCPA &sect;1798.140(o)(1)</span>, <span class="ref">HIPAA PHI</span> or contractual obligation with liquidated damages provisions. Includes PII with re-identification risk above threshold (see Appendix C, &sect;C.4 for k-anonymity parameters). Unauthorized disclosure triggers mandatory breach notification within 72 hours per applicable jurisdiction.</div>
+
+        <div class="dropoff dropoff-exec"><div class="dropoff-dot"></div>Executive stopped here. Already got what they needed: legal risk exists, there are timelines.</div>
+
+        <div class="source-tier"><strong>Tier 2 &mdash; Confidential:</strong> Data whose disclosure would cause material business harm but does not trigger mandatory regulatory notification. Includes aggregated analytics with potential for competitive inference, pre-release financial projections, vendor contract terms with MFN clauses, and internal audit findings prior to board review. Access restricted to named roles; see &sect;4.1 for RBAC matrix.</div>
+
+        <div class="source-tier"><strong>Tier 3 &mdash; Internal:</strong> Data intended for organizational use with low disclosure risk. Departmental planning documents, internal communications not subject to litigation hold, de-identified research datasets meeting Safe Harbor criteria <span class="ref">45 CFR &sect;164.514(b)</span>. Standard access controls; no additional encryption at rest required beyond baseline <span class="ref">AES-256</span>.</div>
+
+        <div class="dropoff dropoff-ic"><div class="dropoff-dot"></div>Everyone else stopped here. Too much policy architecture. They need to know what to do, not why.</div>
+
+        <div class="source-tier"><strong>Tier 4 &mdash; Public:</strong> Data cleared for external distribution through the approved release process (see &sect;6.3). Reclassification from Public to any restricted tier requires DGC approval and retroactive access audit.</div>
+
+        <div class="source-label" style="margin-top:28px">Section 5.1</div>
+        <div class="source-h2">Data Incident Response Protocol</div>
+        <p class="source-p">Upon identification of a suspected data incident &mdash; defined as any unauthorized access, disclosure, modification, or destruction of data classified Tier 1 or Tier 2 &mdash; the discovering party initiates the response protocol by filing a Data Incident Report (DIR) through the GRC platform within 4 hours of discovery.</p>
+        <p class="source-p">The DIR triggers automatic notification to the Data Governance Council (DGC) duty officer, the relevant Data Domain Owner (DDO), and the Information Security Incident Response Team (ISIRT). The DGC duty officer performs initial triage within 2 hours of DIR receipt, classifying the incident as Category A (confirmed breach of Tier 1 data with external exposure), Category B (confirmed breach of Tier 2 data or Tier 1 with contained internal exposure), or Category C (suspected but unconfirmed incident requiring investigation).</p>
+      </div>
+      <div class="source-note">34 pages. Three audiences. None of them will read it like this.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 02 — THE THREE DELIVERABLES ====== -->
+<section data-index="2" id="deliverables" style="min-height:auto;padding-top:80px;padding-bottom:80px">
+  <div class="container">
+    <span class="section-num reveal">02</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">Then, I adapted it for specific audiences in formats <em>tailored</em> for their needs.</h2>
+    <p class="section-lead reveal" style="transition-delay:.1s">Each version restructures what the reader sees first and how much detail surfaces at each level.</p>
+
+    <div class="format-switcher reveal" style="transition-delay:.2s">
+      <div class="format-tabs" role="tablist" aria-label="Document format versions">
+        <button class="format-tab active" data-format="tech" role="tab" aria-selected="true" aria-controls="panel-tech" onclick="switchFormat('tech')">Technical Reference</button>
+        <button class="format-tab" data-format="exec" role="tab" aria-selected="false" aria-controls="panel-exec" onclick="switchFormat('exec')">Executive Narrative</button>
+        <button class="format-tab" data-format="pd" role="tab" aria-selected="false" aria-controls="panel-pd" onclick="switchFormat('pd')">Training Deck</button>
+      </div>
+
+      <!-- TECHNICAL REFERENCE -->
+      <div class="format-panel active" id="panel-tech" role="tabpanel">
+        <div class="teaser-layout">
+          <div class="teaser-copy">
+            <h3>&ldquo;You found the breach. Here's exactly what to do in the next four hours.&rdquo;</h3>
+            <p class="tc-desc">34 pages of policy, and the people who reference it daily need answers in ten seconds. This version strips the reasoning and surfaces the actions: color-coded tiers, inline response steps, and a clear escalation path.</p>
+            <p class="tc-desc">Every section tells the reader exactly what to do and who to contact. It's the version a data steward actually keeps open at their desk.</p>
+            <a href="/tech-reference" class="teaser-cta">View the full reference &rarr;</a>
+          </div>
+          <div class="teaser-sidebar">
+            <div class="spec-card">
+              <div class="spec-item"><span class="spec-label">What?</span><span class="spec-value">Vertical reference document</span></div>
+              <div class="spec-item"><span class="spec-label">Who?</span><span class="spec-value">Data stewards, governance practitioners</span></div>
+              <div class="spec-item"><span class="spec-label">Why?</span><span class="spec-value">Strip the reasoning, surface the actions. Every tier tells the reader exactly what to do.</span></div>
+            </div>
+            <div class="artifact-mini mini-tech">
+              <div class="mt-header"></div>
+              <div class="mt-tier t1"><div class="mt-line"></div></div>
+              <div class="mt-action"></div>
+              <div class="mt-tier t2"><div class="mt-line"></div></div>
+              <div class="mt-action"></div>
+              <div class="mt-tier t3"><div class="mt-line"></div></div>
+              <div class="mt-tier t4"><div class="mt-line"></div></div>
+              <div class="mt-sep"></div>
+              <div class="mt-cat-row"><span class="mt-badge ba"></span><div class="mt-cat-line"></div></div>
+              <div class="mt-cat-row"><span class="mt-badge bb"></span><div class="mt-cat-line"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXECUTIVE NARRATIVE -->
+      <div class="format-panel" id="panel-exec" role="tabpanel">
+        <div class="teaser-layout">
+          <div class="teaser-copy">
+            <h3>&ldquo;The company's data practices were built for a smaller operation. The operation grew.&rdquo;</h3>
+            <p class="tc-desc">Leadership doesn't need the procedural detail. They need the case for why this matters and why now.</p>
+            <p class="tc-desc">This version leads with risk exposure and cost of inaction, walks through the classification framework at a high level, and closes on what the company gains. The format is a scrollytelling narrative designed to earn budget approval, not explain implementation.</p>
+            <a href="/exec-narrative" class="teaser-cta">Read the full narrative &rarr;</a>
+          </div>
+          <div class="teaser-sidebar">
+            <div class="spec-card">
+              <div class="spec-item"><span class="spec-label">What?</span><span class="spec-value">Scrollytelling narrative</span></div>
+              <div class="spec-item"><span class="spec-label">Who?</span><span class="spec-value">Senior leadership, budget decision-makers</span></div>
+              <div class="spec-item"><span class="spec-label">Why?</span><span class="spec-value">Lead with the problem. Bury the procedural detail. End on what the company gains.</span></div>
+            </div>
+            <div class="artifact-mini mini-exec">
+              <div class="me-section me-hero">
+                <div class="me-kicker"></div>
+                <div class="me-headline"></div>
+                <div class="me-headline short"></div>
+                <div class="me-body"></div>
+                <div class="me-dots"><div class="me-dot active"></div><div class="me-dot"></div><div class="me-dot"></div><div class="me-dot"></div></div>
+              </div>
+              <div class="me-section">
+                <div class="me-kicker"></div>
+                <div class="me-stats">
+                  <div class="me-stat"><div class="me-stat-num"></div></div>
+                  <div class="me-stat"><div class="me-stat-num"></div></div>
+                  <div class="me-stat"><div class="me-stat-num"></div></div>
+                </div>
+              </div>
+              <div class="me-section">
+                <div class="me-tiers">
+                  <div class="me-tier high"></div>
+                  <div class="me-tier mid"></div>
+                  <div class="me-tier"></div>
+                  <div class="me-tier" style="border-left-color:#8B9DB0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAINING DECK -->
+      <div class="format-panel" id="panel-pd" role="tabpanel">
+        <div class="teaser-layout">
+          <div class="teaser-copy">
+            <h3>&ldquo;We're changing data handling this quarter. Here's what you need to know about the new framework.&rdquo;</h3>
+            <p class="tc-desc">The department needs to know what's changing and what it means for their daily work.</p>
+            <p class="tc-desc">This deck covers the classification system, the incident response protocol, and the new ownership model in seven slides designed for async review. Before/after framing makes the shift concrete. No speaker notes — it's built to stand on its own.</p>
+            <a href="/training-deck" class="teaser-cta">View the full deck &rarr;</a>
+          </div>
+          <div class="teaser-sidebar">
+            <div class="spec-card">
+              <div class="spec-item"><span class="spec-label">What?</span><span class="spec-value">Horizontal slide deck</span></div>
+              <div class="spec-item"><span class="spec-label">Who?</span><span class="spec-value">ICs and managers, department-wide</span></div>
+              <div class="spec-item"><span class="spec-label">Why?</span><span class="spec-value">Before/after framing. No speaker notes — designed to stand on its own.</span></div>
+            </div>
+            <div class="artifact-mini mini-deck">
+              <div class="md-viewport">
+                <div class="md-slide">
+                  <div class="md-kicker"></div>
+                  <div class="md-headline"></div>
+                  <div class="md-body"></div>
+                  <div class="md-cards">
+                    <div class="md-card"></div>
+                    <div class="md-card"></div>
+                    <div class="md-card"></div>
+                    <div class="md-card"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="md-nav">
+                <div class="md-arrow prev"><div class="md-arrow-inner"></div></div>
+                <div class="md-dot"></div>
+                <div class="md-dot"></div>
+                <div class="md-dot active"></div>
+                <div class="md-dot"></div>
+                <div class="md-dot"></div>
+                <div class="md-dot"></div>
+                <div class="md-dot"></div>
+                <div class="md-arrow"><div class="md-arrow-inner"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 03 — TAKEAWAY ====== -->
+<section data-index="3">
+  <div class="container">
+    <span class="section-num reveal">03</span>
+    <h2 class="section-title reveal" style="transition-delay:.05s">I make sure each audience finds what they need in the <em>first ten seconds.</em></h2>
+
+    <div class="takeaway-text reveal" style="transition-delay:.12s">Everything rides on the first ten seconds. Whether someone scans for a tier definition, reads for the business case, or clicks through slides before a Monday standup — they've already decided if this document is for them. I figure out what those ten seconds need to look like for each reader, then build backward from there.</div>
+
+    <div class="footer-meta reveal" style="transition-delay:.22s">
+      Mae Mendoza &middot; <a href="/" class="footer-link">maemendoza.com</a>
+    </div>
+  </div>
+</section>
+
+
+<script is:inline>
+const html = document.documentElement;
+document.querySelectorAll('.theme-toggle-option').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.theme-toggle-option').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-checked', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-checked', 'true');
+    html.dataset.theme = btn.dataset.theme;
+    try { localStorage.setItem('mae-theme', btn.dataset.theme); } catch(e) {}
+  });
+});
+function switchFormat(f){
+  document.querySelectorAll('.format-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+  document.querySelectorAll('.format-panel').forEach(p=>p.classList.remove('active'));
+  const tab=document.querySelector(`.format-tab[data-format="${f}"]`);
+  tab.classList.add('active');tab.setAttribute('aria-selected','true');
+  document.getElementById(`panel-${f}`).classList.add('active');
+}
+const rObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+const sections=document.querySelectorAll('section[data-index]'),dotsC=document.getElementById('navDots');
+sections.forEach((_,i)=>{const d=document.createElement('button');d.className='nav-dot';d.setAttribute('aria-label','Section '+(i+1));d.addEventListener('click',()=>sections[i].scrollIntoView({behavior:'smooth'}));dotsC.appendChild(d)});
+const dots=dotsC.querySelectorAll('.nav-dot');
+const sObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=parseInt(e.target.dataset.index);dots.forEach((d,j)=>d.classList.toggle('active',j===i))}}),{threshold:.35});
+sections.forEach(s=>sObs.observe(s));
+
+// Sync toggle button states with restored theme
+const savedTheme = document.documentElement.getAttribute('data-theme');
+if (savedTheme) {
+  document.querySelectorAll('.theme-toggle-option').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === savedTheme);
+    b.setAttribute('aria-checked', b.dataset.theme === savedTheme ? 'true' : 'false');
+  });
+}
+</script>
+</BaseLayout>
