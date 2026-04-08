@@ -1,0 +1,226 @@
+/* ========================================
+   DESIGN TOKENS
+   Extracted from homepage-v2.html
+   Single source of truth for all themed pages
+   ======================================== */
+
+/* --- Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600&display=swap');
+
+/* --- Structural --- */
+:root {
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'General Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --grain-opacity: 0.025;
+  --spine-width: 1px;
+  --section-padding-x: 60px;
+  --col-left: 38%;
+  --col-right: 62%;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+/* --- Dark Theme --- */
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --bg-card: rgba(20, 20, 20, 0.85);
+  --bg-tab-bar: rgba(20, 20, 20, 0.6);
+  --bg-tab-hover: rgba(255, 255, 255, 0.04);
+  --bg-tab-active: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-body: #c8c8c8;
+  --text-muted: #777777;
+  --text-surface-label: #999999;
+  --magenta: #e8457a;
+  --teal: #00d4cc;
+  --violet: #a78bfa;
+  --coral: #f4845f;
+  --gold: #f6c744;
+  --green: #34d399;
+  --blue: #60a5fa;
+  --pink: #f0abfc;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.14);
+  --border-active: rgba(255,255,255,0.2);
+  --glow-magenta: rgba(232,69,122,0.15);
+  --glow-teal: rgba(0,212,204,0.08);
+  --spine-color: rgba(255,255,255,0.06);
+  --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.5);
+  --tab-indicator: var(--magenta);
+  --grain-opacity: 0.025;
+}
+
+/* --- Light Theme --- */
+[data-theme="light"] {
+  --bg: #faf8f6;
+  --bg-card: rgba(255,255,255,0.95);
+  --bg-tab-bar: rgba(255, 255, 255, 0.7);
+  --bg-tab-hover: rgba(0, 0, 0, 0.03);
+  --bg-tab-active: rgba(0, 0, 0, 0.06);
+  --text-primary: #0a0a0a;
+  --text-body: #3b4249;
+  --text-muted: #6b7580;
+  --text-surface-label: #6b7580;
+  --magenta: #c23062;
+  --teal: #00c4be;
+  --violet: #7c5fd6;
+  --coral: #e06840;
+  --gold: #d4a520;
+  --green: #1ea670;
+  --blue: #4a8fd6;
+  --pink: #c77dd6;
+  --border-subtle: rgba(100,120,140,0.12);
+  --border-hover: rgba(100,120,140,0.22);
+  --border-active: rgba(100,120,140,0.3);
+  --glow-magenta: rgba(194,48,98,0.08);
+  --glow-teal: rgba(0,196,190,0.06);
+  --spine-color: rgba(194,48,98,0.18);
+  --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.06);
+  --tab-indicator: var(--magenta);
+  --grain-opacity: 0.025;
+}
+
+/* --- Rainbow Theme --- */
+[data-theme="rainbow"] {
+  --bg: #0a0a0a;
+  --bg-card: rgba(10,10,10,0.75);
+  --bg-tab-bar: rgba(10, 10, 10, 0.6);
+  --bg-tab-hover: rgba(255, 255, 255, 0.04);
+  --bg-tab-active: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-body: #c8c8c8;
+  --text-muted: #999999;
+  --text-surface-label: #bbbbbb;
+  --magenta: #ff2d78;
+  --teal: #00ffd5;
+  --violet: #c4b5fd;
+  --coral: #f4845f;
+  --gold: #f6c744;
+  --green: #34d399;
+  --blue: #60a5fa;
+  --pink: #f0abfc;
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --border-active: rgba(255,255,255,0.25);
+  --glow-magenta: rgba(255,45,120,0.2);
+  --glow-teal: rgba(0,255,213,0.1);
+  --spine-color: rgba(255,255,255,0.08);
+  --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.5);
+  --tab-indicator: var(--magenta);
+  --grain-opacity: 0.015;
+}
+
+/* ========================================
+   BASE RESETS & GLOBALS
+   ======================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-body);
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.3s;
+}
+
+/* --- Film grain overlay --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+  pointer-events: none;
+  z-index: 10000;
+}
+
+/* --- Rainbow body polka dots --- */
+[data-theme="rainbow"] body {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.055) 14px, transparent 14px),
+    radial-gradient(circle, rgba(255,255,255,0.055) 14px, transparent 14px);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
+}
+
+/* --- Light body warm texture --- */
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(194,48,98,0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(0,196,190,0.015) 0%, transparent 50%);
+}
+
+/* ========================================
+   SKIP LINK
+   ======================================== */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 99999;
+  padding: 8px 16px;
+  background: var(--magenta);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ========================================
+   REVEAL ANIMATIONS
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal-delay-1, .reveal-delay-2, .reveal-delay-3,
+  .reveal-delay-4, .reveal-delay-5 { transition-delay: 0s; }
+}
+
+/* ========================================
+   RESPONSIVE FOUNDATION
+   ======================================== */
+@media (max-width: 900px) {
+  :root {
+    --section-padding-x: 32px;
+    --col-left: 100%;
+    --col-right: 100%;
+  }
+}
