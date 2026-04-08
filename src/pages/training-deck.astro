@@ -2,36 +2,36 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Training Deck — Mae Mendoza" skipTarget="#slide-0" defaultTheme="dark">
+<BaseLayout title="Training Deck — Mae Mendoza" skipTarget="#slide-0" defaultTheme="light">
 <style is:inline>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root{
-  --bg-primary:#0A1628;
-  --bg-secondary:#0F2039;
-  --bg-card:rgba(15,32,57,0.6);
-  --bg-glass:rgba(255,255,255,0.04);
-  --text-primary:#fff;
-  --text-body:#D4DCE4;
-  --text-muted:#8B9DB0;
-  --border-subtle:rgba(255,255,255,0.06);
-  --border-hover:rgba(255,255,255,0.14);
-  --teal:#00B1AB;
-  --teal-dim:rgba(0,177,171,0.15);
-  --teal-glow:rgba(0,177,171,0.35);
-  --orange:#F6A41A;
-  --orange-dim:rgba(246,164,26,0.15);
-  --pink:#EC0C6D;
-  --pink-dim:rgba(236,12,109,0.1);
-  --sky:#B8DFF0;
-  --grain-opacity:0.03;
-  --shadow-card:0 2px 16px rgba(0,0,0,0.2);
+  --bg-primary:#F7F5F2;
+  --bg-secondary:#EDEAE6;
+  --bg-card:rgba(255,255,255,0.85);
+  --bg-glass:rgba(0,0,0,0.02);
+  --text-primary:#1A2332;
+  --text-body:#3B4856;
+  --text-muted:#6B7A8A;
+  --border-subtle:rgba(0,40,80,0.08);
+  --border-hover:rgba(0,40,80,0.16);
+  --teal:#008C88;
+  --teal-dim:rgba(0,140,136,0.1);
+  --teal-glow:rgba(0,140,136,0.2);
+  --orange:#D48B0A;
+  --orange-dim:rgba(212,139,10,0.1);
+  --pink:#C8085A;
+  --pink-dim:rgba(200,8,90,0.06);
+  --sky:#1A6B82;
+  --grain-opacity:0.02;
+  --shadow-card:0 2px 12px rgba(0,0,0,0.06);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:18px}
 body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-body);overflow:hidden !important;-webkit-font-smoothing:antialiased;line-height:1.65;height:100vh !important}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:var(--grain-opacity);pointer-events:none;z-index:9999}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:var(--grain-opacity);pointer-events:none;z-index:9999}
 
 /* ========== CHROME ========== */
 .back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:30px;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);transition:all .3s}
@@ -51,7 +51,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .slide-lead{font-size:clamp(1rem,1.3vw,1.1rem);color:var(--text-muted);max-width:580px;line-height:1.7;font-weight:300;margin-bottom:32px}
 
 /* ========== SLIDE: TITLE ========== */
-.slide-title-page{background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(0,177,171,0.08) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(236,12,109,0.04) 0%,transparent 60%),var(--bg-primary)}
+.slide-title-page{background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(0,140,136,0.06) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(200,8,90,0.03) 0%,transparent 60%),var(--bg-primary)}
 .slide-title-page h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;color:var(--text-primary);max-width:700px;margin-bottom:24px}
 .slide-title-page h1 em{font-style:italic;color:var(--teal)}
 .slide-title-sub{font-size:clamp(1rem,1.4vw,1.15rem);font-weight:300;color:var(--text-muted);max-width:540px;line-height:1.7;margin-bottom:40px}
@@ -75,7 +75,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 /* ========== RESPONSE TABLE ========== */
 .response-table{max-width:760px;border:1px solid var(--border-subtle);border-radius:10px;overflow:hidden;background:var(--bg-card);box-shadow:var(--shadow-card)}
-.rt-header{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.5fr;gap:0;padding:12px 20px;background:rgba(0,177,171,0.08);border-bottom:1px solid var(--border-subtle)}
+.rt-header{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.5fr;gap:0;padding:12px 20px;background:rgba(0,140,136,0.06);border-bottom:1px solid var(--border-subtle)}
 .rt-header span{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:500}
 .rt-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.5fr;gap:0;padding:14px 20px;border-bottom:1px solid var(--border-subtle);font-size:.82rem;align-items:center}
 .rt-row:last-child{border-bottom:none}
@@ -168,14 +168,14 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 2: THE CHALLENGE -->
-    <div class="slide" role="tabpanel" aria-label="Slide 2 of 7" id="slide-1" style="background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(236,12,109,0.04) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide" role="tabpanel" aria-label="Slide 2 of 7" id="slide-1" style="background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(200,8,90,0.03) 0%,transparent 70%),var(--bg-primary)">
       <div class="slide-eyebrow">01 &middot; The Challenge</div>
       <h2>Arcline handles sensitive data across every business unit. No unified system governs how.</h2>
       <p class="slide-lead">Data handling currently depends on team-level norms. Those norms vary across departments, and new hires inherit them without documentation. The company's regulatory obligations have expanded; the practices have not kept pace.</p>
     </div>
 
     <!-- SLIDE 3: CLASSIFICATION -->
-    <div class="slide" role="tabpanel" aria-label="Slide 3 of 7" id="slide-2" style="background:radial-gradient(ellipse 60% 50% at 60% 40%,rgba(0,177,171,0.06) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide" role="tabpanel" aria-label="Slide 3 of 7" id="slide-2" style="background:radial-gradient(ellipse 60% 50% at 60% 40%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
       <div class="slide-eyebrow">02 &middot; Classification</div>
       <h2>Four tiers, based on what happens if the data is <em>exposed.</em></h2>
       <p class="slide-lead">Every data asset the company holds falls into one of these categories. The tier determines the protections and response timeline, with accountability assigned at each level.</p>
@@ -204,7 +204,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 4: INCIDENT RESPONSE -->
-    <div class="slide" role="tabpanel" aria-label="Slide 4 of 7" id="slide-3" style="background:radial-gradient(ellipse 60% 50% at 40% 50%,rgba(0,177,171,0.06) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide" role="tabpanel" aria-label="Slide 4 of 7" id="slide-3" style="background:radial-gradient(ellipse 60% 50% at 40% 50%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
       <div class="slide-eyebrow">03 &middot; Incident Response</div>
       <h2>When something goes wrong, the timeline is already <em>defined.</em></h2>
       <p class="slide-lead">Every incident follows the same escalation path. The tier of the affected data determines the speed and scope of the response.</p>
@@ -237,7 +237,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 5: OWNERSHIP -->
-    <div class="slide" role="tabpanel" aria-label="Slide 5 of 7" id="slide-4" style="background:radial-gradient(ellipse 60% 50% at 60% 60%,rgba(0,177,171,0.06) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide" role="tabpanel" aria-label="Slide 5 of 7" id="slide-4" style="background:radial-gradient(ellipse 60% 50% at 60% 60%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
       <div class="slide-eyebrow">04 &middot; Ownership Model</div>
       <h2>Every data domain has three roles. Your first contact is your <em>steward.</em></h2>
       <p class="slide-lead">The framework separates governance decisions from implementation. Each role has a defined scope and a clear escalation path.</p>
@@ -262,7 +262,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 6: WHAT CHANGES -->
-    <div class="slide" role="tabpanel" aria-label="Slide 6 of 7" id="slide-5" style="background:radial-gradient(ellipse 50% 50% at 40% 60%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide" role="tabpanel" aria-label="Slide 6 of 7" id="slide-5" style="background:radial-gradient(ellipse 50% 50% at 40% 60%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
       <div class="slide-eyebrow">05 &middot; What Changes</div>
       <h2>Starting this quarter, data handling follows the <em>framework.</em></h2>
       <p class="slide-lead">The shift is structural. Individual judgment gets replaced by classification-driven protections with a defined escalation path.</p>
@@ -291,7 +291,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 7: CLOSER -->
-    <div class="slide slide-closer" role="tabpanel" aria-label="Slide 7 of 7" id="slide-6" style="background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-secondary)">
+    <div class="slide slide-closer" role="tabpanel" aria-label="Slide 7 of 7" id="slide-6" style="background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-secondary)">
       <div class="slide-eyebrow">06</div>
       <h2>Two things to remember from this deck: your <em>steward's name</em> and when to <em>file a report.</em></h2>
       <p class="slide-lead" style="text-align:center;margin-left:auto;margin-right:auto">The full technical reference is available on the governance wiki. Reach out to your department's data steward with questions.</p>
