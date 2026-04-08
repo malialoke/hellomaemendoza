@@ -1,0 +1,327 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Executive Narrative — Mae Mendoza" skipTarget="#main-content" defaultTheme="dark">
+<style is:inline>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --bg-primary:#0A1628;
+  --bg-secondary:#0F2039;
+  --bg-card:rgba(15,32,57,0.6);
+  --bg-glass:rgba(255,255,255,0.04);
+  --text-primary:#fff;
+  --text-body:#D4DCE4;
+  --text-muted:#8B9DB0;
+  --border-subtle:rgba(255,255,255,0.06);
+  --border-hover:rgba(255,255,255,0.14);
+  --teal:#00B1AB;
+  --teal-dim:rgba(0,177,171,0.15);
+  --teal-glow:rgba(0,177,171,0.35);
+  --orange:#F6A41A;
+  --orange-dim:rgba(246,164,26,0.15);
+  --pink:#EC0C6D;
+  --pink-dim:rgba(236,12,109,0.1);
+  --sky:#B8DFF0;
+  --grain-opacity:0.03;
+  --shadow-card:0 2px 16px rgba(0,0,0,0.2);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;font-size:18px}
+body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.65}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:var(--grain-opacity);pointer-events:none;z-index:9999}
+
+/* ========== CHROME ========== */
+.back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:30px;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);transition:all .3s}
+.back-link:hover{color:var(--teal);border-color:var(--border-hover)}
+.back-link:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border-subtle);cursor:pointer;transition:all .3s;border:none;padding:0}
+.nav-dot.active{background:var(--teal);box-shadow:0 0 8px var(--teal-glow)}
+.nav-dot:hover{background:var(--text-muted)}
+.nav-dot:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.sample-label{position:fixed;bottom:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);opacity:.5}
+
+/* ========== SECTIONS ========== */
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px clamp(28px,8vw,140px);position:relative;scroll-snap-align:start}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,3.8vw,2.9rem);color:var(--text-primary);line-height:1.18;max-width:720px;margin-bottom:20px}
+.section-lead{font-size:clamp(1rem,1.3vw,1.1rem);color:var(--text-muted);max-width:620px;line-height:1.7;font-weight:300}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ========== HERO ========== */
+.hero{align-items:flex-start;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(0,177,171,0.08) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(236,12,109,0.04) 0%,transparent 60%),var(--bg-primary)}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:28px;opacity:0;animation:fadeUp .8s ease forwards .3s}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,5.5vw,4.8rem);line-height:1.1;color:var(--text-primary);max-width:780px;opacity:0;animation:fadeUp .8s ease forwards .5s}
+.hero h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{margin-top:32px;font-size:clamp(1.05rem,1.6vw,1.2rem);font-weight:300;color:var(--text-muted);max-width:580px;line-height:1.7;opacity:0;animation:fadeUp .8s ease forwards .7s}
+.hero-meta{margin-top:52px;display:flex;gap:28px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards .9s}
+.hero-meta span{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:var(--text-muted)}
+.scroll-cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease forwards 1.2s}
+.scroll-cue span{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--teal),transparent);animation:pulse 2s ease-in-out infinite}
+
+/* ========== NARRATIVE SECTIONS ========== */
+.narrative-body{margin-top:40px;max-width:640px}
+.narrative-body p{font-size:1rem;line-height:1.75;margin-bottom:20px}
+.narrative-body strong{color:var(--text-primary);font-weight:600}
+
+/* ========== STAT ROW ========== */
+.stat-row{display:flex;gap:20px;margin-top:44px;max-width:800px}
+.stat-block{flex:1;text-align:center;padding:28px 20px;border-radius:12px;background:var(--bg-card);border:1px solid var(--border-subtle);box-shadow:var(--shadow-card)}
+.stat-num{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,4vw,3.2rem);color:var(--teal);line-height:1}
+.stat-label{font-size:.82rem;color:var(--text-muted);margin-top:8px;line-height:1.4}
+
+/* ========== TIER CARDS ========== */
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px;max-width:800px}
+.tier-card{padding:24px 26px;border-radius:12px;background:var(--bg-card);border:1px solid var(--border-subtle);box-shadow:var(--shadow-card);border-left:3px solid var(--teal)}
+.tier-card.tier-high{border-left-color:var(--pink)}
+.tier-card.tier-mid{border-left-color:var(--orange)}
+.tier-card .tier-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tier-card.tier-high .tier-label{color:var(--pink)}
+.tier-card.tier-mid .tier-label{color:var(--orange)}
+.tier-card.tier-low .tier-label{color:var(--teal)}
+.tier-card.tier-public .tier-label{color:var(--text-muted)}
+.tier-card h4{font-weight:600;font-size:.95rem;color:var(--text-primary);margin-bottom:6px}
+.tier-card p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+.tier-card.tier-low{border-left-color:var(--teal)}
+.tier-card.tier-public{border-left-color:var(--text-muted)}
+
+/* ========== OWNERSHIP VISUAL ========== */
+.ownership-chain{display:flex;align-items:center;gap:0;margin-top:44px;max-width:800px;flex-wrap:wrap}
+.ownership-node{padding:20px 24px;border-radius:12px;background:var(--bg-card);border:1px solid var(--border-subtle);box-shadow:var(--shadow-card);text-align:center;flex:1;min-width:160px}
+.ownership-node .on-role{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.ownership-node h4{font-weight:600;font-size:.92rem;color:var(--text-primary);margin-bottom:4px}
+.ownership-node p{font-size:.8rem;color:var(--text-muted);line-height:1.5}
+.ownership-arrow{font-size:1.2rem;color:var(--teal);padding:0 12px;flex-shrink:0}
+
+/* ========== QUOTE BLOCK ========== */
+.quote-block{margin-top:40px;padding:24px 28px;border-left:3px solid var(--teal);background:var(--bg-glass);border-radius:0 10px 10px 0;max-width:640px}
+.quote-block p{font-family:'DM Serif Display',serif;font-size:1.08rem;font-style:italic;color:var(--sky);line-height:1.6}
+
+/* ========== RETURN CARDS ========== */
+.return-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:44px;max-width:960px}
+.return-card{padding:24px;border-radius:12px;background:var(--bg-card);border:1px solid var(--border-subtle);box-shadow:var(--shadow-card);border-top:3px solid var(--teal)}
+.return-card .rc-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.return-card h4{font-weight:600;font-size:.95rem;color:var(--text-primary);margin-bottom:8px}
+.return-card p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+
+/* ========== CTA / CLOSER ========== */
+.closer-section{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-secondary);text-align:center;align-items:center}
+.closer-section .section-title{max-width:680px;text-align:center}
+.closer-sub{font-size:1.02rem;color:var(--text-muted);max-width:540px;line-height:1.7;font-weight:300;margin-top:18px}
+.footer-meta{margin-top:56px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:.1em}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  html{font-size:16px}
+  .stat-row{flex-direction:column}
+  .tier-grid,.return-grid{grid-template-columns:1fr}
+  .ownership-chain{flex-direction:column;gap:8px}
+  .ownership-arrow{transform:rotate(90deg);padding:4px 0}
+  .hero-meta{flex-direction:column;gap:10px}
+  .nav-dots{display:none}
+  .back-link{top:16px;left:16px;font-size:.6rem;padding:6px 10px}
+  .sample-label{display:none}
+}
+
+/* ========== KEYFRAMES ========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+.skip-link{position:absolute;top:-100px;left:16px;background:var(--teal);color:#fff;padding:8px 16px;border-radius:4px;z-index:9999;font-family:'JetBrains Mono',monospace;font-size:.75rem;text-decoration:none}
+.skip-link:focus{top:16px}
+
+/* ========== REDUCED MOTION ========== */
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-label,.hero h1,.hero-sub,.hero-meta,.scroll-cue{opacity:1;animation:none}
+  html{scroll-behavior:auto;scroll-snap-type:none}
+}
+</style>
+
+
+<a href="/audience-adaptation#deliverables" class="back-link">&larr; Back to case study</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="nav-dots" id="navDots" aria-label="Page navigation"></nav>
+<div class="sample-label">Portfolio sample &middot; Arcline is fictional</div>
+
+<!-- HERO -->
+<section class="hero" data-section="0" id="main-content">
+  <div class="hero-label">Arcline &middot; Data Governance Framework</div>
+  <h1>The company's data practices were built for a <em>smaller operation.</em></h1>
+  <p class="hero-sub">A data governance framework that classifies company data by risk and defines how the organization responds when something goes wrong. Why Arcline needs it now, and what changes when it's in place.</p>
+  <div class="hero-meta"><span>Prepared for senior leadership</span><span>Q2 2025</span></div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- 01 — THE LANDSCAPE -->
+<section data-section="1" style="background:radial-gradient(ellipse 70% 50% at 30% 50%,rgba(236,12,109,0.04) 0%,transparent 70%),var(--bg-primary)">
+  <div class="reveal">
+    <div class="section-num">01 &mdash; The Landscape</div>
+    <h2 class="section-title">What worked five years ago doesn't hold at this scale.</h2>
+    <div class="narrative-body">
+      <p>When Arcline was smaller, data handling ran on team norms and good judgment. People knew what was sensitive because they knew the work. That was adequate when thirty people shared a Slack channel and the data footprint fit in one platform.</p>
+      <p>The company now operates across multiple business units, holds data subject to regulatory frameworks in several jurisdictions, and onboards people who have no institutional memory of which systems contain customer financials. <strong>The informal system scaled past the point where it functions as a system.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — THE EXPOSURE -->
+<section data-section="2" style="background:radial-gradient(ellipse 60% 50% at 60% 40%,rgba(236,12,109,0.04) 0%,transparent 70%),var(--bg-primary)">
+  <div class="reveal">
+    <div class="section-num">02 &mdash; The Exposure</div>
+    <h2 class="section-title">Some of this data already carries obligations. Arcline has no reliable way to know which.</h2>
+    <div class="narrative-body">
+      <p>Customer records, financial credentials, and government-issued identifiers sit in production systems today. Some of that data triggers mandatory breach notification within 72 hours if exposed. The people handling it may not know what protections apply. The people accountable for it may not know they're accountable.</p>
+      <p>Meanwhile, sales and partnerships represent data handling practices to clients and prospects. Those representations rest on assumptions about what engineering does. No documented policy backs them up. <strong>That gap is a liability with or without a breach.</strong></p>
+    </div>
+  </div>
+  <div class="stat-row reveal" style="transition-delay:.15s">
+    <div class="stat-block">
+      <div class="stat-num">72h</div>
+      <div class="stat-label">Regulatory notification window for the most sensitive data</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">4h</div>
+      <div class="stat-label">Internal reporting deadline under the proposed framework</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Defined processes currently in place for either</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — THE FRAMEWORK -->
+<section data-section="3" style="background:radial-gradient(ellipse 60% 50% at 40% 50%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-primary)">
+  <div class="reveal">
+    <div class="section-num">03 &mdash; The Framework</div>
+    <h2 class="section-title">Four tiers. Defined protocols. Named owners at every level.</h2>
+    <p class="section-lead">The framework classifies all company data by the severity of what happens if it's exposed. Each tier carries its own controls and response timelines, with accountability assigned at every level.</p>
+  </div>
+  <div class="tier-grid reveal" style="transition-delay:.15s">
+    <div class="tier-card tier-high">
+      <div class="tier-label">Tier 1 &mdash; Restricted</div>
+      <h4>Legal consequences on exposure</h4>
+      <p>Health records, financial credentials, government IDs. Breach triggers mandatory regulatory notification within 72 hours.</p>
+    </div>
+    <div class="tier-card tier-mid">
+      <div class="tier-label">Tier 2 &mdash; Confidential</div>
+      <h4>Business harm, no regulatory mandate</h4>
+      <p>Unreleased financials, vendor pricing, pre-board audit results. Serious damage to the company but no external reporting obligation.</p>
+    </div>
+    <div class="tier-card tier-low">
+      <div class="tier-label">Tier 3 &mdash; Internal</div>
+      <h4>Standard protections</h4>
+      <p>Departmental planning docs and internal communications. Standard access controls, baseline encryption.</p>
+    </div>
+    <div class="tier-card tier-public">
+      <div class="tier-label">Tier 4 &mdash; Public</div>
+      <h4>Cleared for distribution</h4>
+      <p>Press releases, published financials. Already through the approval process.</p>
+    </div>
+  </div>
+  <div class="quote-block reveal" style="transition-delay:.3s">
+    <p>One deliberate design choice: the people who make governance decisions and the people who implement them are separated. This prevents the failure mode where the person closest to the data makes access decisions based on convenience.</p>
+  </div>
+</section>
+
+<!-- 04 — OWNERSHIP -->
+<section data-section="4" style="background:radial-gradient(ellipse 60% 50% at 60% 60%,rgba(0,177,171,0.06) 0%,transparent 70%),var(--bg-primary)">
+  <div class="reveal">
+    <div class="section-num">04 &mdash; Ownership</div>
+    <h2 class="section-title">Every data domain has three roles. None of them overlap.</h2>
+    <p class="section-lead">Clear accountability at every level means incidents move through a defined chain instead of stalling while people figure out who's responsible.</p>
+  </div>
+  <div class="ownership-chain reveal" style="transition-delay:.15s">
+    <div class="ownership-node">
+      <div class="on-role">Domain Owner</div>
+      <h4>VP-level</h4>
+      <p>Sets policy. Accountable for classification decisions and regulatory compliance within their domain.</p>
+    </div>
+    <div class="ownership-arrow" aria-hidden="true">&#8594;</div>
+    <div class="ownership-node">
+      <div class="on-role">Data Steward</div>
+      <h4>Day-to-day governance</h4>
+      <p>First point of contact for data questions. Maintains access lists and runs quarterly reviews. Coordinates with legal as needed.</p>
+    </div>
+    <div class="ownership-arrow" aria-hidden="true">&#8594;</div>
+    <div class="ownership-node">
+      <div class="on-role">Custodians</div>
+      <h4>Technical implementation</h4>
+      <p>Implements controls and manages encryption. Handles access provisioning based on steward and owner directives.</p>
+    </div>
+  </div>
+  <div class="narrative-body reveal" style="transition-delay:.25s;margin-top:40px">
+    <p>When an incident happens, the chain activates in sequence. The discovering party reports. The steward triages. The owner decides. Nobody guesses who does what, and the response runs on structure rather than whoever happens to be in the room.</p>
+  </div>
+</section>
+
+<!-- 05 — THE RETURN -->
+<section data-section="5" style="background:radial-gradient(ellipse 50% 50% at 40% 60%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-primary)">
+  <div class="reveal">
+    <div class="section-num">05 &mdash; The Return</div>
+    <h2 class="section-title">The framework operationalizes commitments Arcline is already making.</h2>
+    <p class="section-lead">It creates three things the company currently lacks.</p>
+  </div>
+  <div class="return-grid reveal" style="transition-delay:.15s">
+    <div class="return-card">
+      <div class="rc-label">Incident readiness</div>
+      <h4>The playbook exists before the incident does</h4>
+      <p>A breach today forces the company to build the response while the clock runs. The framework maps every step in advance.</p>
+    </div>
+    <div class="return-card">
+      <div class="rc-label">Training foundation</div>
+      <h4>Professional development becomes possible</h4>
+      <p>A defined system lets the company build training so every team knows their responsibilities. Right now, there's no process to train people on.</p>
+    </div>
+    <div class="return-card">
+      <div class="rc-label">Client confidence</div>
+      <h4>Sales speaks to documented practices</h4>
+      <p>Client-facing teams gain the ability to describe data governance specifics because a documented framework backs up the conversation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer-section" data-section="6">
+  <div class="reveal">
+    <div class="section-num">06</div>
+    <h2 class="section-title">Build the infrastructure once. Maintain it. Stop improvising.</h2>
+    <p class="closer-sub">Regulatory changes, client inquiries, incidents: the company handles all of them with a system that already exists instead of assembling one under pressure.</p>
+    <div class="footer-meta">Arcline &middot; Data Governance Framework &middot; Prepared for leadership review</div>
+  </div>
+</section>
+
+
+<script is:inline>
+/* Reveal on scroll */
+const rObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('visible');
+}), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+
+/* Nav dots */
+const sections = document.querySelectorAll('section[data-section]');
+const dotsC = document.getElementById('navDots');
+sections.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'nav-dot';
+  d.setAttribute('aria-label', 'Section ' + (i + 1));
+  d.addEventListener('click', () => sections[i].scrollIntoView({ behavior: 'smooth' }));
+  dotsC.appendChild(d);
+});
+const dots = dotsC.querySelectorAll('.nav-dot');
+const sObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    const i = parseInt(e.target.dataset.section);
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  }
+}), { threshold: .35 });
+sections.forEach(s => sObs.observe(s));
+</script>
+</BaseLayout>
