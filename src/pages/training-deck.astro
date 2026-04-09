@@ -51,7 +51,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .slide-lead{font-size:clamp(1rem,1.3vw,1.1rem);color:var(--text-muted);max-width:580px;line-height:1.7;font-weight:300;margin-bottom:32px}
 
 /* ========== SLIDE: TITLE ========== */
-.slide-title-page{background:radial-gradient(circle 60vw at 95% 95%,rgba(0,140,136,0.18) 0%,rgba(0,140,136,0.06) 40%,transparent 70%),var(--bg-primary)}
+.slide-title-page{background:radial-gradient(circle 120vw at 95% 95%,rgba(0,140,136,0.18) 0%,rgba(0,140,136,0.08) 35%,transparent 65%),var(--bg-primary)}
 .slide-title-page h1{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,5vw,4rem);line-height:1.1;color:var(--text-primary);max-width:700px;margin-bottom:24px}
 .slide-title-page h1 em{font-style:italic;color:var(--teal)}
 .slide-title-sub{font-size:clamp(1rem,1.4vw,1.15rem);font-weight:300;color:var(--text-muted);max-width:540px;line-height:1.7;margin-bottom:40px}
@@ -113,14 +113,19 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 /* ========== SLIDE: CHALLENGE (split image) ========== */
 .slide-challenge{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0 !important;align-items:stretch}
 .slide-challenge .slide-content{display:flex;flex-direction:column;justify-content:center;padding:80px clamp(48px,6vw,100px)}
-.slide-challenge .slide-image{background:url('/images/trainingdeck1.jpg') center/cover no-repeat;position:relative}
-.slide-challenge .slide-image::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--bg-primary) 0%,rgba(247,245,242,0.3) 30%,rgba(247,245,242,0.08) 100%)}
+.slide-challenge .slide-image{background:url('/images/trainingdeck1.jpg') center/cover no-repeat}
 
-/* ========== SLIDE: INCIDENT (full-bleed image) ========== */
-.slide-incident{position:relative}
-.slide-incident::before{content:'';position:absolute;inset:0;background:url('/images/trainingdeck2.jpg') center/cover no-repeat;opacity:0.2;z-index:0}
-.slide-incident::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--bg-primary) 0%,rgba(247,245,242,0.85) 50%,rgba(247,245,242,0.7) 100%);z-index:0}
-.slide-incident>*{position:relative;z-index:1}
+/* ========== SLIDE: INCIDENT (teal radial) ========== */
+.slide-incident{background:radial-gradient(circle 45vw at 50% 55%,rgba(0,140,136,0.14) 0%,rgba(0,140,136,0.05) 50%,transparent 75%),var(--bg-primary)}
+
+/* ========== SLIDE: OWNERSHIP (teal gridlines) ========== */
+.slide-ownership{background-color:var(--bg-primary);background-image:linear-gradient(rgba(0,140,136,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,140,136,0.08) 1px,transparent 1px);background-size:10px 10px}
+
+/* ========== SLIDE: WHAT CHANGES (full-bleed image) ========== */
+.slide-changes{position:relative}
+.slide-changes::before{content:'';position:absolute;inset:0;background:url('/images/trainingdeck3.jpg') center/cover no-repeat;opacity:0.7;z-index:0}
+.slide-changes::after{content:'';position:absolute;inset:0;background:rgba(247,245,242,0.55);z-index:0}
+.slide-changes>*{position:relative;z-index:1}
 
 /* ========== CLOSER SLIDE ========== */
 .slide-closer{text-align:center;align-items:center;background:var(--teal) !important;color:#fff}
@@ -149,7 +154,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   .slide{padding:70px 24px 100px}
   .slide-challenge{grid-template-columns:1fr;padding:0 !important}
   .slide-challenge .slide-image{min-height:200px;order:-1}
-  .slide-challenge .slide-image::after{background:linear-gradient(to top,var(--bg-primary) 10%,rgba(247,245,242,0.4) 60%,rgba(247,245,242,0.1) 100%)}
   .slide-challenge .slide-content{padding:32px 24px 100px}
   .tier-grid,.change-grid{grid-template-columns:1fr}
   .role-grid{grid-template-columns:1fr}
@@ -259,7 +263,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 5: OWNERSHIP -->
-    <div class="slide" role="tabpanel" aria-label="Slide 5 of 7" id="slide-4" style="background:radial-gradient(ellipse 60% 50% at 60% 60%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide slide-ownership" role="tabpanel" aria-label="Slide 5 of 7" id="slide-4">
       <div class="slide-eyebrow">04 &middot; Ownership Model</div>
       <h2>Every data domain has three roles. Your first contact is your <em>steward.</em></h2>
       <p class="slide-lead">The framework separates governance decisions from implementation. Each role has a defined scope and a clear escalation path.</p>
@@ -284,7 +288,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
 
     <!-- SLIDE 6: WHAT CHANGES -->
-    <div class="slide" role="tabpanel" aria-label="Slide 6 of 7" id="slide-5" style="background:radial-gradient(ellipse 50% 50% at 40% 60%,rgba(0,140,136,0.05) 0%,transparent 70%),var(--bg-primary)">
+    <div class="slide slide-changes" role="tabpanel" aria-label="Slide 6 of 7" id="slide-5">
       <div class="slide-eyebrow">05 &middot; What Changes</div>
       <h2>Starting this quarter, data handling follows the <em>framework.</em></h2>
       <p class="slide-lead">The shift is structural. Individual judgment gets replaced by classification-driven protections with a defined escalation path.</p>
@@ -318,6 +322,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <h2>Two things to remember from this deck: your <em>steward's name</em> and when to <em>file a report.</em></h2>
       <p class="slide-lead" style="text-align:center;margin-left:auto;margin-right:auto">The full technical reference is available on the governance wiki. Reach out to your department's data steward with questions.</p>
       <div class="closer-meta">Arcline &middot; Data Governance Framework &middot; Internal</div>
+      <div class="closer-meta" style="margin-top:12px">Image credits: <a href="https://www.pexels.com/photo/a-laptop-over-a-round-table-4973899/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.25);text-underline-offset:2px">Dan Nelson</a> and <a href="https://www.pexels.com/photo/low-angle-view-of-skyscrapers-19543998/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.25);text-underline-offset:2px">Josh Hild</a> via Pexels.</div>
     </div>
 
   </div>
