@@ -2,16 +2,27 @@
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  canonicalPath?: string;
+  ogType?: string;
   skipTarget?: string;
   defaultTheme?: 'dark' | 'light' | 'rainbow';
 }
 
+const siteUrl = 'https://maemendoza.com';
+
 const {
   title,
   description = 'Mae Mendoza — Content Design & Subject Matter Expertise',
+  ogImage = '/OGpreview.png',
+  canonicalPath,
+  ogType = 'website',
   skipTarget = '#main-content',
   defaultTheme = 'light',
 } = Astro.props;
+
+const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : siteUrl;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!DOCTYPE html>
@@ -22,6 +33,22 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content="Mae Mendoza" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
   <style is:inline>
     .skip-link {
       position: absolute;
