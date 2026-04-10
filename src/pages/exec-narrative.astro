@@ -2,13 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Executive Narrative — Mae Mendoza"
-  description="The leadership version: risk exposure, cost of inaction, and the case for a data governance framework."
-  canonicalPath="/exec-narrative"
-  skipTarget="#main-content"
-  defaultTheme="dark"
->
+<BaseLayout title="Executive Narrative — Mae Mendoza" skipTarget="#main-content" defaultTheme="dark">
 <style is:inline>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -35,7 +29,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-snap-type:y proximity;font-size:18px}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;overflow-y:scroll;font-size:18px}
 body{font-family:'Outfit',sans-serif;background:var(--bg-primary);color:var(--text-body);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.65}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:var(--grain-opacity);pointer-events:none;z-index:9999}
 
@@ -118,6 +112,7 @@ section{min-height:100vh;display:flex;flex-direction:column;justify-content:cent
 /* ========== CTA / CLOSER ========== */
 .closer-section{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,177,171,0.08) 0%,transparent 70%),var(--bg-secondary);text-align:center;align-items:center}
 .closer-section .section-title{max-width:680px;text-align:center}
+.closer-section .reveal{width:100%;text-align:center;display:flex;flex-direction:column;align-items:center}
 .closer-sub{font-size:1.02rem;color:var(--text-muted);max-width:540px;line-height:1.7;font-weight:300;margin-top:18px}
 .footer-meta{margin-top:56px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:.1em}
 

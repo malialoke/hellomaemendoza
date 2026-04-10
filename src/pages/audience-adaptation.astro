@@ -2,12 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Audience Adaptation — Mae Mendoza"
-  description="One governance framework, three audiences. How structure, pacing, and entry points change when the information doesn't."
-  canonicalPath="/audience-adaptation"
-  skipTarget="#section-hero"
->
+<BaseLayout title="Audience Localization — Mae Mendoza" skipTarget="#section-hero">
 <style is:inline>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -66,8 +61,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .theme-toggle-option.active{background:var(--accent);color:#fff}
 .theme-toggle-option:hover:not(.active){color:var(--text-primary)}
 [data-theme="rainbow"] .theme-toggle-option.active{background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7)}
-.back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:8px 14px;border-radius:30px;background:var(--bg-card);backdrop-filter:blur(16px);border:1px solid var(--border-subtle);transition:all .3s}
-.back-link:hover{color:var(--accent);border-color:var(--border-hover)}
+.back-link{position:fixed;top:24px;left:24px;z-index:200;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+/* Pill shape, colors, and hover from BaseLayout .pill-link */
 .nav-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
 .nav-dot{width:8px;height:8px;border-radius:50%;background:var(--border-subtle);cursor:pointer;transition:all .3s;border:none;padding:0}
 .nav-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
@@ -307,11 +302,7 @@ section{min-height:100vh;display:flex;flex-direction:column;justify-content:cent
   border-color:rgba(0,194,255,0.25)}
 
 /* Rainbow back link */
-[data-theme="rainbow"] .back-link{
-  border-color:rgba(255,45,120,0.3);background:rgba(10,10,10,0.8)}
-[data-theme="rainbow"] .back-link:hover{
-  background:linear-gradient(135deg,#ff2d78,#ff6b35,#ffd600,#00e87b,#00c2ff,#a855f7);
-  color:#0a0a0a;border-color:transparent;font-weight:500}
+/* Rainbow .back-link pill behavior inherited from BaseLayout .pill-link. */
 
 [data-theme="rainbow"] section[data-index="2"]{background:
   radial-gradient(circle,rgba(255,255,255,0.04) 60px,transparent 60px),
@@ -372,7 +363,7 @@ section{min-height:100vh;display:flex;flex-direction:column;justify-content:cent
 </style>
 
 
-<a href="/#section-2" class="back-link">&larr; Back</a>
+<a href="/#section-2" class="back-link pill-link"><span class="pill-link-text">&larr; Back</span></a>
 <div class="theme-toggle" role="radiogroup" aria-label="Theme selector">
   <button class="theme-toggle-option" data-theme="dark" role="radio" aria-checked="false" aria-label="Dark mode" title="Dark">&#9790;</button>
   <button class="theme-toggle-option active" data-theme="light" role="radio" aria-checked="true" aria-label="Light mode" title="Light">&#9788;</button>

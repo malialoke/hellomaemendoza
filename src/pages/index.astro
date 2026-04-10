@@ -2,12 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Mae Mendoza — Senior Content Specialist & Subject Matter Expert"
-  description="Content design, UX writing, and subject matter expertise for digital products. More than 10 years across product, publishing, and platforms."
-  canonicalPath="/"
-  skipTarget="#section-1"
->
+<BaseLayout title="Mae Mendoza — Senior Content Specialist" skipTarget="#section-1">
 <style is:inline>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600&display=swap');
@@ -1015,28 +1010,54 @@ html {
 [data-theme="light"] .flip-card:nth-child(3) .case-title strong { color: var(--magenta); }
 [data-theme="light"] .flip-card:nth-child(2) .case-eyebrow { color: var(--magenta); }
 [data-theme="light"] .flip-card:nth-child(3) .case-eyebrow { color: var(--magenta); }
-[data-theme="light"] .flip-card:nth-child(2) .case-link { color: var(--magenta); }
-[data-theme="light"] .flip-card:nth-child(3) .case-link { color: var(--magenta); }
+/* ========================================
+   CASE LINKS — all three themes
+   ======================================== */
 
-/* Light mode: pill-style case links */
+/* Light mode: all cards use magenta (nth-child accents are suppressed in light) */
 [data-theme="light"] .case-link {
   color: var(--magenta);
-  border: 1.5px solid var(--magenta);
+  border-color: var(--magenta);
   background: #ffffff;
-  padding: 6px 14px;
-  border-radius: 30px;
-  transition: all 0.3s;
-  width: fit-content;
 }
-[data-theme="light"] .case-link:hover,
-[data-theme="light"] .flip-card:nth-child(2) .case-link:hover,
-[data-theme="light"] .flip-card:nth-child(3) .case-link:hover {
+[data-theme="light"] .case-link:hover {
   background: var(--magenta);
   color: #ffffff;
 }
-[data-theme="light"] .case-link:hover svg {
-  stroke: #ffffff;
+[data-theme="light"] .case-link:hover svg { stroke: #ffffff; }
+
+/* Dark mode: each card uses its own accent color */
+[data-theme="dark"] .case-link {
+  color: var(--magenta);
+  border-color: var(--magenta);
+  background: transparent;
 }
+[data-theme="dark"] .flip-card:nth-child(2) .case-link {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+[data-theme="dark"] .flip-card:nth-child(3) .case-link {
+  color: var(--violet);
+  border-color: var(--violet);
+}
+[data-theme="dark"] .case-link:hover {
+  background: var(--magenta);
+  color: #ffffff;
+}
+[data-theme="dark"] .flip-card:nth-child(2) .case-link:hover {
+  background: var(--teal);
+  color: #000000;
+}
+[data-theme="dark"] .flip-card:nth-child(3) .case-link:hover {
+  background: var(--violet);
+  color: #000000;
+}
+[data-theme="dark"] .case-link:hover svg { stroke: #ffffff; }
+[data-theme="dark"] .flip-card:nth-child(2) .case-link:hover svg,
+[data-theme="dark"] .flip-card:nth-child(3) .case-link:hover svg { stroke: #000000; }
+
+/* Rainbow pill behavior is inherited from BaseLayout .pill-link.
+   No overrides needed for .case-link in rainbow mode. */
 
 .flip-card:hover .flip-card-front {
   border-left-color: var(--border-hover);
@@ -1153,11 +1174,9 @@ html {
   align-items: center;
   gap: 6px;
   margin-top: auto;
-  transition: gap 0.3s;
 }
 .flip-card:nth-child(2) .case-link { color: var(--teal); }
 .flip-card:nth-child(3) .case-link { color: var(--violet); }
-.case-link:hover { gap: 10px; }
 .case-link svg { width: 12px; height: 12px; }
 
 /* ========================================
@@ -1310,13 +1329,12 @@ html {
 [data-theme="light"] .contact-statement {
   color: #ffffff;
 }
+/* Light contact section has inverted colors (white on magenta bg),
+   so we override the BaseLayout pill-link defaults here. */
 [data-theme="light"] .contact-link {
   color: rgba(255,255,255,0.85);
-  border: 1.5px solid rgba(255,255,255,0.85);
-  padding: 8px 16px;
-  border-radius: 30px;
-  transition: all 0.3s;
-  width: fit-content;
+  border-color: rgba(255,255,255,0.85);
+  background: transparent;
 }
 [data-theme="light"] .contact-link:hover {
   color: var(--magenta);
@@ -1329,6 +1347,9 @@ html {
 [data-theme="light"] .contact-divider {
   background: #ffffff;
 }
+
+/* Dark and rainbow pill behavior for .contact-link
+   is inherited from BaseLayout .pill-link. */
 
 [data-theme="light"] .section-contact::after {
   display: none;
@@ -1381,12 +1402,7 @@ html {
   background: #ffffff;
   width: 48px;
 }
-[data-theme="rainbow"] .contact-link {
-  color: rgba(255,255,255,0.85);
-}
-[data-theme="rainbow"] .contact-link:hover {
-  color: #ffffff;
-}
+/* Rainbow .contact-link pill behavior inherited from BaseLayout .pill-link. */
 
 /* Hide spine on contact */
 .section-contact::after {
@@ -1482,12 +1498,10 @@ html {
   text-transform: uppercase;
   color: #999999;
   text-decoration: none;
-  transition: color 0.3s;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.contact-link:hover { color: #ffffff; }
 .contact-link svg { width: 16px; height: 16px; }
 
 /* ========================================
@@ -1843,8 +1857,8 @@ html {
           <div class="flip-card-back">
             <div class="case-eyebrow">Content Architecture · Product Localization</div>
             <p class="case-back-desc">Two outdated products needed a full rebuild, not another patch. I analyzed every state's requirements, figured out where the real coverage gaps were, and designed a modular system that could serve most markets from a single content base while supporting two product tiers.</p>
-            <a class="case-link" href="/dual-build" onclick="event.stopPropagation()">
-              Read the case study
+            <a class="case-link pill-link" href="/dual-build" onclick="event.stopPropagation()">
+              <span class="pill-link-text">Read the case study</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
             </a>
           </div>
@@ -1864,8 +1878,8 @@ html {
           <div class="flip-card-back">
             <div class="case-eyebrow">Process Design · AI-Assisted QA</div>
             <p class="case-back-desc">A growing content catalog needed a quality review that would take years at human pace. I built a four-stage workflow where AI handles extraction and flagging while the subject matter expert focuses on the judgment calls: evaluating depth, catching what automation misses, and making the remediation decisions that shape the final product.</p>
-            <a class="case-link" href="/ai-workflow" onclick="event.stopPropagation()">
-              See the workflow
+            <a class="case-link pill-link" href="/ai-workflow" onclick="event.stopPropagation()">
+              <span class="pill-link-text">See the workflow</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
             </a>
           </div>
@@ -1876,7 +1890,7 @@ html {
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h3 class="case-title">How do you turn <strong>one source document</strong> into content that works for three different audiences?</h3>
-            <p class="case-front-sub">Documentation can be accurate and still useless to the people who need it most. Making it work for different audiences means rethinking structure.</p>
+            <p class="case-front-sub">Documentation can be accurate and still useless to the people who need it most. Making it work for different audiences means going beyond changing words to rethinking structure.</p>
             <div class="flip-hint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
               Flip the card to see what I did.
@@ -1885,8 +1899,8 @@ html {
           <div class="flip-card-back">
             <div class="case-eyebrow">Content Adaptation · Audience Design</div>
             <p class="case-back-desc">The documentation was tailored for the team. I restructured it three ways: a narrative walkthrough for stakeholders who needed the why, a reference guide for practitioners who needed the how, and an interactive experience for a broader audience encountering the subject for the first time.</p>
-            <a class="case-link" href="/audience-adaptation" onclick="event.stopPropagation()">
-              See the approach
+            <a class="case-link pill-link" href="/audience-adaptation" onclick="event.stopPropagation()">
+              <span class="pill-link-text">See the approach</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
             </a>
           </div>
@@ -1935,9 +1949,9 @@ html {
       <div class="contact-divider reveal visible reveal-delay-1"></div>
       <p class="contact-statement reveal visible reveal-delay-2">Find me on LinkedIn to learn more.</p>
       <div class="contact-links reveal visible reveal-delay-3">
-        <a class="contact-link" href="https://linkedin.com/in/maemariamendoza" target="_blank" rel="noopener">
+        <a class="contact-link pill-link" href="https://linkedin.com/in/maemendoza" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
+          <span class="pill-link-text">LinkedIn</span>
         </a>
       </div>
     </div>

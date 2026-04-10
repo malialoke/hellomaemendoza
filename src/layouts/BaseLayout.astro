@@ -2,27 +2,16 @@
 interface Props {
   title: string;
   description?: string;
-  ogImage?: string;
-  canonicalPath?: string;
-  ogType?: string;
   skipTarget?: string;
   defaultTheme?: 'dark' | 'light' | 'rainbow';
 }
 
-const siteUrl = 'https://maemendoza.com';
-
 const {
   title,
-  description = 'Content design, UX writing, and subject matter expertise for digital products. More than 10 years across product, publishing, and platforms.',
-  ogImage = '/OGpreview.png',
-  canonicalPath,
-  ogType = 'website',
+  description = 'Mae Mendoza — Content Design & Subject Matter Expertise',
   skipTarget = '#main-content',
   defaultTheme = 'light',
 } = Astro.props;
-
-const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : siteUrl;
-const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!DOCTYPE html>
@@ -33,22 +22,6 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="canonical" href={canonicalUrl} />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImageUrl} />
-  <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:type" content={ogType} />
-  <meta property="og:site_name" content="Mae Mendoza" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ogImageUrl} />
-
   <style is:inline>
     .skip-link {
       position: absolute;
@@ -65,6 +38,85 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
     }
     .skip-link:focus {
       top: 0;
+    }
+
+    /* =============================================
+       PILL LINK — shared button system
+       Shape and transition live here. Color and
+       hover behavior are set per-theme below.
+       Add class="pill-link" to any <a> element.
+       Wrap visible text in <span class="pill-link-text">
+       to get gradient text in rainbow mode.
+       ============================================= */
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 2px solid transparent;
+      width: fit-content;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    /* Light: solid accent border, white bg, invert on hover */
+    [data-theme="light"] .pill-link {
+      background: #ffffff;
+      border-color: #c23062;
+      color: #c23062;
+    }
+    [data-theme="light"] .pill-link:hover {
+      background: #c23062;
+      color: #ffffff;
+    }
+    [data-theme="light"] .pill-link:hover svg { stroke: #ffffff; }
+
+    /* Dark: transparent bg, accent border per element,
+       hover fills with accent. Color overrides are
+       set per-component since accents vary. */
+    [data-theme="dark"] .pill-link {
+      background: transparent;
+      border-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    [data-theme="dark"] .pill-link:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: #ffffff;
+      background: rgba(255,255,255,0.06);
+    }
+    [data-theme="dark"] .pill-link:hover svg { stroke: #ffffff; }
+
+    /* Rainbow: gradient border at rest via padding-box/border-box
+       background layering. Gradient fill on hover, black text.
+       pill-link-text gets gradient text on the span. */
+    [data-theme="rainbow"] .pill-link {
+      background:
+        linear-gradient(#000000, #000000) padding-box,
+        linear-gradient(to right, #ff2d78, #f4845f, #f6c744, #00ffd5, #c4b5fd) border-box;
+      color: #ffffff;
+    }
+    [data-theme="rainbow"] .pill-link:hover {
+      background:
+        linear-gradient(to right, #ff2d78, #f4845f, #f6c744, #00ffd5, #c4b5fd) padding-box,
+        linear-gradient(to right, #ff2d78, #f4845f, #f6c744, #00ffd5, #c4b5fd) border-box;
+      color: #000000;
+    }
+    [data-theme="rainbow"] .pill-link:hover svg { stroke: #000000; }
+    [data-theme="rainbow"] .pill-link:hover .pill-link-text {
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      -webkit-text-fill-color: #000000;
+      color: #000000;
+    }
+
+    /* Gradient text for rainbow rest state */
+    [data-theme="rainbow"] .pill-link-text {
+      background: linear-gradient(to right, #ff2d78, #f4845f, #f6c744, #00ffd5, #c4b5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   </style>
 </head>

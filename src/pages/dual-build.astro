@@ -2,12 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Dual Build Case Study — Mae Mendoza"
-  description="Building the same content for two systems simultaneously — legacy and next-gen — without doubling the work."
-  canonicalPath="/dual-build"
-  skipTarget="#main-content"
->
+<BaseLayout title="Dual Build Case Study — Mae Mendoza" skipTarget="#main-content">
 <style is:inline>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -320,16 +315,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   color: rgba(255,255,255,0.45);
 }
 [data-theme="rainbow"] .footer-meta { color: rgba(255,255,255,0.25); }
-[data-theme="rainbow"] .back-link {
-  border-color: rgba(255,45,120,0.3);
-  background: rgba(10,10,10,0.8);
-}
-[data-theme="rainbow"] .back-link:hover {
-  background: linear-gradient(135deg, #ff2d78, #ff6b35, #ffd600, #00e87b, #00c2ff, #a855f7);
-  color: #0a0a0a;
-  border-color: transparent;
-  font-weight: 500;
-}
+/* Rainbow .back-link pill behavior inherited from BaseLayout .pill-link. */
 
 /* ===== CARDS ===== */
 [data-theme="rainbow"] .expand-card:hover,
@@ -1105,6 +1091,7 @@ section {
   text-align: center; align-items: center;
 }
 .cta-section .section-title { max-width: 680px; text-align: center; }
+.cta-section .reveal { width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .cta-sub {
   font-size: 1.02rem; color: var(--text-muted);
   max-width: 540px; line-height: 1.7; font-weight: 300; margin-top: 18px;
@@ -1122,19 +1109,11 @@ section {
   font-size: .68rem;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--text-muted);
   text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 30px;
-  background: var(--bg-card);
   backdrop-filter: blur(16px);
-  border: 1px solid var(--border-subtle);
-  transition: all .3s;
+  -webkit-backdrop-filter: blur(16px);
 }
-.back-link:hover {
-  color: var(--accent);
-  border-color: var(--border-hover);
-}
+/* Pill shape, colors, and hover from BaseLayout .pill-link */
 
 /* ========== NAV DOTS ========== */
 .nav-dots {
@@ -1184,7 +1163,7 @@ section {
 <!-- Skip link for accessibility -->
 <a href="#main-content" class="skip-link">Skip to content</a>
 
-<a href="/#section-2" class="back-link">&larr; Back</a>
+<a href="/#section-2" class="back-link pill-link"><span class="pill-link-text">&larr; Back</span></a>
 
 <!-- Theme toggle -->
 <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Cycle between dark, light, and rainbow themes">
